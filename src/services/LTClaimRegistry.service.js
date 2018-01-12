@@ -4,9 +4,11 @@ const config = require('config');
 
 class LTClaimRegistry {
   constructor() {
-    this.web3 = new Web3(window.web3.currentProvider);
-    this.contract = this.web3.eth.contract(config.LTClaimRegistry.abi)
-      .at(config.LTClaimRegistry.address);
+    if (window.web3) {
+      this.web3 = new Web3(window.web3.currentProvider);
+      this.contract = this.web3.eth.contract(config.LTClaimRegistry.abi)
+        .at(config.LTClaimRegistry.address);
+    }
   }
 
   // function certify(
@@ -18,10 +20,12 @@ class LTClaimRegistry {
 
   getCost() {
     return new Promise((resolve, reject) => {
-      this.contract.cost((err, result) => {
-        if (err) return reject(err);
-        return resolve(result);
-      });
+      if (this.web3) {
+        this.contract.cost((err, result) => {
+          if (err) return reject(err);
+          return resolve(result);
+        });
+      } else reject(new Error('No Web3 provider: install MetaMask!'));
     });
   }
 }
