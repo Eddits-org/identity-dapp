@@ -1,0 +1,11 @@
+$fa-font-path: "~font-awesome/fonts";
+@import '~bulma/sass/utilities/initial-variables.sass';
+@import '~bulma/sass/utilities/functions';
+@import '~font-awesome/scss/font-awesome.scss';
+
+$body-background-color: $white-ter;
+
+$family-serif: 'Open Sans', serif;
+$family-primary: $family-serif;
+
+@import '~bulma/bulma.sass';
