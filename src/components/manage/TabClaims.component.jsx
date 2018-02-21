@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -16,7 +18,8 @@ const TabClaimsComponent = ({
   confirmAddLuxTrustClaim
 }) => (
   <div className='content'>
-    <div>TODO: List claims, add a self-signed claim, request an issuer claim</div>
+    <div>Coming soon: List claims, add a self-signed claim, request a claim from an issuer</div>
+    { /*
     { !!keyPurposes.find(p => p === KEYS_PURPOSES.MANAGEMENT) && (
       <DropdownButton
         label='Add a claim'
@@ -44,6 +47,7 @@ const TabClaimsComponent = ({
       }}
       />
      ) }
+    */ }
   </div>
 );
 
