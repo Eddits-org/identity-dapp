@@ -1,9 +1,12 @@
+/* eslint-disable */
 import Web3 from 'services/Web3.service';
+import JWT from 'services/JWT.service';
 
 export const LOGIN_RESPONSE_SIGNED = 'LOGIN_RESPONSE_SIGNED';
 
 export const login = (nonce, account, identity, redirect) => (dispatch) => {
-  const loginResponse = {
+  JWT.sign(account);
+  /*const loginResponse = {
     identity,
     nonce
   };
@@ -18,5 +21,5 @@ export const login = (nonce, account, identity, redirect) => (dispatch) => {
     const base64response = Buffer.from(JSON.stringify(response)).toString('base64');
     const redirectionURL = `${redirect}${base64response}`;
     dispatch({ type: LOGIN_RESPONSE_SIGNED, redirectionURL });
-  });
+  });*/
 };

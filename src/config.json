@@ -1,4 +1,5 @@
 {
+  "baseUrl": "/identity",
   "networks": [
     { "id": 1, "name": "Mainnet", "enabled": false, "etherscan": "https://etherscan.io" },
     { "id": 3, "name": "Ropsten", "enabled": true, "etherscan": "https://ropsten.etherscan.io" },

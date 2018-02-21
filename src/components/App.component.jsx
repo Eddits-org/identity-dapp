@@ -16,8 +16,10 @@ import Footer from 'containers/Footer.container';
 
 const HeaderWithRouter = withRouter(Header);
 
+const config = require('config');
+
 const AppComponent = () => (
-  <Router>
+  <Router basename={config.baseUrl}>
     <div>
       <Network />
       <HeaderWithRouter />

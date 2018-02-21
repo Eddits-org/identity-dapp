@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const FooterComponent = ({ network, account }) => (
-  <footer className='footer'>
+  <footer className='footer app-footer'>
     <div className='container'>
       <div className='content has-text-centered'>
         {network && account && (

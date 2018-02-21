@@ -8,11 +8,11 @@ const className = (location, path) => (
 
 const HeaderComponent = ({ location }) => (
   <header>
-    <nav className='navbar is-info'>
+    <nav className='navbar'>
       <div className='container'>
         <div className='navbar-brand'>
           <Link to='/' href='/' className='navbar-item is-size-3 has-text-weight-bold'>
-            EDAS
+            EDITS
           </Link>
           <span className='navbar-burger burger' data-target='navbarMenu' />
         </div>
