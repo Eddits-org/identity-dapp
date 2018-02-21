@@ -79,8 +79,8 @@ class JWTService {
       payload
     })
       .once('done', (signature) => {
-        console.log(signature);
         /* eslint-disable */
+        console.log(signature);
         const [h, p, encodedSign] = signature.split('.');
         const decodedSign = Buffer.from(base64url.toBase64(encodedSign), 'base64');
         const msg = Buffer.from(util.format('%s.%s', h, p), 'utf8');

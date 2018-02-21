@@ -10,6 +10,7 @@ import {
 export const initialState = {
   fetchingCost: false,
   cost: '',
+  gas: null,
   deploying: false,
   txHash: null,
   // address: '0x07d2469d84725d8ca12dd15a5dada88bc39247a8'
@@ -27,7 +28,8 @@ export const RegisterReducer = (state = initialState, action) => {
       return {
         ...state,
         fetchingCost: false,
-        cost: action.cost.eth
+        cost: action.cost.eth,
+        gas: action.cost.gas
       };
     case DEPLOY_IDENTITY_REQUESTED:
       return {

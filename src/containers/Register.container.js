@@ -9,6 +9,7 @@ const mapStateToProps = store => ({
   account: store.network.account,
   fetchingCost: store.register.fetchingCost,
   cost: store.register.cost,
+  gas: store.register.gas,
   deploying: store.register.deploying,
   txHash: store.register.txHash,
   address: store.register.address
@@ -16,7 +17,7 @@ const mapStateToProps = store => ({
 
 const mapDispatchToProps = dispatch => ({
   fetchCost: () => dispatch(estimateCost()),
-  deploy: account => dispatch(deployIdentity(account)),
+  deploy: (account, gas) => dispatch(deployIdentity(account, gas)),
   reset: () => dispatch(resetDeployment())
 });
 

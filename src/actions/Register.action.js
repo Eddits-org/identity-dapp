@@ -18,9 +18,9 @@ export const estimateCost = () => (dispatch) => {
   });
 };
 
-export const deployIdentity = account => (dispatch) => {
+export const deployIdentity = (account, gas) => (dispatch) => {
   dispatch({ type: DEPLOY_IDENTITY_REQUESTED });
-  Web3.deployIdentity(account).then((txHash) => {
+  Web3.deployIdentity(account, gas).then((txHash) => {
     dispatch({ type: WAIT_IDENTITY_MINING, txHash });
     Web3.waitForMining(txHash).then(({ block, address }) => {
       Storage.addIdentity({ address });

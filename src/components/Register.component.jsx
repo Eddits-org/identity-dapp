@@ -15,6 +15,7 @@ const RegisterComponent = ({
   account,
   fetchingCost,
   cost,
+  gas,
   fetchCost,
   deploying,
   txHash,
@@ -62,7 +63,13 @@ const RegisterComponent = ({
               <a className='card-footer-item' onClick={reset}>Cancel</a>
             )}
             {!deploying && !address && (
-              <a className='card-footer-item' onClick={() => deploy(account)}>Create</a>
+              <a
+                className='card-footer-item'
+                disabled={fetchingCost}
+                onClick={() => deploy(account, gas)}
+              >
+                Create
+              </a>
             )}
           </footer>
         </div>
@@ -75,7 +82,8 @@ RegisterComponent.defaultProps = {
   network: null,
   account: null,
   txHash: null,
-  address: null
+  address: null,
+  gas: null
 };
 
 RegisterComponent.propTypes = {
@@ -84,6 +92,7 @@ RegisterComponent.propTypes = {
   account: PropTypes.string,
   fetchingCost: PropTypes.bool.isRequired,
   cost: PropTypes.string.isRequired,
+  gas: PropTypes.number,
   deploying: PropTypes.bool.isRequired,
   txHash: PropTypes.string,
   address: PropTypes.string,

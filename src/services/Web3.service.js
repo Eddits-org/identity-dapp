@@ -74,18 +74,20 @@ class Web3Service {
   }
 
   estimateIdentityCreationCost() {
-    return this.estimateIdentityCreationGas().then(gas =>
+    // TODO : force gas value because of invalid estimation through estimateGat
+    const gas = 2745819;
+    return this.estimateIdentityCreationGas().then(() =>
       this.getGasPrice().then(gasPrice => ({
         eth: this.web3.fromWei(gasPrice.times(gas), 'ether').toString(),
-        gas: gas.toString(),
+        gas: parseInt(gas.toString(), 10),
         gasPrice: gasPrice.toString()
       })));
   }
 
-  deployIdentity(from) {
+  deployIdentity(from, gas) {
     return this.withWeb3Promise((resolve, reject) => {
       const contract = this.web3.eth.contract(config.contract.abi);
-      contract.new({ data: config.contract.bytecode, from }, (err, res) => {
+      contract.new({ data: config.contract.bytecode, from, gas }, (err, res) => {
         if (err) reject(err);
         else resolve(res.transactionHash);
       });
