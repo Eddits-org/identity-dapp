@@ -12,9 +12,11 @@ export const switchAddKeyVisibility = visible => ({
   visible
 });
 
-export const switchDuplicateKeyVisibility = visible => ({
+export const switchDuplicateKeyVisibility = (visible, key, purpose) => ({
   type: DUPLICATE_VISIBILITY_SWITCHED,
-  visible
+  visible,
+  key,
+  purpose
 });
 
 export const addKey = (key, purpose, type) => (dispatch, getState) => {

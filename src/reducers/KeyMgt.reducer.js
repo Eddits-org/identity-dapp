@@ -10,8 +10,7 @@ import {
 
 export const initialState = {
   keys: [],
-  addKeyVisible: false,
-  duplicateKeyVisible: false
+  addKeyVisible: false
 };
 
 export const KeyMgtReducer = (state = initialState, action) => {
@@ -31,7 +30,15 @@ export const KeyMgtReducer = (state = initialState, action) => {
     case DUPLICATE_VISIBILITY_SWITCHED:
       return {
         ...state,
-        duplicateKeyVisible: action.visible
+        keys: state.keys.map((k) => {
+          if (k.key === action.key && k.purpose.code === action.purpose) {
+            return {
+              ...k,
+              isDuplicating: action.visible
+            };
+          }
+          return k;
+        })
       };
 
     case REMOVE_KEY:

@@ -7,13 +7,13 @@ const mapStateToProps = store => ({
   account: store.network.account,
   keyPurposes: store.identity.keyPurposes,
   keys: store.keyMgt.keys,
-  addKeyVisible: store.keyMgt.addKeyVisible,
-  duplicateKeyVisible: store.keyMgt.duplicateKeyVisible
+  addKeyVisible: store.keyMgt.addKeyVisible
 });
 
 const mapDispatchToProps = dispatch => ({
   switchAddKeyVisibility: visible => dispatch(switchAddKeyVisibility(visible)),
-  switchDuplicateKeyVisibility: visible => dispatch(switchDuplicateKeyVisibility(visible)),
+  switchDuplicateKeyVisibility: (visible, key, purpose) =>
+    dispatch(switchDuplicateKeyVisibility(visible, key, purpose)),
   addKey: (key, purpose, type) => dispatch(addKey(key, purpose, type)),
   removeKey: (key, purpose) => dispatch(removeKey(key, purpose))
 });
