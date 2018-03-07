@@ -109,7 +109,10 @@ export class Identity {
   execute(dest, amount, calldata, from) {
     return new Promise((resolve, reject) => {
       // TODO: estimate gas cost !
-      this.contract.execute(dest, amount, calldata, { from }, resolvePromise(resolve, reject));
+      this.contract.execute(dest, amount, calldata, {
+        from,
+        gas: 5000000
+      }, resolvePromise(resolve, reject));
     });
   }
 
