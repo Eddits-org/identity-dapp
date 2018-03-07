@@ -7,10 +7,10 @@ const WelcomeComponent = () => (
       <div className='hero-body has-text-centered'>
         <div className='container'>
           <h1 className='title'>
-            Decentralized Authentication Service
+            Ethereum Decentralized Digital Identity and Trust Services
           </h1>
           <h2 className='subtitle'>
-            <p>A new decentralized authentication service, based on Ethereum blockchain.</p>
+            <p>A new decentralized identity management service, based on Ethereum blockchain.</p>
             <p>
               Create your <strong>identity</strong> in the chain,
               collect <strong>claims</strong> to complete your profile,

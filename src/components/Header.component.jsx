@@ -12,7 +12,7 @@ const HeaderComponent = ({ location }) => (
       <div className='container'>
         <div className='navbar-brand'>
           <Link to='/' href='/' className='navbar-item is-size-3 has-text-weight-bold'>
-            EDITS
+            EDDITS
           </Link>
           <span className='navbar-burger burger' data-target='navbarMenu' />
         </div>
