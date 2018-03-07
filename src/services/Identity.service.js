@@ -22,7 +22,19 @@ export const KEY_TYPES = Object.freeze({
   RSA: 2
 });
 
+export const CLAIM_TYPES = Object.freeze({
+  BIOMETRIC: 1
+});
+
+export const CLAIM_SCHEME = Object.freeze({
+  CONTRACT: 3
+});
+
+
 const keyTypeLabel = num => Object.keys(KEY_TYPES).find(type => KEY_TYPES[type] === num);
+
+const claimSchemeLabel = num =>
+  Object.keys(CLAIM_SCHEME).find(scheme => CLAIM_SCHEME[scheme] === num);
 
 export class Identity {
   constructor(address) {
@@ -96,7 +108,51 @@ export class Identity {
 
   execute(dest, amount, calldata, from) {
     return new Promise((resolve, reject) => {
+      // TODO: estimate gas cost !
       this.contract.execute(dest, amount, calldata, { from }, resolvePromise(resolve, reject));
     });
+  }
+
+  getClaimIdsByType(type) {
+    return new Promise((resolve, reject) => {
+      this.contract.getClaimIdsByType(type, resolvePromise(resolve, reject));
+    });
+  }
+
+  getClaim(id) {
+    return new Promise((resolve, reject) => {
+      this.contract.getClaim(id, resolvePromise(resolve, reject));
+    });
+  }
+
+  getAllClaims() {
+    return Promise.all(Object.keys(CLAIM_TYPES)
+      // For each CLAIM_TYPES, get the list of claims
+      .map(type => this.getClaimIdsByType(CLAIM_TYPES[type]).then(claims => [type, claims])))
+      // Fetch claims data
+      .then(result => Promise.all(
+        result.map(([type, claims]) => Promise.all(
+          claims.map(claimId => this.getClaim(claimId).then(
+            // eslint-disable-next-line no-unused-vars
+            ([_1, scheme, issuer, signature, data, uri]) => ({
+              id: claimId,
+              type: {
+                label: type,
+                code: CLAIM_TYPES[type]
+              },
+              scheme: {
+                label: claimSchemeLabel(scheme.toNumber()),
+                code: scheme.toNumber()
+              },
+              issuer,
+              signature,
+              data,
+              uri
+            })
+          ))
+        ))
+      ))
+      // Build final result
+      .then(result => result.reduce((a, b) => a.concat(b)));
   }
 }

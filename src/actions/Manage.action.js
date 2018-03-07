@@ -3,6 +3,7 @@ import { Identity } from 'services/Identity.service';
 
 export const IDENTITY_BALANCE_FETCHED = 'IDENTITY_BALANCE_FETCHED';
 export const IDENTITY_KEYS_FETCHED = 'IDENTITY_KEYS_FETCHED';
+export const IDENTITY_CLAIMS_FETCHED = 'IDENTITY_CLAIMS_FETCHED';
 export const IDENTITY_DETAIL_TAB_CHANGED = 'IDENTITY_DETAIL_TAB_CHANGED';
 export const PENDING_TX_HIDDEN = 'PENDING_TX_HIDDEN';
 export const PENDING_TX_ADDED = 'PENDING_TX_ADDED';
@@ -15,6 +16,12 @@ export const fetchIdentityDetail = address => (dispatch) => {
     dispatch({
       type: IDENTITY_KEYS_FETCHED,
       keys
+    });
+  });
+  id.getAllClaims().then((claims) => {
+    dispatch({
+      type: IDENTITY_CLAIMS_FETCHED,
+      claims
     });
   });
   Web3.getBalance(address).then((balance) => {

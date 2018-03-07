@@ -23,14 +23,14 @@ const AddLuxTrustClaimComponent = ({
     <h5 className='title is-5'>Add a LuxTrust claim</h5>
     <div className='content'>
       {!orelyResponse && (
-        <p>
+        <div>
           <span className='icon is-medium'>
             <i className='fa fa-refresh fa-spin' />
           </span>
           Generate a LuxTrust request, please wait.
           You will be redirected to LuxTrust for authentication...
           {samlRequest && <Redirect {...{ samlRequest }} />}
-        </p>
+        </div>
       )}
       {orelyResponse && (
         <div>

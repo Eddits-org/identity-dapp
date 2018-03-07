@@ -24,7 +24,7 @@ const plugins = [
   new HtmlWebpackPlugin({
     template: path.join(src, 'index.html'),
     inject: 'body',
-    baseUrl: isProd ? '/identity/' : '/',
+    baseUrl: '/identity/',
     isProd
   })
 ];
@@ -86,8 +86,12 @@ module.exports = {
   },
   plugins,
   devServer: {
+    publicPath: '/identity',
     contentBase: isProd ? './www' : './src',
-    historyApiFallback: true,
+    historyApiFallback: {
+      index: '/identity'
+    },
+    disableHostCheck: true,
     port: 3000,
     host: '0.0.0.0'
   }
