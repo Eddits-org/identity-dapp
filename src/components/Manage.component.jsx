@@ -21,8 +21,12 @@ const ManageComponent = ({
   pendingTransactions,
   balance,
   processingDeposit,
+  addIdentityVisible,
 
   selectIdentity,
+  addIdentity,
+  removeIdentity,
+  switchAddIdentityVisibility,
   setTab,
   hidePendingTx,
   deposit
@@ -42,7 +46,17 @@ const ManageComponent = ({
             <KeySelector {...{ account, keyPurposes, selectedIdentity }} />
           </div>
           <div className='column'>
-            <IdentitySelector {...{ identities, selectedIdentity, selectIdentity }} />
+            <IdentitySelector
+              {...{
+                identities,
+                selectedIdentity,
+                addIdentityVisible,
+                selectIdentity,
+                addIdentity,
+                removeIdentity,
+                switchAddIdentityVisibility
+              }}
+            />
           </div>
         </div>
         {!!selectedIdentity && (
@@ -82,11 +96,15 @@ ManageComponent.propTypes = {
   pendingTransactions: PropTypes.arrayOf(PropTypes.object).isRequired,
   balance: PropTypes.object,
   processingDeposit: PropTypes.bool.isRequired,
+  addIdentityVisible: PropTypes.bool.isRequired,
 
   selectIdentity: PropTypes.func.isRequired,
+  addIdentity: PropTypes.func.isRequired,
+  removeIdentity: PropTypes.func.isRequired,
   setTab: PropTypes.func.isRequired,
   hidePendingTx: PropTypes.func.isRequired,
-  deposit: PropTypes.func.isRequired
+  deposit: PropTypes.func.isRequired,
+  switchAddIdentityVisibility: PropTypes.func.isRequired
 };
 
 export default ManageComponent;

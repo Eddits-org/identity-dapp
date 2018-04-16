@@ -7,7 +7,7 @@ const LoadingComponent = ({ message }) => (
       <article className='message is-info'>
         <div className='message-body has-text-centered'>
           <span className='icon is-medium'>
-            <i className='fa fa-refresh fa-spin' />
+            <i className='fas fa-sync-alt fa-spin' />
           </span>
           <p>{message}</p>
         </div>

@@ -1,8 +1,11 @@
 import { Identity } from 'services/Identity.service';
-import { fetchIdentityDetail } from 'actions/Manage.action';
+import Storage from 'services/Storage.service';
+import { fetchIdentityDetail, switchAddIdentityVisibility } from 'actions/Manage.action';
 
 export const SELECT_IDENTITY = 'SELECT_IDENTITY';
 export const KEY_PURPOSES_FETCHED = 'KEY_PURPOSES_FETCHED';
+export const IDENTITY_ADDEDD = 'IDENTITY_ADDED';
+export const IDENTITY_REMOVED = 'IDENTITY_REMOVED';
 
 export const checkKeyPurposes = (key, identityAddress) => (dispatch) => {
   const id = new Identity(identityAddress);
@@ -17,4 +20,24 @@ export const selectIdentity = address => (dispatch, getState) => {
   if (address) dispatch(fetchIdentityDetail(address));
   else dispatch({ type: KEY_PURPOSES_FETCHED, purposes: [] });
   dispatch({ type: SELECT_IDENTITY, address: address || null });
+};
+
+export const addIdentity = address => (dispatch) => {
+  Storage.addIdentity({ address });
+  dispatch({
+    type: IDENTITY_ADDEDD,
+    address
+  });
+  dispatch(switchAddIdentityVisibility(false));
+  dispatch(selectIdentity(address));
+};
+
+export const removeIdentity = address => (dispatch) => {
+  Storage.removeIdentity({ address });
+  dispatch({
+    type: IDENTITY_REMOVED,
+    address
+  });
+  dispatch(switchAddIdentityVisibility(false));
+  dispatch(selectIdentity(null));
 };

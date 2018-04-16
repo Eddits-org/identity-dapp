@@ -4,7 +4,8 @@ import {
   PENDING_TX_HIDDEN,
   PENDING_TX_ADDED,
   PENDING_TX_REMOVED,
-  DEPOSIT_PROCESSING_SWITCHED
+  DEPOSIT_PROCESSING_SWITCHED,
+  ADD_IDENTITY_VISIBILITY_CHANGED
 } from 'actions/Manage.action';
 
 export const initialState = {
@@ -12,7 +13,8 @@ export const initialState = {
   addKeyVisible: false,
   pendingTransactions: [],
   balance: null,
-  processingDeposit: false
+  processingDeposit: false,
+  addIdentityVisible: false
 };
 
 export const ManageReducer = (state = initialState, action) => {
@@ -62,6 +64,12 @@ export const ManageReducer = (state = initialState, action) => {
       return {
         ...state,
         processingDeposit: action.processing
+      };
+
+    case ADD_IDENTITY_VISIBILITY_CHANGED:
+      return {
+        ...state,
+        addIdentityVisible: action.value
       };
 
     default:

@@ -37,7 +37,7 @@ const RegisterComponent = ({
           <header className='card-header'>
             <p className='card-header-title'>
               <span className='icon card-title-icon'>
-                <i className='fa fa-id-card-o' />
+                <i className='far fa-id-card' />
               </span>
               Identity
             </p>

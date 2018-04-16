@@ -22,7 +22,7 @@ const PendingTxComponent = ({ transactions, hidePendingTx, network }) => (
         <button className='delete' onClick={() => hidePendingTx(tx.hash)} />
         <div><h6 className='title has-text-weight-semibold is-6'>{tx.label}</h6></div>
         <span className='icon'>
-          <i className='fa fa-refresh fa-spin' />
+          <i className='fas fa-sync-alt fa-spin' />
         </span>
         <small>Waiting for transaction {maybeLink(tx.hash, network)}</small>
       </div>

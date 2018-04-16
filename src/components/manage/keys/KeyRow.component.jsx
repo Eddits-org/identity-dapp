@@ -25,7 +25,7 @@ const Purpose = ({ purpose }) => {
   return (
     <span className={`tag key-${purpose.label.toLowerCase()}`}>
       <span className='icon'>
-        <i className={`fa ${icon}`} />
+        <i className={`fas ${icon}`} />
       </span>&nbsp;
       {purpose.label}
     </span>
@@ -44,7 +44,7 @@ const Key = ({ value, account }) => {
           className='icon'
           title='This is your current management key'
         >
-          <i className='fa fa-warning' />
+          <i className='fas fa-exclamation-triangle' />
         </span>
       )}
       &nbsp;{keyLabel}

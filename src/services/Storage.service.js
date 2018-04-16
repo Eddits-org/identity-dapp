@@ -32,6 +32,17 @@ class StorageService {
       }
     }
   }
+
+  removeIdentity(identity) {
+    const identities = this.getIdentities().filter(id => id.address !== identity.address);
+    if (this.localStorage) {
+      try {
+        this.localStorage.setItem('identities', JSON.stringify(identities));
+      } catch (error) {
+        console.error('Cannot save identities', error);
+      }
+    }
+  }
 }
 
 export default new StorageService();

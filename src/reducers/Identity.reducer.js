@@ -1,6 +1,8 @@
 import {
   SELECT_IDENTITY,
-  KEY_PURPOSES_FETCHED
+  KEY_PURPOSES_FETCHED,
+  IDENTITY_ADDEDD,
+  IDENTITY_REMOVED
 } from 'actions/Identity.action';
 import { IDENTITY_DEPLOYED } from 'actions/Register.action';
 
@@ -13,9 +15,16 @@ export const initialState = {
 export const IdentityReducer = (state = initialState, action) => {
   switch (action.type) {
     case IDENTITY_DEPLOYED:
+    case IDENTITY_ADDEDD:
       state.identities.push({ address: action.address });
       return {
         ...state
+      };
+
+    case IDENTITY_REMOVED:
+      return {
+        ...state,
+        identities: state.identities.filter(id => id.address !== action.address)
       };
 
     case SELECT_IDENTITY:
