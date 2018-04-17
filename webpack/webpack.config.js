@@ -3,8 +3,8 @@ const path = require('path');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const env = process.env.NODE_ENV || 'dev';
-const isProd = env !== 'dev';
+const env = process.env.NODE_ENV || 'development';
+const isProd = env === 'production';
 
 const root = path.join(__dirname, '..');
 const nodeModules = path.join(root, './node_modules');
@@ -12,11 +12,6 @@ const src = path.join(root, './src');
 const dist = path.join(root, './www');
 
 const plugins = [
-  new webpack.optimize.CommonsChunkPlugin({
-    name: 'vendor',
-    chunks: ['app'],
-    minChunks: module => /node_modules\//.test(module.resource)
-  }),
   new webpack.DefinePlugin({
     ENV: JSON.stringify(env),
     LOG_LEVEL: JSON.stringify('debug')
@@ -62,6 +57,7 @@ const alias = {
 };
 
 module.exports = {
+  mode: env,
   devtool: isProd ? 'cheap-module-source-map' : 'source-map',
   context: src,
   entry: {
@@ -94,5 +90,18 @@ module.exports = {
     disableHostCheck: true,
     port: 3000,
     host: '0.0.0.0'
+  },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        default: false,
+        commons: {
+          test: /node_modules/,
+          name: 'vendor',
+          chunks: 'initial',
+          minSize: 1
+        }
+      }
+    }
   }
 };
