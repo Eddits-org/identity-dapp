@@ -7,9 +7,7 @@ import {
   CLAIM_DETAILS_CLOSED
 } from 'actions/Claims.action';
 
-import {
-  IDENTITY_CLAIMS_FETCHED
-} from 'actions/Manage.action';
+import { IDENTITY_CLAIMS_FETCHED } from 'actions/Manage.action';
 
 export const initialState = {
   claims: [],

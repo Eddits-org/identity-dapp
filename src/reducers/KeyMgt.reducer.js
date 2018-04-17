@@ -4,9 +4,7 @@ import {
   REMOVE_KEY
 } from 'actions/KeyMgt.action';
 
-import {
-  IDENTITY_KEYS_FETCHED
-} from 'actions/Manage.action';
+import { IDENTITY_KEYS_FETCHED } from 'actions/Manage.action';
 
 export const initialState = {
   keys: [],
