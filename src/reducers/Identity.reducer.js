@@ -2,14 +2,16 @@ import {
   SELECT_IDENTITY,
   KEY_PURPOSES_FETCHED,
   IDENTITY_ADDEDD,
-  IDENTITY_REMOVED
+  IDENTITY_REMOVED,
+  ADD_IDENTITY_VISIBILITY_CHANGED
 } from 'actions/Identity.action';
 import { IDENTITY_DEPLOYED } from 'actions/Register.action';
 
 export const initialState = {
   identities: [],
   selectedIdentity: null,
-  keyPurposes: []
+  keyPurposes: [],
+  addIdentityVisible: false
 };
 
 export const IdentityReducer = (state = initialState, action) => {
@@ -37,6 +39,12 @@ export const IdentityReducer = (state = initialState, action) => {
       return {
         ...state,
         keyPurposes: action.purposes
+      };
+
+    case ADD_IDENTITY_VISIBILITY_CHANGED:
+      return {
+        ...state,
+        addIdentityVisible: action.value
       };
 
     default:

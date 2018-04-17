@@ -9,7 +9,6 @@ export const PENDING_TX_HIDDEN = 'PENDING_TX_HIDDEN';
 export const PENDING_TX_ADDED = 'PENDING_TX_ADDED';
 export const PENDING_TX_REMOVED = 'PENDING_TX_REMOVED';
 export const DEPOSIT_PROCESSING_SWITCHED = 'DEPOSIT_PROCESSING_SWITCHED';
-export const ADD_IDENTITY_VISIBILITY_CHANGED = 'ADD_IDENTITY_VISIBILITY_CHANGED';
 
 export const fetchIdentityDetail = address => (dispatch) => {
   const id = new Identity(address);
@@ -71,8 +70,3 @@ export const deposit = amount => (dispatch, getState) => {
     });
   });
 };
-
-export const switchAddIdentityVisibility = value => ({
-  type: ADD_IDENTITY_VISIBILITY_CHANGED,
-  value
-});

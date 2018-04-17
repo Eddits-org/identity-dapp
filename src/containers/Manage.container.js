@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
-import { selectIdentity, addIdentity, removeIdentity } from 'actions/Identity.action';
-import { changeIdentityDetailTab, hidePendingTx, deposit, switchAddIdentityVisibility } from 'actions/Manage.action';
+import { addIdentity, removeIdentity, switchAddIdentityVisibility } from 'actions/Identity.action';
+import { changeIdentityDetailTab, hidePendingTx, deposit } from 'actions/Manage.action';
 import ManageComponent from 'components/Manage.component';
 
 const mapStateToProps = store => ({
@@ -15,11 +15,11 @@ const mapStateToProps = store => ({
   pendingTransactions: store.manage.pendingTransactions,
   balance: store.manage.balance,
   processingDeposit: store.manage.processingDeposit,
-  addIdentityVisible: store.manage.addIdentityVisible
+  addIdentityVisible: store.identity.addIdentityVisible
 });
 
-const mapDispatchToProps = dispatch => ({
-  selectIdentity: address => dispatch(selectIdentity(address)),
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  selectIdentity: address => ownProps.history.push(`/manage/${address}`),
   setTab: tab => dispatch(changeIdentityDetailTab(tab)),
   hidePendingTx: hash => dispatch(hidePendingTx(hash)),
   deposit: amount => dispatch(deposit(amount)),

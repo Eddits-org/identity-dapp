@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
+// TODO : handle path parameters
 const className = (location, path) => (
   `navbar-item ${location.pathname === path ? 'is-active' : ''}`
 );

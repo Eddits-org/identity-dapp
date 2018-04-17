@@ -26,8 +26,8 @@ const store = createStore(
 );
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
+  <Provider {...{ store }}>
+    <App {...{ store }} />
   </Provider>,
   document.querySelector('#app')
 );
