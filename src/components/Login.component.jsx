@@ -10,6 +10,8 @@ import IdentitySelector from 'components/IdentitySelector.component';
 import LoginRequest from 'components/login/LoginRequest.component';
 import LoginResponse from 'components/login/LoginResponse.component';
 
+import { emptyLoginRequest } from 'reducers/Login.reducer';
+
 const LoginComponent = ({
   providerReady,
   network,
@@ -18,9 +20,14 @@ const LoginComponent = ({
   identities,
   selectedIdentity,
   loginRequest,
+  isValidatingSigner,
   loginRedirectionURL,
+  addIdentityVisible,
 
   selectIdentity,
+  addIdentity,
+  removeIdentity,
+  switchAddIdentityVisibility,
   login
 }) => {
   if (!providerReady) return <NoProvider />;
@@ -37,7 +44,16 @@ const LoginComponent = ({
             <KeySelector {...{ account, keyPurposes, selectedIdentity }} />
           </div>
           <div className='column'>
-            <IdentitySelector {...{ identities, selectedIdentity, selectIdentity }} />
+            <IdentitySelector {...{
+                identities,
+                selectedIdentity,
+                addIdentityVisible,
+                selectIdentity,
+                addIdentity,
+                removeIdentity,
+                switchAddIdentityVisibility
+              }}
+            />
           </div>
         </div>
         {loginRequest && !loginRedirectionURL && (
@@ -45,6 +61,7 @@ const LoginComponent = ({
             loginRequest,
             account,
             selectedIdentity,
+            isValidatingSigner,
             login
             }}
           />
@@ -62,7 +79,7 @@ LoginComponent.defaultProps = {
   account: null,
   keyPurposes: [],
   selectedIdentity: null,
-  loginRequest: null,
+  loginRequest: emptyLoginRequest,
   loginRedirectionURL: null
 };
 
@@ -71,13 +88,18 @@ LoginComponent.propTypes = {
   network: PropTypes.object,
   account: PropTypes.string,
   loginRequest: PropTypes.object,
+  isValidatingSigner: PropTypes.bool.isRequired,
   loginRedirectionURL: PropTypes.string,
   keyPurposes: PropTypes.arrayOf(PropTypes.number),
   identities: PropTypes.arrayOf(PropTypes.object).isRequired,
   selectedIdentity: PropTypes.string,
+  addIdentityVisible: PropTypes.bool.isRequired,
 
   selectIdentity: PropTypes.func.isRequired,
-  login: PropTypes.func.isRequired
+  addIdentity: PropTypes.func.isRequired,
+  removeIdentity: PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired,
+  switchAddIdentityVisibility: PropTypes.func.isRequired
 };
 
 export default LoginComponent;

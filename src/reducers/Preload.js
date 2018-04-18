@@ -5,6 +5,8 @@ import { initialState as initialManageState } from 'reducers/Manage.reducer';
 import { initialState as initialClaimsState } from 'reducers/Claims.reducer';
 import { initialState as initialLoginState } from 'reducers/Login.reducer';
 
+import { parseLoginRequest } from 'utils/LoginRequest.utils';
+
 const ORLEY_TAG = '#response=';
 const AUTH_TAG = '#loginRequest=';
 
@@ -28,10 +30,9 @@ const preloadStateFromURL = () => {
   }
   if (url.indexOf(AUTH_TAG) > 0) {
     const loginRequest = url.substring(url.indexOf(AUTH_TAG) + AUTH_TAG.length);
-    const json = JSON.parse(atob(loginRequest));
     return {
       login: {
-        loginRequest: json
+        loginRequest: parseLoginRequest(loginRequest)
       }
     };
   }

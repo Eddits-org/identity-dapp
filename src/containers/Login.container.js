@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import { login } from 'actions/Login.action';
-import { selectIdentity } from 'actions/Identity.action';
+import { selectIdentity, addIdentity, removeIdentity, switchAddIdentityVisibility } from 'actions/Identity.action';
 import LoginComponent from 'components/Login.component';
 
 const mapStateToProps = store => ({
@@ -12,12 +12,18 @@ const mapStateToProps = store => ({
   identities: store.identity.identities,
   selectedIdentity: store.identity.selectedIdentity,
   loginRequest: store.login.loginRequest,
-  loginRedirectionURL: store.login.loginRedirectionURL
+  isValidatingSigner: store.login.isValidatingSigner,
+  loginRedirectionURL: store.login.loginRedirectionURL,
+  addIdentityVisible: store.identity.addIdentityVisible
 });
 
 const mapDispatchToProps = dispatch => ({
   selectIdentity: address => dispatch(selectIdentity(address)),
-  login: (nonce, account, identity, redirect) => dispatch(login(nonce, account, identity, redirect))
+  login: (nonce, account, identity, redirect) =>
+    dispatch(login(nonce, account, identity, redirect)),
+  switchAddIdentityVisibility: visibility => dispatch(switchAddIdentityVisibility(visibility)),
+  addIdentity: address => dispatch(addIdentity(address)),
+  removeIdentity: address => dispatch(removeIdentity(address))
 });
 
 export default connect(
