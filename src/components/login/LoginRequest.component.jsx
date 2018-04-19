@@ -107,7 +107,8 @@ const LoginRequestComponent = ({
               loginRequest.identity,
               account,
               selectedIdentity,
-              loginRequest.redirect
+              loginRequest.redirect,
+              loginRequest.state
             )}
           >
             <span className='icon'>

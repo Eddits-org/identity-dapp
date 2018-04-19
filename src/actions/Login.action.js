@@ -5,15 +5,16 @@ import { Identity, KEYS_PURPOSES } from 'services/Identity.service';
 export const LOGIN_RESPONSE_SIGNED = 'LOGIN_RESPONSE_SIGNED';
 export const LOGIN_REQUEST_SIGNER_VALIDATED = 'LOGIN_REQUEST_SIGNER_VALIDATED';
 
-export const login = (sp, account, identity, redirect) => (dispatch) => {
+export const login = (sp, account, identity, redirect, state) => (dispatch) => {
   const payload = {
     sub: identity,
     aud: sp,
     iat: Math.floor(Date.now() / 1000),
     jti: generateId(10)
   };
+  if (state) payload.state = state;
   JWT.sign(payload, account).then((token) => {
-    const redirectionURL = `${redirect}${redirect.indexOf('?') >= 0 ? '&' : '?'}token=${token}`;
+    const redirectionURL = `${redirect}#token=${token}`;
     dispatch({ type: LOGIN_RESPONSE_SIGNED, redirectionURL });
   });
 };

@@ -39,6 +39,7 @@ const decodeRequest = (request) => {
 
       identity: parsed.identity,
       redirect: parsed.redirect,
+      state: parsed.state || null,
 
       formatValid: true
     };
