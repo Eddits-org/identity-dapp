@@ -4,7 +4,6 @@ export const emptyLoginRequest = {
   rawLoginRequest: null,
   signature: null,
 
-  nonce: null,
   redirect: null,
   identity: null,
 

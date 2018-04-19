@@ -104,7 +104,7 @@ const LoginRequestComponent = ({
               !loginRequest.signerValid
             }
             onClick={() => login(
-              loginRequest.nonce,
+              loginRequest.identity,
               account,
               selectedIdentity,
               loginRequest.redirect

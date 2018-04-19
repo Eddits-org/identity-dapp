@@ -1,6 +1,3 @@
-// import * as ethutil from 'ethereumjs-util';
-// import sha3 from 'crypto-js/sha3';
-
 import base64url from 'base64url';
 import SignStream from 'jws/lib/sign-stream';
 import * as util from 'util';
@@ -61,12 +58,11 @@ SignStream.prototype.sign = sign;
 
 class JWTService {
   sign(payload, account) {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       const header = {
         alg: 'ESK256'
       };
 
-      // eslint-disable-next-line
       new SignStream({
         provider: window.web3.currentProvider,
         signer: account,
@@ -75,19 +71,8 @@ class JWTService {
         header,
         payload
       })
-        .once('done', (token) => {
-          /* eslint-disable */
-          const [h, p, encodedSign] = token.split('.');
-          /*
-          const decodedSign = Buffer.from(base64url.toBase64(encodedSign), 'base64');
-          const msg = Buffer.from(util.format('%s.%s', h, p), 'utf8');
-          const hash = ethutil.hashPersonalMessage(msg);
-          const sigParams = ethutil.fromRpcSig(decodedSign);
-          const signerPublicKey = ethutil.ecrecover(hash, sigParams.v, sigParams.r, sigParams.s);
-          const signerAddress = `0x${ethutil.publicToAddress(signerPublicKey).toString('hex')}`;
-          */
-          resolve(token);
-        });
+        .once('done', resolve)
+        .once('error', reject);
     });
   }
 }

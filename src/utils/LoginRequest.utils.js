@@ -27,7 +27,7 @@ const decodeRequest = (request) => {
   // If token is OK, decode the loginRequest and validate the format
   try {
     const parsed = JSON.parse(Buffer.from(rawLoginRequest, 'base64'));
-    if (!parsed || !parsed.identity || !parsed.redirect || !parsed.nonce) {
+    if (!parsed || !parsed.identity || !parsed.redirect) {
       return {
         formatValid: false,
         error: 'Invalid loginRequest format'
@@ -39,7 +39,6 @@ const decodeRequest = (request) => {
 
       identity: parsed.identity,
       redirect: parsed.redirect,
-      nonce: parsed.nonce,
 
       formatValid: true
     };

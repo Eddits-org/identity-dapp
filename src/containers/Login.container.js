@@ -19,8 +19,8 @@ const mapStateToProps = store => ({
 
 const mapDispatchToProps = dispatch => ({
   selectIdentity: address => dispatch(selectIdentity(address)),
-  login: (nonce, account, identity, redirect) =>
-    dispatch(login(nonce, account, identity, redirect)),
+  login: (sp, account, identity, redirect) =>
+    dispatch(login(sp, account, identity, redirect)),
   switchAddIdentityVisibility: visibility => dispatch(switchAddIdentityVisibility(visibility)),
   addIdentity: address => dispatch(addIdentity(address)),
   removeIdentity: address => dispatch(removeIdentity(address))
