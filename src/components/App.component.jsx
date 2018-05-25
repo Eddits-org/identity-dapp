@@ -14,7 +14,6 @@ import Register from 'containers/Register.container';
 import Manage from 'containers/Manage.container';
 import Login from 'containers/Login.container';
 import Network from 'containers/Network.container';
-import Footer from 'containers/Footer.container';
 
 import { selectIdentity } from 'actions/Identity.action';
 import { validateLoginRequestSigner } from 'actions/Login.action';
@@ -54,7 +53,6 @@ const AppComponent = ({ store }) => (
           </OnRouteEnter>)
         }
       />
-      <Footer />
     </div>
   </Router>
 );
