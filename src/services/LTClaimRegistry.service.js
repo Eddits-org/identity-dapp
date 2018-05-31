@@ -49,12 +49,13 @@ class LTClaimRegistry {
           data: calldata
         }, (err, result) => {
           // eslint-disable-next-line no-unused-vars
-          const [active, subjectCN, issuerCN, modulus, exponent] =
+          const [active, subjectCN, country, issuerCN, modulus, exponent] =
             this.verifyFunc.unpackOutput(result);
           if (err) return reject(err);
           return resolve({
             active,
             subjectCN,
+            country,
             issuerCN
           });
         });

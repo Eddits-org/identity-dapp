@@ -18,6 +18,10 @@ const ClaimDetailsModalComponent = ({ details, closeDetail }) => (
                 <td>{details.subjectCN}</td>
               </tr>
               <tr>
+                <th>Country</th>
+                <td>{details.country}</td>
+              </tr>
+              <tr>
                 <th>Certification authority</th>
                 <td>{details.issuerCN}</td>
               </tr>
