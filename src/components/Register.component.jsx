@@ -48,7 +48,13 @@ const RegisterComponent = ({
                 <WaitDeploy {... { network, txHash }} />
               )}
               {!deploying && !address && (
-                <Form {... { fetchingCost, cost, account }} />
+                <Form {... {
+                    fetchingCost,
+                    cost,
+                    account,
+                    gas
+                  }}
+                />
               )}
               {!deploying && !!address && (
                 <Success {... { address, network }} />
