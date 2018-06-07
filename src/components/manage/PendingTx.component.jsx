@@ -8,6 +8,7 @@ const maybeLink = (hash, network) => {
   return (
     <a
       target='_blank'
+      rel='noopener noreferrer'
       href={`${network.etherscan}/tx/${hash}`}
     >
       {shorten(hash)}
