@@ -34,7 +34,7 @@ const LoginRequestComponent = ({
                 <th>Service Provider Identity</th>
                 <td>
                   <span className='tag is-medium'>{loginRequest.identity}</span>
-                  <a className='button is-small' href={`/identity/manage/${loginRequest.identity}`} target='_blank'>
+                  <a className='button is-small' href={`/identity/manage/${loginRequest.identity}`} target='_blank' rel='noopener noreferrer'>
                     <span className='icon is-small'>
                       <i className='fas fa-external-link-alt' />
                     </span>
