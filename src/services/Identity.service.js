@@ -116,9 +116,9 @@ export class Identity {
     });
   }
 
-  getClaimIdsByType(type) {
+  getClaimIdsByTopic(type) {
     return new Promise((resolve, reject) => {
-      this.contract.getClaimIdsByType(type, resolvePromise(resolve, reject));
+      this.contract.getClaimIdsByTopic(type, resolvePromise(resolve, reject));
     });
   }
 
@@ -131,7 +131,7 @@ export class Identity {
   getAllClaims() {
     return Promise.all(Object.keys(CLAIM_TYPES)
       // For each CLAIM_TYPES, get the list of claims
-      .map(type => this.getClaimIdsByType(CLAIM_TYPES[type]).then(claims => [type, claims])))
+      .map(type => this.getClaimIdsByTopic(CLAIM_TYPES[type]).then(claims => [type, claims])))
       // Fetch claims data
       .then(result => Promise.all(
         result.map(([type, claims]) => Promise.all(
