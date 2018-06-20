@@ -21,6 +21,27 @@ class Registry {
       this.contract.getPSPNames(resolvePromise(resolve, reject));
     });
   }
+
+  getPspAddress( name ) {
+    return new Promise((resolve, reject) => {
+      return this.contract.getPSPAddress(name, (err, res) => {
+        if (err) return reject(err);
+        return resolve({ name: this.web3.toAscii(name), address : res })
+      });
+    });
+  }
+
+  getPspNamesToAddress(){
+    return new Promise((resolve, reject) => {
+      this.getPSPNames().then( (names) => {
+        return Promise.all( names.map( name => this.getPspAddress(name) ) )
+      }).then( values => {
+        return resolve(values)
+    }).catch( err => reject(err))
+    });
+  }
+
+
 }
 
 export default new Registry();

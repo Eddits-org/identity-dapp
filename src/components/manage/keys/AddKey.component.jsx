@@ -14,8 +14,8 @@ const InputKeyByPurpose = ({
     return (
       <div className='select'>
         <select onChange={ event => onChange(event) }>
-          {pspNames.map(name => (
-            <option key={name} value={name}>{name}</option>
+          {pspNames.map(psp => (
+            <option key={psp.name} value={psp.address}>{psp.name}</option>
           ))}
         </select>
       </div>
@@ -120,7 +120,7 @@ class AddKeyComponent extends React.Component {
 
 AddKeyComponent.propTypes = {
   switchAddKeyVisibility: PropTypes.func.isRequired,
-  pspNames: PropTypes.arrayOf(PropTypes.string),
+  pspNames: PropTypes.arrayOf(PropTypes.object),
   addKey: PropTypes.func.isRequired
 };
 

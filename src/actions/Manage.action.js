@@ -74,10 +74,10 @@ export const deposit = amount => (dispatch, getState) => {
 };
 
 export const fetchPSPNames = () => (dispatch) => {
-  Registry.getPSPNames().then((res) => {
+  Registry.getPspNamesToAddress().then((res) => {
     dispatch({
       type: PSP_NAMES_FETCHED,
-      names: res.map(bytes32 => Web3.toAcsii(bytes32))
+      names: res
     });
   });
 };

@@ -66,7 +66,7 @@ TabKeysComponent.propTypes = {
   addKeyVisible: PropTypes.bool.isRequired,
   account: PropTypes.string.isRequired,
   keyPurposes: PropTypes.arrayOf(PropTypes.number).isRequired,
-  pspNames: PropTypes.arrayOf(PropTypes.string),
+  pspNames: PropTypes.arrayOf(PropTypes.object),
 
   switchAddKeyVisibility: PropTypes.func.isRequired,
   switchDuplicateKeyVisibility: PropTypes.func.isRequired,
