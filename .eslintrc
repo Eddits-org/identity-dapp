@@ -1,5 +1,17 @@
 {
-  "extends": "airbnb",
+//  "extends": "airbnb",
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true,
+      "experimentalObjectRestSpread": true
+    }
+  },
+  "plugins": [
+    "react"
+  ],
   "rules": {
     "jsx-quotes": [
       2,

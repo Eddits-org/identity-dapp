@@ -7,7 +7,8 @@ const mapStateToProps = store => ({
   account: store.network.account,
   keyPurposes: store.identity.keyPurposes,
   keys: store.keyMgt.keys,
-  addKeyVisible: store.keyMgt.addKeyVisible
+  addKeyVisible: store.keyMgt.addKeyVisible,
+  pspNames: store.manage.pspNames
 });
 
 const mapDispatchToProps = dispatch => ({

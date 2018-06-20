@@ -37,6 +37,10 @@ class Web3Service {
     });
   }
 
+  toAcsii(bytes32){
+    return this.web3.toAscii(bytes32);
+  }
+
   waitForMining(txHash) {
     return this.withWeb3Promise((resolve, reject) => {
       const id = setInterval(() => {
@@ -75,7 +79,7 @@ class Web3Service {
 
   estimateIdentityCreationCost() {
     // TODO : force gas value because of invalid estimation through estimateGat
-    const gas = 2745819;
+    const gas = 3745819;
     return this.estimateIdentityCreationGas().then(() =>
       this.getGasPrice().then(gasPrice => ({
         eth: this.web3.fromWei(gasPrice.times(gas), 'ether').toString(),

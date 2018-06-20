@@ -17,6 +17,7 @@ import Network from 'containers/Network.container';
 
 import { selectIdentity } from 'actions/Identity.action';
 import { validateLoginRequestSigner } from 'actions/Login.action';
+import { fetchPSPNames } from 'actions/Manage.action';
 
 const HeaderWithRouter = withRouter(Header);
 
@@ -35,7 +36,10 @@ const AppComponent = ({ store }) => (
         render={props => (
           <OnRouteEnter
             {...props}
-            onEnter={match => store.dispatch(selectIdentity(match.params.address))}
+            onEnter={(match) => {
+              store.dispatch(selectIdentity(match.params.address));
+              store.dispatch(fetchPSPNames());
+            }}
           >
             <Manage {...props} />
           </OnRouteEnter>)

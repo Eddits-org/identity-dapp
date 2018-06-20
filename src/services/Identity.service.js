@@ -14,7 +14,8 @@ export const KEYS_PURPOSES = Object.freeze({
   MANAGEMENT: 1,
   ACTION: 2,
   CLAIM: 3,
-  ENCRYPTION: 4
+  ENCRYPTION: 4,
+  PAYMENT: 101
 });
 
 export const KEY_TYPES = Object.freeze({

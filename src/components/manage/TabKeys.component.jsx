@@ -9,6 +9,7 @@ import KeyRow from './keys/KeyRow.component';
 const TabKeysComponent = ({
   keys,
   keyPurposes,
+  pspNames,
   addKeyVisible,
   switchAddKeyVisibility,
   switchDuplicateKeyVisibility,
@@ -55,7 +56,7 @@ const TabKeysComponent = ({
           Add key
         </button>
       )}
-      {addKeyVisible && <AddKey {...{ switchAddKeyVisibility, addKey }} />}
+      {addKeyVisible && <AddKey {...{ switchAddKeyVisibility, addKey, pspNames }} />}
     </div>
   );
 };
@@ -65,6 +66,7 @@ TabKeysComponent.propTypes = {
   addKeyVisible: PropTypes.bool.isRequired,
   account: PropTypes.string.isRequired,
   keyPurposes: PropTypes.arrayOf(PropTypes.number).isRequired,
+  pspNames: PropTypes.arrayOf(PropTypes.string),
 
   switchAddKeyVisibility: PropTypes.func.isRequired,
   switchDuplicateKeyVisibility: PropTypes.func.isRequired,

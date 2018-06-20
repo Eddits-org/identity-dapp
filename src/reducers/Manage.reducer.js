@@ -4,7 +4,8 @@ import {
   PENDING_TX_HIDDEN,
   PENDING_TX_ADDED,
   PENDING_TX_REMOVED,
-  DEPOSIT_PROCESSING_SWITCHED
+  DEPOSIT_PROCESSING_SWITCHED,
+  PSP_NAMES_FETCHED
 } from 'actions/Manage.action';
 
 export const initialState = {
@@ -12,7 +13,8 @@ export const initialState = {
   addKeyVisible: false,
   pendingTransactions: [],
   balance: null,
-  processingDeposit: false
+  processingDeposit: false,
+  pspNames: []
 };
 
 export const ManageReducer = (state = initialState, action) => {
@@ -62,6 +64,12 @@ export const ManageReducer = (state = initialState, action) => {
       return {
         ...state,
         processingDeposit: action.processing
+      };
+
+    case PSP_NAMES_FETCHED:
+      return {
+        ...state,
+        pspNames: action.names
       };
 
     default:

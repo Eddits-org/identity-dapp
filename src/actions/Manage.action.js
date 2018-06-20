@@ -1,5 +1,6 @@
 import Web3 from 'services/Web3.service';
 import { Identity } from 'services/Identity.service';
+import Registry from 'services/Registry.service';
 
 export const IDENTITY_BALANCE_FETCHED = 'IDENTITY_BALANCE_FETCHED';
 export const IDENTITY_KEYS_FETCHED = 'IDENTITY_KEYS_FETCHED';
@@ -9,6 +10,7 @@ export const PENDING_TX_HIDDEN = 'PENDING_TX_HIDDEN';
 export const PENDING_TX_ADDED = 'PENDING_TX_ADDED';
 export const PENDING_TX_REMOVED = 'PENDING_TX_REMOVED';
 export const DEPOSIT_PROCESSING_SWITCHED = 'DEPOSIT_PROCESSING_SWITCHED';
+export const PSP_NAMES_FETCHED = 'PSP_NAMES_FETCHED';
 
 export const fetchIdentityDetail = address => (dispatch) => {
   const id = new Identity(address);
@@ -67,6 +69,15 @@ export const deposit = amount => (dispatch, getState) => {
       dispatch(fetchIdentityDetail(identityAddress));
       dispatch({ type: DEPOSIT_PROCESSING_SWITCHED, processing: false });
       dispatch(removePendingTx(hash));
+    });
+  });
+};
+
+export const fetchPSPNames = () => (dispatch) => {
+  Registry.getPSPNames().then((res) => {
+    dispatch({
+      type: PSP_NAMES_FETCHED,
+      names: res.map(bytes32 => Web3.toAcsii(bytes32))
     });
   });
 };
