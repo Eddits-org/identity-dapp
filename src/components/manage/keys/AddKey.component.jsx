@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import Select from 'react-select';
+
+
 import {KEYS_PURPOSES, KEY_TYPES} from 'services/Identity.service';
 import {addressToKey} from 'utils/Keys.util';
 
@@ -8,26 +11,32 @@ import {addressToKey} from 'utils/Keys.util';
 const InputKeyByPurpose = ({
   purpose,
   pspNames,
-  onChange
+  psp,
+  onChange,
+  onChangePsp
 }) => {
   if( purpose == 101 ){
     return (
-      <div className='select'>
-        <select onChange={ event => onChange(event) }>
-          {pspNames.map(psp => (
-            <option key={psp.name} value={psp.address}>{psp.name}</option>
-          ))}
-        </select>
-      </div>
+      <Select onChange={ event => onChangePsp(event) }
+              options={ pspNames }
+              value={ psp }
+              placeholder='Choose a PSP'
+              labelKey='name'
+      />
     )
   } else {
     return (
-      <input
-        className='input'
-        type='text'
-        placeholder='Key value'
-        onChange={ event => onChange(event) }
-      />
+      <span>
+        <input
+          className='input'
+          type='text'
+          placeholder='Key value'
+          onChange={ event => onChange(event) }
+        />
+        <span className='icon is-small is-left'>
+          <i className='fa fa-key'/>
+        </span>
+      </span>
     )
   }
 }
@@ -40,20 +49,24 @@ class AddKeyComponent extends React.Component {
     this.state = {
       key: '',
       purpose: '',
-      type: ''
+      type: '',
+      psp: ''
     }
   }
 
+  // TODO: input validation + addessToKey only for ECDSA
+  handleClick = () => {
+    const { key, purpose, type, psp } = this.state;
+    if( psp ){
+      this.props.addKey(addressToKey(psp.address), purpose, type);
+    } else {
+      this.props.addKey(addressToKey(key), purpose, type);
+    }
+  };
+
   render() {
     const { addKey, switchAddKeyVisibility, pspNames } = this.props;
-    const { key, purpose, type } = this.state;
-
-    const handleClick = () => {
-      // TODO: input validation + addessToKey only for ECDSA
-      addKey(addressToKey(key), purpose, type);
-    };
-
-    console.log( this.state, pspNames );
+    const { key, purpose, type, psp } = this.state;
 
     return (
       <div className='box'>
@@ -65,13 +78,15 @@ class AddKeyComponent extends React.Component {
               <InputKeyByPurpose
                 pspNames={ pspNames }
                 purpose={ purpose }
+                psp={ psp }
                 onChange={(event) => {
                   this.setState({ key: event.target.value })
                 }}
+                onChangePsp={(psp) => {
+                  console.log(psp);
+                  this.setState({ psp })
+                }}
               />
-              <span className='icon is-small is-left'>
-                <i className='fa fa-key'/>
-              </span>
             </span>
             </div>
             <div className='field is-grouped'>
@@ -100,7 +115,7 @@ class AddKeyComponent extends React.Component {
             </div>
             <div className='field is-grouped is-grouped-right'>
             <span className='control'>
-              <button className='button is-success' onClick={handleClick}>
+              <button className='button is-success' onClick={this.handleClick}>
                 Add
               </button>
             </span>
