@@ -19,6 +19,9 @@ const Purpose = ({ purpose }) => {
     case 4:
       icon = 'fa-lock';
       break;
+    case 5:
+      icon = 'fa-key';
+      break;
     default:
       icon = '';
   }

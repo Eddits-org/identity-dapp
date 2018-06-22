@@ -17,9 +17,18 @@ const InputKeyByPurpose = ({
 }) => {
   if( purpose == 101 ){
     return (
-      <Select onChange={ event => onChangePsp(event) }
+      <Select.Creatable
+              onChange={ event => onChangePsp(event) }
               options={ pspNames }
               value={ psp }
+              // promptTextCreator={ _ => 'Add other Eth Address' }
+              newOptionCreator={({label, labelKey, valueKey}) => {
+                const option = {};
+                option.address = label;
+                option.value = label;
+                option.name = 'Add other Eth Address';
+                return option;
+              }}
               placeholder='Choose a PSP'
               labelKey='name'
       />
@@ -83,7 +92,7 @@ class AddKeyComponent extends React.Component {
                   this.setState({ key: event.target.value })
                 }}
                 onChangePsp={(psp) => {
-                  console.log(psp);
+                  psp && psp.name === 'Add other Eth Address' ? psp.name = 'New address' : null;
                   this.setState({ psp })
                 }}
               />
