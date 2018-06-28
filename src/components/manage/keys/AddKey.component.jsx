@@ -58,7 +58,7 @@ class AddKeyComponent extends React.Component {
     this.state = {
       key: '',
       purpose: '',
-      type: '',
+      type: KEY_TYPES['ECDSA'],
       psp: ''
     }
   }
