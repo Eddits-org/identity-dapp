@@ -38,7 +38,6 @@ const AppComponent = ({ store }) => (
             {...props}
             onEnter={(match) => {
               store.dispatch(selectIdentity(match.params.address));
-              store.dispatch(fetchPSPNames());
             }}
           >
             <Manage {...props} />

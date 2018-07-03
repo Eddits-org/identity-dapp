@@ -73,8 +73,9 @@ export const deposit = amount => (dispatch, getState) => {
   });
 };
 
-export const fetchPSPNames = () => (dispatch) => {
-  Registry.getPspNamesToAddress().then((res) => {
+export const fetchPSPNames = () => (dispatch, getState) => {
+  const networkId = getState().network.network.id;
+  Registry.getPspNamesToAddress(networkId).then((res) => {
     dispatch({
       type: PSP_NAMES_FETCHED,
       names: res

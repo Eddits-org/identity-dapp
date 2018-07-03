@@ -1,5 +1,6 @@
 import Web3 from 'web3';
 import SolidityFunction from 'web3/lib/web3/function';
+import web3 from "./Web3.service";
 
 const config = require('config');
 
@@ -7,12 +8,12 @@ class LTClaimRegistry {
   constructor() {
     if (window.web3) {
       this.web3 = new Web3(window.web3.currentProvider);
-      this.contract = this.web3.eth.contract(config.LTClaimRegistry.abi)
+      this.contract = this.web3.eth.contract(config.LTClaimRegistry[42].abi)
         .at(config.LTClaimRegistry.address);
       this.verifyFunc = new SolidityFunction(
         window.web3,
-        config.LTClaimRegistry.abi.find(v => v.type === 'function' && v.name === 'get'),
-        config.LTClaimRegistry.address
+        config.LTClaimRegistry[42].abi.find(v => v.type === 'function' && v.name === 'get'),
+        config.LTClaimRegistry[42].address
       );
     }
   }

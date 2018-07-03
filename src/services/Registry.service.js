@@ -6,14 +6,12 @@ const config = require('config');
 
 const resolvePromise = (resolve, reject, map = x => x) => (err, result) => {
   if (err) return reject(err);
-  console.log('result', result);
   return resolve(map(result));
 };
 
 class Registry {
   constructor() {
     this.web3 = new Web3(window.web3.currentProvider);
-    this.contract = this.web3.eth.contract(config.registry.abi).at(config.registry.address);
   }
 
   getPSPNames() {
@@ -31,8 +29,9 @@ class Registry {
     });
   }
 
-  getPspNamesToAddress(){
-    return new Promise((resolve, reject) => {
+  getPspNamesToAddress(networkId){
+      this.contract = this.web3.eth.contract(config.PSPregistry[networkId].abi).at(config.PSPregistry[networkId].address);
+      return new Promise((resolve, reject) => {
       this.getPSPNames().then( (names) => {
         return Promise.all( names.map( name => this.getPspAddress(name) ) )
       }).then( values => {
