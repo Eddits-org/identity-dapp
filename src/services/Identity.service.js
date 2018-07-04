@@ -107,6 +107,22 @@ export class Identity {
     });
   }
 
+
+  getPayments() {
+    // Replace from for something like one month ( currentBlock - 60s * 60mn * 24h * 30j / 15s );
+    const from = 0;
+    return new Promise((resolve, reject) => {
+      this.contract.PaymentMade({}, { fromBlock: from, toBlock: 'latest' }).get((err, res) => {
+        if (err)
+          reject(err);
+        else {
+          console.log(res);
+          resolve(res.map( r => ( { ...r.args } ) ) );
+        }
+      });
+    });
+  }
+
   execute(dest, amount, calldata, from) {
     return new Promise((resolve, reject) => {
       // TODO: estimate gas cost !

@@ -11,6 +11,7 @@ export const PENDING_TX_ADDED = 'PENDING_TX_ADDED';
 export const PENDING_TX_REMOVED = 'PENDING_TX_REMOVED';
 export const DEPOSIT_PROCESSING_SWITCHED = 'DEPOSIT_PROCESSING_SWITCHED';
 export const PSP_NAMES_FETCHED = 'PSP_NAMES_FETCHED';
+export const PAYMENTS_FETCHED = 'PAYMENTS_FETCHED';
 
 export const fetchIdentityDetail = address => (dispatch) => {
   const id = new Identity(address);
@@ -80,5 +81,16 @@ export const fetchPSPNames = () => (dispatch, getState) => {
       type: PSP_NAMES_FETCHED,
       names: res
     });
+  });
+};
+
+export const fetchPayments = () => (dispatch, getState) => {
+  const identityAddress = getState().identity.selectedIdentity;
+  const id = new Identity(identityAddress);
+  id.getPayments().then( res => {
+    dispatch({
+      type: PAYMENTS_FETCHED,
+      payments: res
+    })
   });
 };

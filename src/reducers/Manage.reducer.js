@@ -7,6 +7,7 @@ import {
   DEPOSIT_PROCESSING_SWITCHED,
   PSP_NAMES_FETCHED
 } from 'actions/Manage.action';
+import {PAYMENTS_FETCHED} from "../actions/Manage.action";
 
 export const initialState = {
   identityDetailTab: 'keys',
@@ -14,7 +15,8 @@ export const initialState = {
   pendingTransactions: [],
   balance: null,
   processingDeposit: false,
-  pspNames: []
+  pspNames: [],
+  payments: []
 };
 
 export const ManageReducer = (state = initialState, action) => {
@@ -70,6 +72,12 @@ export const ManageReducer = (state = initialState, action) => {
       return {
         ...state,
         pspNames: action.names
+      };
+
+      case PAYMENTS_FETCHED:
+      return {
+        ...state,
+        payments: action.payments
       };
 
     default:

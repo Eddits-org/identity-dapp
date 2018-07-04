@@ -5,6 +5,7 @@ import TabKeys from 'containers/TabKeys.container';
 import TabClaims from 'containers/TabClaims.container';
 import TabActions from './TabActions.component';
 import TabFunds from './TabFunds.component';
+import TabPSP from 'containers/TabPSP.container';
 
 const TabHeader = ({
   id,
@@ -56,7 +57,7 @@ const IdentityDetailComponent = ({
         />
       )}
       {tab === 'actions' && <TabActions />}
-      {tab === 'psp' && <TabActions />}
+      {tab === 'psp' && <TabPSP />}
     </div>
   </div>
 );
