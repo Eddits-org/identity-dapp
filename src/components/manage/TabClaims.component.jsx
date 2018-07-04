@@ -14,13 +14,15 @@ const TabClaimsComponent = ({
   addClaim,
   samlRequest,
   orelyResponse,
+  available,
   ltClaimCost,
   claimDetails,
   openAddLuxTrustClaim,
   closeAddLuxTrustClaim,
   confirmAddLuxTrustClaim,
   verifyContractClaim,
-  closeClaimDetails
+  closeClaimDetails,
+  fetchClaimCost
 }) => (
   <div className='content'>
     <table className='table is-fullwidth'>
@@ -70,7 +72,9 @@ const TabClaimsComponent = ({
         orelyResponse,
         closeAddLuxTrustClaim,
         confirmAddLuxTrustClaim,
-        ltClaimCost
+        ltClaimCost,
+        fetchClaimCost,
+        available
       }}
       />
      ) }
@@ -100,8 +104,10 @@ TabClaimsComponent.propTypes = {
   orelyResponse: PropTypes.object,
   ltClaimCost: PropTypes.object,
   claimDetails: PropTypes.object,
+  available: PropTypes.bool,
 
   openAddLuxTrustClaim: PropTypes.func.isRequired,
+  fetchClaimCost: PropTypes.func.isRequired,
   closeAddLuxTrustClaim: PropTypes.func.isRequired,
   confirmAddLuxTrustClaim: PropTypes.func.isRequired,
   verifyContractClaim: PropTypes.func.isRequired,

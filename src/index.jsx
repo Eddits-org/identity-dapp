@@ -33,6 +33,3 @@ ReactDOM.render(
   </Provider>,
   document.querySelector('#app')
 );
-
-// Initial data loads
-store.dispatch(fetchClaimCost());

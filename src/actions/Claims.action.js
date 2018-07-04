@@ -13,12 +13,24 @@ export const ADD_CLAIM_CLOSED = 'ADD_CLAIM_CLOSED';
 export const CLAIM_COST_FETCHED = 'CLAIM_COST_FETCHED';
 export const CLAIM_DETAILS_FETCHED = 'CLAIM_DETAILS_FETCHED';
 export const CLAIM_DETAILS_CLOSED = 'CLAIM_DETAILS_CLOSED';
+export const LTCLAIM_AVAILABLE = 'LTCLAIM_AVAILABLE';
 
-export const fetchClaimCost = () => (dispatch) => {
-  LTClaimRegistry.getCost().then((cost) => {
+export const fetchClaimCost = () => (dispatch, getState) => {
+  const networkId = getState().network.network.id;
+  LTClaimRegistry.getCost(networkId).then((cost) => {
     dispatch({
       type: CLAIM_COST_FETCHED,
       cost
+    });
+  });
+};
+
+export const LTClaimAvailableOnCurrentNetwork = () => (dispatch, getState) => {
+  const networkId = getState().network.network.id;
+  LTClaimRegistry.isAvailable(networkId).then((available) => {
+    dispatch({
+      type: LTCLAIM_AVAILABLE,
+      available
     });
   });
 };

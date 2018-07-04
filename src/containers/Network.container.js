@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Web3 from 'services/Web3.service';
 import { web3Fetched, networkChanged, accountChanged } from 'actions/Network.action';
+import {LTClaimAvailableOnCurrentNetwork} from "../actions/Claims.action";
 
 class NetworkComponent extends React.Component {
   constructor(props) {
@@ -82,7 +83,10 @@ const mapStateToProps = store => ({
 
 const mapDispatchToProps = dispatch => ({
   fetch: available => dispatch(web3Fetched(available)),
-  changeNetwork: network => dispatch(networkChanged(network)),
+  changeNetwork: network => {
+    dispatch(networkChanged(network));
+    dispatch(LTClaimAvailableOnCurrentNetwork())
+  },
   changeAccount: account => dispatch(accountChanged(account))
 });
 

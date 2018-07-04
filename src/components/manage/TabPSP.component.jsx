@@ -10,7 +10,6 @@ class TabPSPComponent extends React.Component {
   }
 
   render() {
-
     const { payments } = this.props;
 
     return (
