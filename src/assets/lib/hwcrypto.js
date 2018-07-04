@@ -1,6 +1,7 @@
+/* eslint-disable */
 /*! This is hwcrypto.js 0.0.11 generated on 2017-01-25 */
 /* DO NOT EDIT (use src/hwcrypto.js) */
-var hwcrypto = function hwcrypto() {
+module.exports = function hwcrypto() {
     "use strict";
     var _debug = function(x) {};
     _debug("hwcrypto.js activated");

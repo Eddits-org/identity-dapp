@@ -1,4 +1,5 @@
 const config = require('config');
+const hwcrypto = require('assets/lib/hwcrypto.js');
 
 const { dappURL } = config;
 
