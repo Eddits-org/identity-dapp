@@ -63,7 +63,7 @@ const RegisterComponent = ({
           </div>
           <footer className='card-footer'>
             {!!address && (
-              <a className='card-footer-item'>Manage</a>
+              <a className='card-footer-item' href={`/identity/manage/${address}`}>Manage</a>
             )}
             {(deploying || !address) && (
               <a className='card-footer-item' onClick={reset}>Cancel</a>
