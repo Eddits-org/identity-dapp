@@ -16,8 +16,7 @@ export const CLAIM_DETAILS_CLOSED = 'CLAIM_DETAILS_CLOSED';
 export const LTCLAIM_AVAILABLE = 'LTCLAIM_AVAILABLE';
 
 export const fetchClaimCost = () => (dispatch, getState) => {
-  const networkId = getState().network.network.id;
-  LTClaimRegistry.getCost(networkId).then((cost) => {
+  LTClaimRegistry.getCost().then((cost) => {
     dispatch({
       type: CLAIM_COST_FETCHED,
       cost
