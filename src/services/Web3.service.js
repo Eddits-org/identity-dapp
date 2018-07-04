@@ -1,4 +1,5 @@
 import Web3 from 'web3';
+import BigNumber from 'bignumber.js';
 
 const config = require('config');
 
@@ -74,20 +75,23 @@ class Web3Service {
   }
 
   estimateIdentityCreationCost() {
-    // TODO : force gas value because of invalid estimation through estimateGat
-    const gas = 2745819;
-    return this.estimateIdentityCreationGas().then(() =>
-      this.getGasPrice().then(gasPrice => ({
-        eth: this.web3.fromWei(gasPrice.times(gas), 'ether').toString(),
-        gas: parseInt(gas.toString(), 10),
-        gasPrice: gasPrice.toString()
-      })));
+    const gasPrice = new BigNumber(2000000000);
+    return this.estimateIdentityCreationGas().then(gas => ({
+      eth: this.web3.fromWei(gasPrice.times(gas), 'ether').toString(),
+      gas: new BigNumber(2800000).toNumber() // TODO: metamask compute an invalid gas amount
+    }));
   }
 
   deployIdentity(from, gas) {
+    const gasPrice = new BigNumber(2000000000).toNumber();
     return this.withWeb3Promise((resolve, reject) => {
       const contract = this.web3.eth.contract(config.contract.abi);
-      contract.new({ data: config.contract.bytecode, from, gas }, (err, res) => {
+      contract.new({
+        data: config.contract.bytecode,
+        from,
+        gas,
+        gasPrice
+      }, (err, res) => {
         if (err) reject(err);
         else resolve(res.transactionHash);
       });

@@ -5,7 +5,7 @@ const { dappURL } = config;
 class OrelyService {
   generateSAMLRequest(address) {
     let url = `${config.orelySvcURL}/request?address=${address}`;
-    if (dappURL) url += `&redirect=${dappURL}`;
+    if (dappURL) url += `&redirect=${dappURL}/${address}`;
     return fetch(url, {
       headers: {
         Accept: 'application/json'

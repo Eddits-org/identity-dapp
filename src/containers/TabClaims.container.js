@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { openAddLuxTrustClaim, closeAddLuxTrustClaim, confirmAddLuxTrustClaim, openAddEstonianIDClaim, closeAddEstonianIDClaim, confirmAddEstonianIDClaim, verifyContractClaim, closeClaimDetails } from 'actions/Claims.action';
+import { openAddLuxTrustClaim, closeAddLuxTrustClaim, confirmAddLuxTrustClaim, openAddEstonianIDClaim, closeAddEstonianIDClaim, confirmAddEstonianIDClaim, verifyContractClaim, closeClaimDetails, requestSOClaim } from 'actions/Claims.action';
 import TabClaimsComponent from 'components/manage/TabClaims.component';
 
 const mapStateToProps = store => ({
@@ -23,7 +23,8 @@ const mapDispatchToProps = dispatch => ({
   closeAddEstonianIDClaim: () => dispatch(closeAddEstonianIDClaim()),
   confirmAddEstonianIDClaim: () => dispatch(confirmAddEstonianIDClaim()),
   verifyContractClaim: (issuer, data) => dispatch(verifyContractClaim(issuer, data)),
-  closeClaimDetails: () => dispatch(closeClaimDetails())
+  closeClaimDetails: () => dispatch(closeClaimDetails()),
+  requestSOClaim: () => dispatch(requestSOClaim())
 });
 
 export default connect(

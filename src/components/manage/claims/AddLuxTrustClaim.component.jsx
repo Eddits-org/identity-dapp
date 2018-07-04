@@ -12,6 +12,13 @@ const extractCN = (str) => {
   return cn.split('=')[1].trim();
 };
 
+const extractC = (str) => {
+  const parts = str.split(',');
+  const cn = parts.find(p => p.trim().indexOf('C=') === 0);
+  if (!cn) return str;
+  return cn.split('=')[1].trim();
+};
+
 const AddLuxTrustClaimComponent = ({
   samlRequest,
   orelyResponse,
@@ -40,6 +47,10 @@ const AddLuxTrustClaimComponent = ({
               <tr>
                 <th>Common name</th>
                 <td>{extractCN(orelyResponse.subject)}</td>
+              </tr>
+              <tr>
+                <th>Country</th>
+                <td>{extractC(orelyResponse.subject)}</td>
               </tr>
               <tr>
                 <th>Issued by</th>
