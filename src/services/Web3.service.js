@@ -82,7 +82,7 @@ class Web3Service {
     const gasPrice = new BigNumber(2000000000);
     return this.estimateIdentityCreationGas().then(gas => ({
       eth: this.web3.fromWei(gasPrice.times(gas), 'ether').toString(),
-      gas: new BigNumber(2800000).toNumber() // TODO: metamask compute an invalid gas amount
+      gas: new BigNumber(3200000).toNumber() // TODO: metamask compute an invalid gas amount
     }));
   }
 
