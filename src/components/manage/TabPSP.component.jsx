@@ -27,7 +27,7 @@ class TabPSPComponent extends React.Component {
           </thead>
           <tbody>
         { payments.map( (payment, index) =>
-          <PaymentRowComponent {...payment} />
+          <PaymentRowComponent {...payment} key={ index }/>
         )}
           </tbody>
         </table>
