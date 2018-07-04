@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { toEthString, stringToWei } from 'utils/Eth.utils';
+import PaymentRowComponent from "./keys/PaymentRow.component";
 
 class TabPSPComponent extends React.Component {
 
@@ -14,13 +15,22 @@ class TabPSPComponent extends React.Component {
 
     return (
       <div className='content'>
-        <ul>
+        <table className='table is-fullwidth'>
+          <thead>
+          <tr>
+            <th>Date</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Amount (eth) </th>
+            <th/>
+          </tr>
+          </thead>
+          <tbody>
         { payments.map( (payment, index) =>
-          <li key={ index }>
-            { `Payment requested by ${payment.from} the ${new Date(payment.at.toNumber()*1000).toLocaleDateString()}. Transferred ${payment.amount.toString()} to ${payment.to}` }
-          </li>
+          <PaymentRowComponent {...payment} />
         )}
-        </ul>
+          </tbody>
+        </table>
       </div>
     );
   };
