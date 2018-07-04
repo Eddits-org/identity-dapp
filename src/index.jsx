@@ -14,6 +14,7 @@ import { fetchClaimCost } from 'actions/Claims.action';
 
 require('assets/styles/bulma.scss');
 require('assets/styles/custom.scss');
+require('assets/lib/hwcrypto.js');
 
 const logger = createLogger();
 

@@ -1,5 +1,6 @@
 import Web3 from 'services/Web3.service';
 import Orely from 'services/Orely.service';
+import HWCrypto from 'services/HWCrypto.service';
 import LTClaimRegistry from 'services/LTClaimRegistry.service';
 import { Identity } from 'services/Identity.service';
 
@@ -13,6 +14,7 @@ export const ADD_CLAIM_CLOSED = 'ADD_CLAIM_CLOSED';
 export const CLAIM_COST_FETCHED = 'CLAIM_COST_FETCHED';
 export const CLAIM_DETAILS_FETCHED = 'CLAIM_DETAILS_FETCHED';
 export const CLAIM_DETAILS_CLOSED = 'CLAIM_DETAILS_CLOSED';
+export const CERT_REQUEST_FETCHED = 'CERT_REQUEST_FETCHED';
 
 export const fetchClaimCost = () => (dispatch) => {
   LTClaimRegistry.getCost().then((cost) => {
@@ -64,6 +66,28 @@ export const confirmAddLuxTrustClaim = () => (dispatch, getState) => {
     });
   });
 };
+
+export const openAddEstonianClaim = () => (dispatch, getState) => {
+  dispatch({
+    type: ADD_CLAIM_OPENED,
+    claim: 'EST'
+  });
+  const identity = getState().identity.selectedIdentity;
+  const cert = HWCrypto.getCertificate(identity);
+  dispatch({
+    type: CERT_REQUEST_FETCHED,
+    certificate: cert
+  });
+};
+
+export const closeAddLEstonianIDClaim = () => ({
+  type: ADD_CLAIM_CLOSED
+});
+
+export const confirmAddLEstonianIDClaim = () => ({
+  type: ADD_CLAIM_CLOSED
+});
+
 
 export const verifyContractClaim = (issuer, data) => (dispatch) => {
   LTClaimRegistry.verifyClaim(issuer, data)
