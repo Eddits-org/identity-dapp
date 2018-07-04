@@ -1,7 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const FormComponent = ({ account, fetchingCost, cost }) => (
+const FormComponent = ({
+  account,
+  fetchingCost,
+  gas,
+  cost
+}) => (
   <div>
     <p>Management key : <strong>{account}</strong></p>
     {fetchingCost && (
@@ -13,19 +18,21 @@ const FormComponent = ({ account, fetchingCost, cost }) => (
       </div>
     )}
     {!fetchingCost && (
-      <p>Estimated cost: <strong>{cost} ETH</strong></p>
+      <p>Estimated cost: <strong>{cost} ETH ({gas} gas)</strong></p>
     )}
   </div>
 );
 
 FormComponent.defaultProps = {
   account: null,
+  gas: null,
   cost: null
 };
 
 FormComponent.propTypes = {
   account: PropTypes.string,
   fetchingCost: PropTypes.bool.isRequired,
+  gas: PropTypes.number,
   cost: PropTypes.string
 };
 

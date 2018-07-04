@@ -22,7 +22,8 @@ const TabClaimsComponent = ({
   confirmAddLuxTrustClaim,
   verifyContractClaim,
   closeClaimDetails,
-  fetchClaimCost
+  fetchClaimCost,
+  requestSOClaim
 }) => (
   <div className='content'>
     <table className='table is-fullwidth'>
@@ -57,11 +58,12 @@ const TabClaimsComponent = ({
         disabled={addClaim !== null}
         items={[
           {
-            label: 'Self-signed claim'
-          },
-          {
             label: 'LuxTrust identity',
             onClick: openAddLuxTrustClaim
+          },
+          {
+            label: 'SmartOversight claim',
+            onClick: requestSOClaim
           }
         ]}
       />
@@ -111,7 +113,8 @@ TabClaimsComponent.propTypes = {
   closeAddLuxTrustClaim: PropTypes.func.isRequired,
   confirmAddLuxTrustClaim: PropTypes.func.isRequired,
   verifyContractClaim: PropTypes.func.isRequired,
-  closeClaimDetails: PropTypes.func.isRequired
+  closeClaimDetails: PropTypes.func.isRequired,
+  requestSOClaim: PropTypes.func.isRequired
 };
 
 export default TabClaimsComponent;

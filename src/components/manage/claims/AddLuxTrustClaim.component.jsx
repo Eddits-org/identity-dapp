@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { toEthString } from 'utils/Eth.utils';
+import {toEthString} from 'utils/Eth.utils';
 
 import Redirect from './Redirect.component';
 
@@ -12,18 +12,22 @@ const extractCN = (str) => {
   return cn.split('=')[1].trim();
 };
 
-
-// store.dispatch(fetchClaimCost());
+const extractC = (str) => {
+  const parts = str.split(',');
+  const cn = parts.find(p => p.trim().indexOf('C=') === 0);
+  if (!cn) return str;
+  return cn.split('=')[1].trim();
+};
 
 class AddLuxTrustClaimComponent extends React.Component {
 
-  componentDidMount(){
-    if( this.props.available )
+  componentDidMount() {
+    if (this.props.available)
       this.props.fetchClaimCost()
   }
 
-  componentWillReceiveProps(nextProps){
-    if ( nextProps.available ){
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.available) {
       this.props.fetchClaimCost()
     }
   }
@@ -37,7 +41,7 @@ class AddLuxTrustClaimComponent extends React.Component {
       confirmAddLuxTrustClaim
     } = this.props;
 
-    if ( !this.props.available ) {
+    if (!this.props.available) {
       return (
         <div>
           Lux trust claim is not available on this network
@@ -67,6 +71,10 @@ class AddLuxTrustClaimComponent extends React.Component {
                 <tr>
                   <th>Common name</th>
                   <td>{extractCN(orelyResponse.subject)}</td>
+                </tr>
+                <tr>
+                  <th>Country</th>
+                  <td>{extractC(orelyResponse.subject)}</td>
                 </tr>
                 <tr>
                   <th>Issued by</th>
@@ -107,7 +115,6 @@ class AddLuxTrustClaimComponent extends React.Component {
     );
   }
 }
-
 
 AddLuxTrustClaimComponent.defaultProps = {
   samlRequest: null,

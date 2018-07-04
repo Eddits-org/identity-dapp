@@ -1,6 +1,7 @@
 import Web3 from 'services/Web3.service';
 import Orely from 'services/Orely.service';
 import LTClaimRegistry from 'services/LTClaimRegistry.service';
+import SOClaimRegistry from 'services/SOClaimRegistry.service';
 import { Identity } from 'services/Identity.service';
 
 import { addPendingTx, removePendingTx, fetchIdentityDetail } from 'actions/Manage.action';
@@ -89,3 +90,18 @@ export const verifyContractClaim = (issuer, data) => (dispatch) => {
 export const closeClaimDetails = () => ({
   type: CLAIM_DETAILS_CLOSED
 });
+
+export const requestSOClaim = () => (dispatch, getState) => {
+  const calldata = SOClaimRegistry.generateRequestClaim();
+  const identity = getState().identity.selectedIdentity;
+  const soClaimRegistry = config.SOClaimRegistry.address;
+  const from = getState().network.account;
+  const id = new Identity(identity);
+  id.execute(soClaimRegistry, 0, calldata, from).then((txHash) => {
+    dispatch(addPendingTx(txHash, 'Request a SmartOversight claim'));
+    Web3.waitForMining(txHash).then(() => {
+      dispatch(removePendingTx(txHash));
+      dispatch(fetchIdentityDetail(identity));
+    });
+  });
+};
