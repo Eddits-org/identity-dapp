@@ -30,6 +30,7 @@ class Registry {
   }
 
   getPspNamesToAddress(networkId){
+      if( !config.PSPregistry[networkId] ) return Promise.resolve([]);
       this.contract = this.web3.eth.contract(config.PSPregistry[networkId].abi).at(config.PSPregistry[networkId].address);
       return new Promise((resolve, reject) => {
       this.getPSPNames().then( (names) => {
