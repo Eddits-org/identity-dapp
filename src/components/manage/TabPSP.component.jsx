@@ -15,7 +15,7 @@ class TabPSPComponent extends React.Component {
 
     return (
       <div className='content'>
-        <table className='table is-fullwidth'>
+        <table className='table is-fullwidth monospaced'>
           <thead>
           <tr>
             <th>Date</th>
