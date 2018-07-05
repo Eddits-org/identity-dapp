@@ -356,6 +356,12 @@ asn1@~0.2.3:
   version "0.2.3"
   resolved "https://registry.yarnpkg.com/asn1/-/asn1-0.2.3.tgz#dac8787713c9966849fc8180777ebe9c1ddf3b86"
 
+asn1js@latest:
+  version "2.0.21"
+  resolved "https://registry.yarnpkg.com/asn1js/-/asn1js-2.0.21.tgz#a9ce6a02727c1a9249f26b94afd23b957a1015f0"
+  dependencies:
+    pvutils latest
+
 assert-plus@1.0.0, assert-plus@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/assert-plus/-/assert-plus-1.0.0.tgz#f12e0f3c5d77b0b1cdd9146942e4e96c1e4dd525"
@@ -1344,6 +1350,10 @@ bulma@^0.7.0:
 bytes@3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/bytes/-/bytes-3.0.0.tgz#d32815404d689699f85a4ea4fa8755dd13a96048"
+
+bytestreamjs@latest:
+  version "1.0.22"
+  resolved "https://registry.yarnpkg.com/bytestreamjs/-/bytestreamjs-1.0.22.tgz#7fbcc7c84989feb79c5046d27af0fab7a446fa1b"
 
 cacache@^10.0.4:
   version "10.0.4"
@@ -5437,6 +5447,14 @@ pkg-dir@^2.0.0:
   dependencies:
     find-up "^2.1.0"
 
+pkijs@^2.1.64:
+  version "2.1.64"
+  resolved "https://registry.yarnpkg.com/pkijs/-/pkijs-2.1.64.tgz#39ada45636e94ea3f0b0e4fa74f0b048aee50bc2"
+  dependencies:
+    asn1js latest
+    bytestreamjs latest
+    pvutils latest
+
 pluralize@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/pluralize/-/pluralize-7.0.0.tgz#298b89df8b93b0221dbf421ad2b1b1ea23fc6777"
@@ -5820,6 +5838,10 @@ punycode@^1.2.4, punycode@^1.4.1:
 punycode@^2.1.0:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
+
+pvutils@latest:
+  version "1.0.16"
+  resolved "https://registry.yarnpkg.com/pvutils/-/pvutils-1.0.16.tgz#b85984388e4d2770686712a2246202d11750d083"
 
 q@^1.1.2:
   version "1.5.1"

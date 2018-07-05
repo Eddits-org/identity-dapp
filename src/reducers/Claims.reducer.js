@@ -1,6 +1,7 @@
 import {
   ADD_CLAIM_OPENED,
   SAML_REQUEST_FETCHED,
+  CERT_REQUEST_FETCHED,
   ADD_CLAIM_CLOSED,
   CLAIM_COST_FETCHED,
   CLAIM_DETAILS_FETCHED,
@@ -44,6 +45,12 @@ export const ClaimsReducer = (state = initialState, action) => {
       return {
         ...state,
         samlRequest: action.request
+      };
+
+    case CERT_REQUEST_FETCHED:
+      return {
+        ...state,
+        certificate: action.estCert
       };
 
     case ADD_CLAIM_CLOSED:
