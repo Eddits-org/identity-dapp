@@ -76,8 +76,8 @@ export const openAddEstonianIDClaim = () => (dispatch, getState) => {
   const identity = getState().identity.selectedIdentity;
   HWCrypto.getCertificate(identity).then((cert) => {
     dispatch({
-        type: CERT_REQUEST_FETCHED,
-        estCert: cert
+      type: CERT_REQUEST_FETCHED,
+      estCert: cert
     });
   });
 };
