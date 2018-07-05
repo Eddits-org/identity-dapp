@@ -6,7 +6,8 @@ import {
   CLAIM_COST_FETCHED,
   CLAIM_DETAILS_FETCHED,
   CLAIM_DETAILS_CLOSED,
-  LTCLAIM_AVAILABLE
+  LTCLAIM_AVAILABLE,
+  SOCLAIM_AVAILABLE
 } from 'actions/Claims.action';
 
 import { IDENTITY_CLAIMS_FETCHED } from 'actions/Manage.action';
@@ -18,7 +19,10 @@ export const initialState = {
   orelyResponse: null,
   ltClaimCost: null,
   claimDetails: null,
-  available: false
+  available: {
+    'LT': false,
+    'SO' : false
+  }
 };
 
 export const ClaimsReducer = (state = initialState, action) => {
@@ -38,7 +42,13 @@ export const ClaimsReducer = (state = initialState, action) => {
     case LTCLAIM_AVAILABLE:
       return {
         ...state,
-        available: action.available
+        available: { ...state.available, ['LT'] : action.available }
+      };
+
+    case SOCLAIM_AVAILABLE:
+      return {
+        ...state,
+        available: { ...state.available, ['SO'] : action.available }
       };
 
     case SAML_REQUEST_FETCHED:

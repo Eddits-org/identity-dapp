@@ -4,6 +4,7 @@
 - Contract are loaded based on current network (LTClaim for example)
   - If not available on current network a message is displayed
 - Added Estonian ID claim
+- Dropdown for claims now display in red not available claims on network
 
 # 12.06.2018
 

@@ -17,6 +17,7 @@ export const CLAIM_DETAILS_FETCHED = 'CLAIM_DETAILS_FETCHED';
 export const CLAIM_DETAILS_CLOSED = 'CLAIM_DETAILS_CLOSED';
 export const CERT_REQUEST_FETCHED = 'CERT_REQUEST_FETCHED';
 export const LTCLAIM_AVAILABLE = 'LTCLAIM_AVAILABLE';
+export const SOCLAIM_AVAILABLE = 'SOCLAIM_AVAILABLE';
 
 export const fetchClaimCost = () => (dispatch, getState) => {
   LTClaimRegistry.getCost().then((cost) => {
@@ -27,11 +28,17 @@ export const fetchClaimCost = () => (dispatch, getState) => {
   });
 };
 
-export const LTClaimAvailableOnCurrentNetwork = () => (dispatch, getState) => {
+export const ClaimAvailableOnCurrentNetwork = () => (dispatch, getState) => {
   const networkId = getState().network.network.id;
   LTClaimRegistry.isAvailable(networkId).then((available) => {
     dispatch({
       type: LTCLAIM_AVAILABLE,
+      available
+    });
+  });
+  SOClaimRegistry.isAvailable(networkId).then((available) => {
+    dispatch({
+      type: SOCLAIM_AVAILABLE,
       available
     });
   });
@@ -93,11 +100,11 @@ export const openAddEstonianIDClaim = () => (dispatch, getState) => {
   });
 };
 
-export const closeAddLEstonianIDClaim = () => ({
+export const closeAddEstonianIDClaim = () => ({
   type: ADD_CLAIM_CLOSED
 });
 
-export const confirmAddLEstonianIDClaim = () => ({
+export const confirmAddEstonianIDClaim = () => ({
   type: ADD_CLAIM_CLOSED
 });
 
@@ -117,9 +124,10 @@ export const closeClaimDetails = () => ({
 });
 
 export const requestSOClaim = () => (dispatch, getState) => {
+  const networkId = getState().network.network.id;
   const calldata = SOClaimRegistry.generateRequestClaim();
   const identity = getState().identity.selectedIdentity;
-  const soClaimRegistry = config.SOClaimRegistry.address;
+  const soClaimRegistry = config.SOClaimRegistry[networkId].address;
   const from = getState().network.account;
   const id = new Identity(identity);
   id.execute(soClaimRegistry, 0, calldata, from).then((txHash) => {

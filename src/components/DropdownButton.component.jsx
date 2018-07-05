@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames'
 
 export class DropdownButton extends React.Component {
   constructor(props) {
@@ -35,7 +36,7 @@ export class DropdownButton extends React.Component {
   handleAction(item) {
     return () => {
       this.handleTrigger();
-      if (item.onClick) item.onClick();
+      if (item.onClick && item.available) item.onClick();
     };
   }
 
@@ -62,7 +63,7 @@ export class DropdownButton extends React.Component {
         <div className='dropdown-menu'>
           <div className='dropdown-content'>
             {this.props.items.map(item => (
-              <a key={item.label} className='dropdown-item' onClick={this.handleAction(item)}>
+              <a key={item.label} className={classNames('dropdown-item',{'not-available': !item.available }) } onClick={this.handleAction(item)}>
                 {item.label}
               </a>
             ))}

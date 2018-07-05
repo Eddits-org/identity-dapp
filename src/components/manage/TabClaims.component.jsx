@@ -28,7 +28,6 @@ const TabClaimsComponent = ({
   confirmAddEstonianIDClaim,
   verifyContractClaim,
   closeClaimDetails,
-  fetchClaimCost,
   requestSOClaim
 }) => (
   <div className='content'>
@@ -65,15 +64,18 @@ const TabClaimsComponent = ({
         items={[
           {
             label: 'LuxTrust identity',
-            onClick: openAddLuxTrustClaim
+            onClick: openAddLuxTrustClaim,
+            available: available['LT']
           },
           {
             label: 'Estonian identity',
-            onClick: openAddEstonianIDClaim
+            onClick: openAddEstonianIDClaim,
+            available : true
           },
           {
             label: 'SmartOversight claim',
-            onClick: requestSOClaim
+            onClick: requestSOClaim,
+            available: available['SO']
           }
         ]}
       />
@@ -84,9 +86,7 @@ const TabClaimsComponent = ({
         orelyResponse,
         closeAddLuxTrustClaim,
         confirmAddLuxTrustClaim,
-        ltClaimCost,
-        fetchClaimCost,
-        available
+        ltClaimCost
       }}
       />
      ) }
@@ -130,10 +130,9 @@ TabClaimsComponent.propTypes = {
   ltClaimCost: PropTypes.object,
   estClaimCost: PropTypes.object,
   claimDetails: PropTypes.object,
-  available: PropTypes.bool,
+  available: PropTypes.object,
 
   openAddLuxTrustClaim: PropTypes.func.isRequired,
-  fetchClaimCost: PropTypes.func.isRequired,
   closeAddLuxTrustClaim: PropTypes.func.isRequired,
   confirmAddLuxTrustClaim: PropTypes.func.isRequired,
 

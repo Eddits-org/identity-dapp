@@ -18,7 +18,10 @@ const mapStateToProps = store => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  openAddLuxTrustClaim: () => dispatch(openAddLuxTrustClaim()),
+  openAddLuxTrustClaim: () => {
+    dispatch(fetchClaimCost());
+    dispatch(openAddLuxTrustClaim());
+  },
   closeAddLuxTrustClaim: () => dispatch(closeAddLuxTrustClaim()),
   confirmAddLuxTrustClaim: () => dispatch(confirmAddLuxTrustClaim()),
   openAddEstonianIDClaim: () => dispatch(openAddEstonianIDClaim()),
@@ -26,8 +29,7 @@ const mapDispatchToProps = dispatch => ({
   confirmAddEstonianIDClaim: () => dispatch(confirmAddEstonianIDClaim()),
   verifyContractClaim: (issuer, data) => dispatch(verifyContractClaim(issuer, data)),
   closeClaimDetails: () => dispatch(closeClaimDetails()),
-  requestSOClaim: () => dispatch(requestSOClaim()),
-  fetchClaimCost: () => dispatch(fetchClaimCost())
+  requestSOClaim: () => dispatch(requestSOClaim())
 });
 
 export default connect(
