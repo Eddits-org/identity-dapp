@@ -25,11 +25,11 @@ const AddEstonianIDClaimComponent = ({
           <tbody>
             <tr>
               <th>Common name</th>
-              <td>CN : {certificate.name}</td>
+              <td>CN : {certificate.hex}</td>
             </tr>
             <tr>
               <th>Issued by</th>
-              <td>Issuer {certificate.issuer}</td>
+              <td>Issuer ??</td>
             </tr>
           </tbody>
         </table>

@@ -11,6 +11,7 @@ const mapStateToProps = store => ({
   samlRequest: store.claims.samlRequest,
   orelyResponse: store.claims.orelyResponse,
   ltClaimCost: store.claims.ltClaimCost,
+  estCert: store.claims.estCert,
   estClaimCost: store.claims.estClaimCost,
   claimDetails: store.claims.claimDetails
 });

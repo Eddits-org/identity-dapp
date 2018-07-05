@@ -16,6 +16,7 @@ const TabClaimsComponent = ({
   samlRequest,
   orelyResponse,
   ltClaimCost,
+  estCert,
   estClaimCost,
   claimDetails,
   openAddLuxTrustClaim,
@@ -108,6 +109,7 @@ TabClaimsComponent.defaultProps = {
   addClaim: null,
   samlRequest: null,
   orelyResponse: null,
+  estCert: null,
   ltClaimCost: null,
   estClaimCost: null,
   claimDetails: null
@@ -120,6 +122,7 @@ TabClaimsComponent.propTypes = {
   addClaim: PropTypes.string,
   samlRequest: PropTypes.string,
   orelyResponse: PropTypes.object,
+  estCert: PropTypes.object,
   ltClaimCost: PropTypes.object,
   estClaimCost: PropTypes.object,
   claimDetails: PropTypes.object,

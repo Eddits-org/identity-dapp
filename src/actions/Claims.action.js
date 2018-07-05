@@ -68,16 +68,17 @@ export const confirmAddLuxTrustClaim = () => (dispatch, getState) => {
   });
 };
 
-export const openAddEstonianClaim = () => (dispatch, getState) => {
+export const openAddEstonianIDClaim = () => (dispatch, getState) => {
   dispatch({
     type: ADD_CLAIM_OPENED,
     claim: 'EST'
   });
   const identity = getState().identity.selectedIdentity;
-  const cert = HWCrypto.getCertificate(identity);
-  dispatch({
-    type: CERT_REQUEST_FETCHED,
-    certificate: cert
+  HWCrypto.getCertificate(identity).then((cert) => {
+    dispatch({
+        type: CERT_REQUEST_FETCHED,
+        estCert: cert
+    });
   });
 };
 

@@ -1,15 +1,17 @@
 const config = require('config');
-const hwcrypto = require('assets/lib/hwcrypto.js');
+const HWCrypto = require('assets/lib/hwcrypto.js');
 
 const { dappURL } = config;
 
 class HWCryptoService {
   getCertificate(address) {
-    return {
-      id: 1234,
-      name: 'CROISEAUX',
-      issuer: 'Estonian Gov.'
-    };
+      HWCrypto.getCertificate({lang: 'en'}).then((response) => {
+          const cert = response;
+          console.log('Using certificate: $(cert.hex)');
+          return cert;
+      }, function(err) {
+          console.log('getCertificate() failed: $(err)');
+      });
   }
 }
 
