@@ -1,5 +1,7 @@
 {
-  "extends": "airbnb",
+//  "extends": "airbnb",
+  "parser": "babel-eslint",
+  "plugins": [ "react" ],
   "rules": {
     "jsx-quotes": [
       2,

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { toEthString } from 'utils/Eth.utils';
+import {toEthString} from 'utils/Eth.utils';
 
 import Redirect from './Redirect.component';
 
@@ -20,23 +20,23 @@ const extractC = (str) => {
 };
 
 const AddLuxTrustClaimComponent = ({
-  samlRequest,
-  orelyResponse,
-  ltClaimCost,
-  closeAddLuxTrustClaim,
-  confirmAddLuxTrustClaim
-}) => (
+      samlRequest,
+      orelyResponse,
+      ltClaimCost,
+      closeAddLuxTrustClaim,
+      confirmAddLuxTrustClaim
+    }) => (
   <div className='box'>
     <h5 className='title is-5'>Add a LuxTrust claim</h5>
     <div className='content'>
       {!orelyResponse && (
         <div>
-          <span className='icon is-medium'>
-            <i className='fa fa-refresh fa-spin' />
-          </span>
+      <span className='icon is-medium'>
+        <i className='fa fa-refresh fa-spin'/>
+      </span>
           Generate a LuxTrust request, please wait.
           You will be redirected to LuxTrust for authentication...
-          {samlRequest && <Redirect {...{ samlRequest }} />}
+          {samlRequest && <Redirect {...{samlRequest}} />}
         </div>
       )}
       {orelyResponse && (
@@ -44,18 +44,18 @@ const AddLuxTrustClaimComponent = ({
           <p>The following claim will be added to your identity:</p>
           <table className='table is-narrow is-bordered'>
             <tbody>
-              <tr>
-                <th>Common name</th>
-                <td>{extractCN(orelyResponse.subject)}</td>
-              </tr>
-              <tr>
-                <th>Country</th>
-                <td>{extractC(orelyResponse.subject)}</td>
-              </tr>
-              <tr>
-                <th>Issued by</th>
-                <td>{extractCN(orelyResponse.issuer)}</td>
-              </tr>
+            <tr>
+              <th>Common name</th>
+              <td>{extractCN(orelyResponse.subject)}</td>
+            </tr>
+            <tr>
+              <th>Country</th>
+              <td>{extractC(orelyResponse.subject)}</td>
+            </tr>
+            <tr>
+              <th>Issued by</th>
+              <td>{extractCN(orelyResponse.issuer)}</td>
+            </tr>
             </tbody>
           </table>
           <div className='field'>
@@ -63,9 +63,9 @@ const AddLuxTrustClaimComponent = ({
             {ltClaimCost === null && <span>Fetching...</span>}
             {ltClaimCost !== null && (
               <span>
-                <strong>{toEthString(ltClaimCost)} ETH</strong>&nbsp;
+            <strong>{toEthString(ltClaimCost)} ETH</strong>&nbsp;
                 <small>(plus transaction fees)</small>
-              </span>
+          </span>
             )}
           </div>
           <div className='field is-grouped'>
@@ -93,7 +93,8 @@ const AddLuxTrustClaimComponent = ({
 AddLuxTrustClaimComponent.defaultProps = {
   samlRequest: null,
   orelyResponse: null,
-  ltClaimCost: null
+  ltClaimCost: null,
+  available: false
 };
 
 AddLuxTrustClaimComponent.propTypes = {

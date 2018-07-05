@@ -14,7 +14,8 @@ export const KEYS_PURPOSES = Object.freeze({
   MANAGEMENT: 1,
   ACTION: 2,
   CLAIM: 3,
-  ENCRYPTION: 4
+  ENCRYPTION: 4,
+  PAYMENT: 101
 });
 
 export const KEY_TYPES = Object.freeze({
@@ -106,6 +107,26 @@ export class Identity {
     });
   }
 
+
+  getPayments() {
+    return new Promise((resolve, reject) => {
+      this.web3.eth.getBlockNumber((err, res) => {
+        if (err)
+          reject(err);
+        let from = res - 60*60*24*30/15; // currentBlock - 60s * 60mn * 24h * 30j / 15s (one month)
+        from = from > 0 ? from : 0;
+        this.contract.PaymentMade({}, { fromBlock: from, toBlock: 'latest' }).get((err, res) => {
+          if (err)
+            reject(err);
+          else {
+            console.log(res);
+            resolve(res.map( r => ( { ...r.args } ) ) );
+          }
+        });
+      });
+    });
+  }
+
   execute(dest, amount, calldata, from) {
     return new Promise((resolve, reject) => {
       // TODO: estimate gas cost !
@@ -116,9 +137,9 @@ export class Identity {
     });
   }
 
-  getClaimIdsByType(type) {
+  getClaimIdsByTopic(type) {
     return new Promise((resolve, reject) => {
-      this.contract.getClaimIdsByType(type, resolvePromise(resolve, reject));
+      this.contract.getClaimIdsByTopic(type, resolvePromise(resolve, reject));
     });
   }
 
@@ -131,7 +152,7 @@ export class Identity {
   getAllClaims() {
     return Promise.all(Object.keys(CLAIM_TYPES)
       // For each CLAIM_TYPES, get the list of claims
-      .map(type => this.getClaimIdsByType(CLAIM_TYPES[type]).then(claims => [type, claims])))
+      .map(type => this.getClaimIdsByTopic(CLAIM_TYPES[type]).then(claims => [type, claims])))
       // Fetch claims data
       .then(result => Promise.all(
         result.map(([type, claims]) => Promise.all(

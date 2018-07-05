@@ -15,6 +15,7 @@ const TabClaimsComponent = ({
   addClaim,
   samlRequest,
   orelyResponse,
+  available,
   ltClaimCost,
   estCert,
   estClaimCost,
@@ -63,15 +64,18 @@ const TabClaimsComponent = ({
         items={[
           {
             label: 'LuxTrust identity',
-            onClick: openAddLuxTrustClaim
+            onClick: openAddLuxTrustClaim,
+            available: available['LT']
           },
           {
             label: 'Estonian identity',
-            onClick: openAddEstonianIDClaim
+            onClick: openAddEstonianIDClaim,
+            available : true
           },
           {
             label: 'SmartOversight claim',
-            onClick: requestSOClaim
+            onClick: requestSOClaim,
+            available: available['SO']
           }
         ]}
       />
@@ -125,6 +129,7 @@ TabClaimsComponent.propTypes = {
   ltClaimCost: PropTypes.object,
   estClaimCost: PropTypes.object,
   claimDetails: PropTypes.object,
+  available: PropTypes.object,
 
   openAddLuxTrustClaim: PropTypes.func.isRequired,
   closeAddLuxTrustClaim: PropTypes.func.isRequired,

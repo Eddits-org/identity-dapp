@@ -5,7 +5,7 @@ const { dappURL } = config;
 
 class HWCryptoService {
   getCertificate(address) {
-      HWCrypto.getCertificate({lang: 'en'}).then((response) => {
+      return HWCrypto.getCertificate({lang: 'en'}).then((response) => {
           const cert = response;
           console.log('Using certificate: $(cert.hex)');
           return cert;

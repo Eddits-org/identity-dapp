@@ -15,6 +15,8 @@ import { fetchClaimCost } from 'actions/Claims.action';
 require('assets/styles/bulma.scss');
 require('assets/styles/custom.scss');
 
+import 'react-select/dist/react-select.css';
+
 const logger = createLogger();
 
 const store = createStore(
@@ -31,6 +33,3 @@ ReactDOM.render(
   </Provider>,
   document.querySelector('#app')
 );
-
-// Initial data loads
-store.dispatch(fetchClaimCost());
