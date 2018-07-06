@@ -432,7 +432,7 @@ asn1@~0.2.3:
   version "0.2.3"
   resolved "https://registry.yarnpkg.com/asn1/-/asn1-0.2.3.tgz#dac8787713c9966849fc8180777ebe9c1ddf3b86"
 
-asn1js@^2.0.21, asn1js@latest:
+asn1js@latest:
   version "2.0.21"
   resolved "https://registry.yarnpkg.com/asn1js/-/asn1js-2.0.21.tgz#a9ce6a02727c1a9249f26b94afd23b957a1015f0"
   dependencies:
