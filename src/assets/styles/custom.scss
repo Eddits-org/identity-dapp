@@ -13,7 +13,12 @@ body {
   margin: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 40, 74, 0.95);
+  background-color: rgba(0, 40, 74, 0.75);
+}
+
+.address-text {
+  font-family: Avenir next;
+  font-weight: 500;
 }
 
 .welcome {

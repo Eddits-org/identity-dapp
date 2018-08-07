@@ -9,6 +9,7 @@ import PendingTx from 'components/manage/PendingTx.component';
 import KeySelector from 'components/KeySelector.component';
 import IdentitySelector from 'components/IdentitySelector.component';
 import IdentityDetail from 'components/manage/IdentityDetail.component';
+import IdentityCardUnfold from "components/IdentityCardUnfold";
 
 const ManageComponent = ({
   providerReady,
@@ -39,24 +40,24 @@ const ManageComponent = ({
   return (
     <section className='section'>
       <div className='container'>
+        <KeySelector {...{ account, keyPurposes, selectedIdentity }} />
         <PendingTx transactions={pendingTransactions} {...{ hidePendingTx, network }} />
         <h1 className='title'>Manage your identity</h1>
         <div className='columns'>
           <div className='column'>
-            <KeySelector {...{ account, keyPurposes, selectedIdentity }} />
-          </div>
-          <div className='column'>
-            <IdentitySelector
-              {...{
-                identities,
-                selectedIdentity,
-                addIdentityVisible,
-                selectIdentity,
-                addIdentity,
-                removeIdentity,
-                switchAddIdentityVisibility
-              }}
-            />
+			  {!selectedIdentity && (
+                <IdentityCardUnfold
+                {...{
+                  identities,
+                  selectedIdentity,
+                  addIdentityVisible,
+                  selectIdentity,
+                  addIdentity,
+                  removeIdentity,
+                  switchAddIdentityVisibility
+                }}
+                />
+			  )}
           </div>
         </div>
         {!!selectedIdentity && (
