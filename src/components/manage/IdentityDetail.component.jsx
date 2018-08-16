@@ -27,7 +27,7 @@ const IdentityDetailComponent = ({
   deposit
 }) => (
   <div className='card identity-detail'>
-    <header className='card-header'>
+    <header className='card-header flex-column'>
       <div className='card-header-title'>
 		  <img
 			  className='identicon'
@@ -39,17 +39,17 @@ const IdentityDetailComponent = ({
             <div className='address-text'> {address} </div>
           </div>
       </div>
-    </header>
-    <div className='card-content'>
       <div className='tabs'>
-        <ul>
-          <TabHeader label='Keys' id='keys' currentTab={tab} setTab={setTab} />
-          <TabHeader label='Claims' id='claims' currentTab={tab} setTab={setTab} />
-          <TabHeader label='Funds' id='funds' currentTab={tab} setTab={setTab} />
-          <TabHeader label='Actions' id='actions' currentTab={tab} setTab={setTab} />
-          <TabHeader label='PSP' id='psp' currentTab={tab} setTab={setTab} />
-        </ul>
+          <ul>
+              <TabHeader label='Keys' id='keys' currentTab={tab} setTab={setTab} />
+              <TabHeader label='Claims' id='claims' currentTab={tab} setTab={setTab} />
+              <TabHeader label='Funds' id='funds' currentTab={tab} setTab={setTab} />
+              <TabHeader label='Actions' id='actions' currentTab={tab} setTab={setTab} />
+              <TabHeader label='PSP' id='psp' currentTab={tab} setTab={setTab} />
+          </ul>
       </div>
+    </header>
+    <div className='card-content identity-content'>
       {tab === 'keys' && <TabKeys  />}
       {tab === 'claims' && <TabClaims />}
       {tab === 'funds' && (

@@ -43,23 +43,23 @@ const ManageComponent = ({
         <KeySelector {...{ account, keyPurposes, selectedIdentity }} />
         <PendingTx transactions={pendingTransactions} {...{ hidePendingTx, network }} />
         <h1 className='title'>Manage your identity</h1>
-        <div className='columns'>
-          <div className='column'>
-			  {!selectedIdentity && (
-                <IdentityCardUnfold
-                {...{
-                  identities,
-                  selectedIdentity,
-                  addIdentityVisible,
-                  selectIdentity,
-                  addIdentity,
-                  removeIdentity,
-                  switchAddIdentityVisibility
-                }}
-                />
-			  )}
+        {!selectedIdentity && (
+          <div className='columns'>
+            <div className='column'>
+              <IdentityCardUnfold
+              {...{
+                identities,
+                selectedIdentity,
+                addIdentityVisible,
+                selectIdentity,
+                addIdentity,
+                removeIdentity,
+                switchAddIdentityVisibility
+              }}
+              />
+            </div>
           </div>
-        </div>
+        )}
         {!!selectedIdentity && (
           <IdentityDetail
             address={selectedIdentity}

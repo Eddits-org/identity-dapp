@@ -20,4 +20,30 @@
       height: 4rem;
     }
   }
+
+  .flex-column {
+    flex-direction: column;
+    background-color: #E7E7E7;
+
+    .tabs {
+      margin-left: 1rem;
+
+      .is-active {
+        background-color: white;
+        border-top: #3273dc 1px solid;
+        a {
+          border-bottom: none;
+        }
+      }
+    }
+  }
+
+  .identity-content {
+    background-color: #F0F0F0;
+
+    .table {
+      background-color: #F0F0F0;
+    }
+  }
+
 }
