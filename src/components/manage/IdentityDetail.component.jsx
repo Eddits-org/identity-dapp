@@ -45,7 +45,7 @@ const IdentityDetailComponent = ({
               <TabHeader label='Claims' id='claims' currentTab={tab} setTab={setTab} />
               <TabHeader label='Funds' id='funds' currentTab={tab} setTab={setTab} />
               <TabHeader label='Actions' id='actions' currentTab={tab} setTab={setTab} />
-              <TabHeader label='PSP' id='psp' currentTab={tab} setTab={setTab} />
+              <TabHeader label='Payments' id='psp' currentTab={tab} setTab={setTab} />
           </ul>
       </div>
     </header>

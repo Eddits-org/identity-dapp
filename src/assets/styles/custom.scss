@@ -32,6 +32,22 @@ body {
   margin-right: 5px;
 }
 
+.bullet-point {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+}
+
+.eddits-label {
+  text-transform: lowercase;
+  display: inline-block;
+  &:first-letter {
+    text-transform: uppercase
+  }
+}
+
 .key-management {
   background-color: $black !important;
   color: $white !important;
@@ -49,6 +65,11 @@ body {
 
 .key-encryption {
   background-color: lighten($black, 70%) !important;
+  color: $white !important;
+}
+
+.key-payment {
+  background-color: $orange !important;
   color: $white !important;
 }
 
@@ -93,4 +114,13 @@ body {
 
 thead > tr > th {
   font-weight: 500;
+}
+
+.key-selector {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 1rem;
+  .tag {
+    padding: 0 4rem;
+  }
 }

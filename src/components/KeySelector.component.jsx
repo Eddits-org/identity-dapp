@@ -28,8 +28,8 @@ const KeySelectorComponent = ({account, keyPurposes, selectedIdentity}) => {
 		}
 	}
 	return (
-		<div>
-      		<span className={`tag is-medium full-width ${tag}`}>
+		<div className='key-selector'>
+      		<span className={`tag is-medium ${tag}`}>
         	<p>{label}</p>
         	<span
 				className='icon'

@@ -26,12 +26,10 @@ const Purpose = ({ purpose }) => {
       icon = '';
   }
   return (
-    <span className={`tag key-${purpose.label.toLowerCase()}`}>
-      <span className='icon'>
-        <i className={`fas ${icon}`} />
-      </span>&nbsp;
-      {purpose.label}
-    </span>
+  <span>
+    <span className={`bullet-point key-${purpose.label.toLowerCase()}`}/>
+	  <span className='eddits-label'>{purpose.label}</span>
+  </span>
   );
 };
 
