@@ -7,6 +7,8 @@ import TabActions from './TabActions.component';
 import TabFunds from './TabFunds.component';
 import TabPSP from 'containers/TabPSP.container';
 
+import { toEthString } from 'utils/Eth.utils';
+
 const TabHeader = ({
   id,
   currentTab,
@@ -29,6 +31,7 @@ const IdentityDetailComponent = ({
   <div className='card identity-detail'>
     <header className='card-header flex-column'>
       <div className='card-header-title'>
+        <div className='card-header-title'>
 		  <img
 			  className='identicon'
 			  src={`https://eth.vanity.show/${address}`}
@@ -38,6 +41,10 @@ const IdentityDetailComponent = ({
             <h2> Identity </h2>
             <div className='address-text'> {address} </div>
           </div>
+        </div>
+        <div className='balance'>
+			Current balance: <strong>{toEthString(balance)} ETH</strong>
+        </div>
       </div>
       <div className='tabs'>
           <ul>
