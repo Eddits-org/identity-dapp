@@ -26,14 +26,19 @@ const IdentityDetailComponent = ({
   setTab,
   deposit
 }) => (
-  <div className='card'>
+  <div className='card identity-detail'>
     <header className='card-header'>
-      <p className='card-header-title'>
-        <span className='icon card-title-icon'>
-          <i className='far fa-id-card' />
-        </span>
-        Identity {address}
-      </p>
+      <div className='card-header-title'>
+		  <img
+			  className='identicon'
+			  src={`https://eth.vanity.show/${address}`}
+			  alt={ `Identicon of ether address ${address}` }
+		  />
+		  <div className='title-p2'>
+            <h2> Identity </h2>
+            <div className='address-text'> {address} </div>
+          </div>
+      </div>
     </header>
     <div className='card-content'>
       <div className='tabs'>
@@ -76,5 +81,7 @@ IdentityDetailComponent.propTypes = {
   setTab: PropTypes.func.isRequired,
   deposit: PropTypes.func.isRequired
 };
+
+import './IdentityDetail.style.scss'
 
 export default IdentityDetailComponent;

@@ -1,0 +1,23 @@
+.identity-detail {
+
+  h2 {
+    font-family: Avenir next;
+    font-weight: 600;
+    font-size: 125%;
+  }
+
+  .title-p2 {
+    margin-left: 0.7rem;
+  }
+
+  .identicon {
+    border-radius: 50%;
+    width: 6rem;
+    height: 6rem;
+
+    &.small {
+      width: 4rem;
+      height: 4rem;
+    }
+  }
+}
