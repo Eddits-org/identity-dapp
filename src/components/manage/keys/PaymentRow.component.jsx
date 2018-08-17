@@ -11,8 +11,8 @@ const PaymentRowComponent = ({
   return (
     <tr>
       <td> {new Date(at.toNumber()*1000).toLocaleDateString()} </td>
-      <td> {from} </td>
-      <td> {to} </td>
+      <td className='address-text'> {from} </td>
+      <td className='address-text'> {to} </td>
       <td> {toEthString(amount)} </td>
     </tr>
   );

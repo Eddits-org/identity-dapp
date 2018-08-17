@@ -1,5 +1,7 @@
 .flex-container {
   display: flex;
+  flex-flow: wrap;
+  justify-content: space-between;
 }
 
 .identity-card {
