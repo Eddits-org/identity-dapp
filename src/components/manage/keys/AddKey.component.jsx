@@ -98,28 +98,23 @@ class AddKeyComponent extends React.Component {
               />
             </span>
             </div>
-            <div className='field is-grouped'>
+						<div className='field is-expanded'>
             <span className='control'>
-              <div className='select'>
-                <select onChange={(event) => {
-                  this.setState({ purpose: event.target.value })
-                }}>
-                  {Object.keys(KEYS_PURPOSES).map(purpose => (
-                    <option key={purpose} value={KEYS_PURPOSES[purpose]}>{purpose}</option>
-                  ))}
-                </select>
-              </div>
+                <Select onChange={(purpose) => { this.setState({ purpose : purpose.value }) }}
+												value={ this.state.purpose }
+												scrollMenuIntoView={ false }
+                        options={ Object.keys(KEYS_PURPOSES).map(purpose => ({label : purpose, value: KEYS_PURPOSES[purpose]}) ) }
+                >
+                </Select>
             </span>
-              <span className='control'>
-              <div className='select'>
-                <select onChange={(event) => {
-                  this.setState({ type: event.target.value })
-                }}>
-                  {Object.keys(KEY_TYPES).map(type => (
-                    <option key={type} value={KEY_TYPES[type]}>{type}</option>
-                  ))}
-                </select>
-              </div>
+            </div>
+						<div className='field is-expanded'>
+            <span className='control'>
+              <Select onChange={(event) => { this.setState({ type: event.value }) }}
+                      value={ this.state.type }
+											options={ Object.keys(KEY_TYPES).map(type => ({label : type, value: KEY_TYPES[type]}) ) }
+              >
+              </Select>
             </span>
             </div>
             <div className='field is-grouped is-grouped-right'>
