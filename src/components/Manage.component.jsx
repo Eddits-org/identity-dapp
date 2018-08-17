@@ -7,7 +7,6 @@ import InvalidNetwork from 'components/messages/InvalidNetwork.component';
 
 import PendingTx from 'components/manage/PendingTx.component';
 import KeySelector from 'components/KeySelector.component';
-import IdentitySelector from 'components/IdentitySelector.component';
 import IdentityDetail from 'components/manage/IdentityDetail.component';
 import IdentityCardUnfold from "components/IdentityCardUnfold";
 
@@ -25,9 +24,7 @@ const ManageComponent = ({
   addIdentityVisible,
 
   selectIdentity,
-  addIdentity,
   removeIdentity,
-  switchAddIdentityVisibility,
   setTab,
   hidePendingTx,
   deposit
@@ -52,9 +49,7 @@ const ManageComponent = ({
                 selectedIdentity,
                 addIdentityVisible,
                 selectIdentity,
-                addIdentity,
-                removeIdentity,
-                switchAddIdentityVisibility
+                removeIdentity
               }}
               />
             </div>
@@ -100,12 +95,10 @@ ManageComponent.propTypes = {
   addIdentityVisible: PropTypes.bool.isRequired,
 
   selectIdentity: PropTypes.func.isRequired,
-  addIdentity: PropTypes.func.isRequired,
   removeIdentity: PropTypes.func.isRequired,
   setTab: PropTypes.func.isRequired,
   hidePendingTx: PropTypes.func.isRequired,
-  deposit: PropTypes.func.isRequired,
-  switchAddIdentityVisibility: PropTypes.func.isRequired
+  deposit: PropTypes.func.isRequired
 };
 
 export default ManageComponent;

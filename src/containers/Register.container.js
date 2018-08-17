@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 
 import { estimateCost, deployIdentity, resetDeployment } from 'actions/Register.action';
 import RegisterComponent from 'components/Register.component';
+import {addIdentity} from "../actions/Identity.action";
 
 const mapStateToProps = store => ({
   providerReady: store.network.providerReady,
@@ -18,7 +19,8 @@ const mapStateToProps = store => ({
 const mapDispatchToProps = dispatch => ({
   fetchCost: () => dispatch(estimateCost()),
   deploy: (account, gas) => dispatch(deployIdentity(account, gas)),
-  reset: () => dispatch(resetDeployment())
+  reset: () => dispatch(resetDeployment()),
+  addIdentity: address => dispatch(addIdentity(address))
 });
 
 export default connect(

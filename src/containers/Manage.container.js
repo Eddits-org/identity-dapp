@@ -23,8 +23,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   setTab: tab => dispatch(changeIdentityDetailTab(tab)),
   hidePendingTx: hash => dispatch(hidePendingTx(hash)),
   deposit: amount => dispatch(deposit(amount)),
-  switchAddIdentityVisibility: visibility => dispatch(switchAddIdentityVisibility(visibility)),
-  addIdentity: address => dispatch(addIdentity(address)),
   removeIdentity: address => dispatch(removeIdentity(address))
 });
 

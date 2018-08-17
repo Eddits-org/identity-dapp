@@ -6,22 +6,22 @@ const IdentitySelectorComponent = ({
   selectedIdentity,
   addIdentityVisible,
   selectIdentity,
-  addIdentity,
-  removeIdentity,
-  switchAddIdentityVisibility
+  removeIdentity
 }) => {
-	let refAddIdentityAddress = null;
 	return (
 		<div className='flex-container'>
 			{identities.map(identity =>
 				<div key={identity.address} className='card identity-card' onClick={ _ => selectIdentity(identity.address)}>
-					<header className='card-header'>
+					<header className='card-header' style={{"alignItems" : "center"}}>
 						<p className='card-header-title'>
 							<span className='icon card-title-icon'>
 							  <i className='far fa-id-card'/>
 							</span>
 							Identity
 						</p>
+						<span className='icon has-text-danger' onClick={ (e) => { e.stopPropagation(); removeIdentity(identity.address)} }>
+							<i className='fa fa-trash'/>
+						</span>
 					</header>
 					<div className='card-content'>
 						<img
@@ -47,9 +47,7 @@ IdentitySelectorComponent.propTypes = {
   addIdentityVisible: PropTypes.bool.isRequired,
 
   selectIdentity: PropTypes.func.isRequired,
-  addIdentity: PropTypes.func.isRequired,
-  removeIdentity: PropTypes.func.isRequired,
-  switchAddIdentityVisibility: PropTypes.func.isRequired
+  removeIdentity: PropTypes.func.isRequired
 };
 
 import './IdentityCardUnfold.style.scss'

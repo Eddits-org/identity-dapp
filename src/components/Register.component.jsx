@@ -21,6 +21,7 @@ const RegisterComponent = ({
   txHash,
   address,
   deploy,
+  addIdentity,
   reset
 }) => {
   if (!fetchingCost && !cost) fetchCost();
@@ -29,6 +30,7 @@ const RegisterComponent = ({
     return <Loading message='Please wait during the connection to Ethereum network...' />;
   }
   if (!network.enabled) return <InvalidNetwork {...{ network }} />;
+  let refAddIdentityAddress = null;
   return (
     <section className='section'>
       <div className='container'>
@@ -80,14 +82,49 @@ const RegisterComponent = ({
           </footer>
         </div>
       </div>
-    </section>
-  );
+      <br/>
+			<div className='container'>
+				<div className='card'>
+					<header className='card-header'>
+						<p className='card-header-title'>
+							Add an existing identity
+						</p>
+					</header>
+					<div className='card-content'>
+						<div className='content'>
+							<div className='field has-addons is-fullwidth'>
+								<p className='control is-expanded'>
+									<input
+											className='input'
+											type='text'
+											placeholder='Address of an ERC-725 identity contract'
+											ref={(input) => {
+												refAddIdentityAddress = input;
+											}}
+									/>
+								</p>
+								<p className='control'>
+									<a className='button is-success'
+										 onClick={() => addIdentity(refAddIdentityAddress.value)}
+									>
+                  <span className='icon is-small'>
+                    <i className='fas fa-check'/>
+                  </span>
+									</a>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	);
 };
 
 RegisterComponent.defaultProps = {
-  network: null,
-  account: null,
-  txHash: null,
+	network: null,
+	account: null,
+	txHash: null,
   address: null,
   gas: null
 };
@@ -105,6 +142,7 @@ RegisterComponent.propTypes = {
 
   fetchCost: PropTypes.func.isRequired,
   deploy: PropTypes.func.isRequired,
+  addIdentity: PropTypes.func.isRequired,
   reset: PropTypes.func.isRequired
 };
 
