@@ -45,10 +45,12 @@ const KeySelectorComponent = ({account, keyPurposes, selectedIdentity}) => {
 				</p>
 			)}
 			{selectedIdentity && !isAction && !isManagement && (
-				<p className='has-text-danger'>
+			<div className='tag is-medium is-danger' style={{height: "3.25rem"}}>
+				<p>
 					Your key is not registered on this identity.<br/>
 					You can change the selected key in MetaMask.
 				</p>
+			</div>
 			)}
 		</div>
 	);
