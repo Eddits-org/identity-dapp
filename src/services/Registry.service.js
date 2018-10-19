@@ -11,7 +11,7 @@ const resolvePromise = (resolve, reject, map = x => x) => (err, result) => {
 
 class Registry {
   constructor() {
-    this.web3 = new Web3(window.web3.currentProvider);
+    if(window.web3 && window.web3.currentProvider) this.web3 = new Web3(window.web3.currentProvider);
   }
 
   getPSPNames() {
