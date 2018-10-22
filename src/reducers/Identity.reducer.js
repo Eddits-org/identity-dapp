@@ -3,7 +3,8 @@ import {
   KEY_PURPOSES_FETCHED,
   IDENTITY_ADDEDD,
   IDENTITY_REMOVED,
-  ADD_IDENTITY_VISIBILITY_CHANGED
+  ADD_IDENTITY_VISIBILITY_CHANGED,
+  SET_IDENTITY_OPERATION_RESULT
 } from 'actions/Identity.action';
 import { IDENTITY_DEPLOYED } from 'actions/Register.action';
 
@@ -11,7 +12,8 @@ export const initialState = {
   identities: [],
   selectedIdentity: null,
   keyPurposes: [],
-  addIdentityVisible: false
+  addIdentityVisible: false,
+  addIdentityOperationResult: {state: null, message: ''}
 };
 
 export const IdentityReducer = (state = initialState, action) => {
@@ -46,6 +48,13 @@ export const IdentityReducer = (state = initialState, action) => {
         ...state,
         addIdentityVisible: action.value
       };
+
+    case SET_IDENTITY_OPERATION_RESULT:
+
+      return {
+        ...state,
+        addIdentityOperationResult: {state: action.state, message: action.message}
+      }
 
     default:
       return state;

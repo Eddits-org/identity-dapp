@@ -8,6 +8,7 @@ import InvalidNetwork from 'components/messages/InvalidNetwork.component';
 import WaitDeploy from 'components/register/WaitDeploy.component';
 import Form from 'components/register/Form.component';
 import Success from 'components/register/Success.component';
+import Notifier from 'components/messages/Notifier.component';
 
 const RegisterComponent = ({
   providerReady,
@@ -22,7 +23,8 @@ const RegisterComponent = ({
   address,
   deploy,
   addIdentity,
-  reset
+  reset,
+  addIdentityOperationResult
 }) => {
   if (!fetchingCost && !cost) fetchCost();
   if (!providerReady) return <NoProvider />;
@@ -33,6 +35,7 @@ const RegisterComponent = ({
   let refAddIdentityAddress = null;
   return (
     <section className='section'>
+      <Notifier state={addIdentityOperationResult.state} message={addIdentityOperationResult.message}></Notifier>
       <div className='container'>
         <h1 className='title'>Register your identity</h1>
         <div className='card'>

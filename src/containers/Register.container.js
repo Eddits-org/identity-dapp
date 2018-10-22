@@ -13,7 +13,8 @@ const mapStateToProps = store => ({
   gas: store.register.gas,
   deploying: store.register.deploying,
   txHash: store.register.txHash,
-  address: store.register.address
+  address: store.register.address,
+  addIdentityOperationResult: store.identity.addIdentityOperationResult
 });
 
 const mapDispatchToProps = dispatch => ({
