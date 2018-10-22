@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import makeBlockie from 'ethereum-blockies-base64';
 
 const shorten = hash => `${hash.substring(0, 10)}...${hash.substring(28)}`;
 
@@ -15,9 +16,11 @@ class IdentitySelectorComponent extends React.Component {
 	
 	render() {
 		const {identities, selectIdentity, removeIdentity} = this.props;
+
 		return (
 				<div className='flex-container'>
 					{identities.map(identity =>
+					
 						<div key={identity.address} className='card identity-card'
 								 onClick={_ => selectIdentity(identity.address)}>
 							<header className='card-header' style={{"alignItems": "center"}}>
@@ -43,7 +46,7 @@ class IdentitySelectorComponent extends React.Component {
 							<div className='card-content'>
 								<img
 										className='identicon'
-										src={`https://eth.vanity.show/${identity.address}`}
+										src={makeBlockie(identity.address)}
 										alt={`Identicon of ether address ${identity.address}`}
 								/>
 								<span className='address-text'>{shorten(identity.address)}</span>

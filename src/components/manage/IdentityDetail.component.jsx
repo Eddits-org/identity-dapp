@@ -8,6 +8,7 @@ import TabFunds from './TabFunds.component';
 import TabPSP from 'containers/TabPSP.container';
 
 import { toEthString } from 'utils/Eth.utils';
+import makeBlockie from 'ethereum-blockies-base64';
 
 const TabHeader = ({
   id,
@@ -34,7 +35,7 @@ const IdentityDetailComponent = ({
         <div className='card-header-title'>
 		  <img
 			  className='identicon'
-			  src={`https://eth.vanity.show/${address}`}
+			  src={makeBlockie(address)}
 			  alt={ `Identicon of ether address ${address}` }
 		  />
 		  <div className='title-p2'>
