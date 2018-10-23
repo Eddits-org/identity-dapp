@@ -7,6 +7,7 @@ import {
   SET_IDENTITY_OPERATION_RESULT
 } from 'actions/Identity.action';
 import { IDENTITY_DEPLOYED } from 'actions/Register.action';
+import Storage from 'services/Storage.service';
 
 export const initialState = {
   identities: [],
@@ -20,12 +21,21 @@ export const IdentityReducer = (state = initialState, action) => {
   switch (action.type) {
     case IDENTITY_DEPLOYED:
     case IDENTITY_ADDEDD:
-      state.identities.push({ address: action.address });
+
+      // avoid duplicate addition
+      let index = state.identities.findIndex(el => el.address === action.address);
+      if(index === -1) {
+        state.identities.push({ address: action.address });
+        Storage.addIdentity({ address: action.address });
+      }
       return {
         ...state
+
       };
 
     case IDENTITY_REMOVED:
+
+      Storage.removeIdentity({ address: action.address });
       return {
         ...state,
         identities: state.identities.filter(id => id.address !== action.address)

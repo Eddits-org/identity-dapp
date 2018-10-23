@@ -48,8 +48,6 @@ export const addIdentity = address => (dispatch) => {
     return;
   }
 
- 
-  Storage.addIdentity({ address });
 
   dispatch({
     type: IDENTITY_ADDEDD,
@@ -62,7 +60,7 @@ export const addIdentity = address => (dispatch) => {
 };
 
 export const removeIdentity = address => (dispatch) => {
-  Storage.removeIdentity({ address });
+
   dispatch({
     type: IDENTITY_REMOVED,
     address
