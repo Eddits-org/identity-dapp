@@ -100,7 +100,7 @@ class AddKeyComponent extends React.Component {
             </div>
 						<div className='field is-expanded'>
             <span className='control'>
-                <Select onChange={(purpose) => { this.setState({ purpose : purpose.value }) }}
+                <Select className='is-small' onChange={(purpose) => { this.setState({ purpose : purpose.value }) }}
 												value={ this.state.purpose }
 												scrollMenuIntoView={ false }
                         options={ Object.keys(KEYS_PURPOSES).map(purpose => ({label : purpose, value: KEYS_PURPOSES[purpose]}) ) }
@@ -119,13 +119,19 @@ class AddKeyComponent extends React.Component {
             </div>
             <div className='field is-grouped is-grouped-right'>
             <span className='control'>
-              <button className='button is-success' onClick={this.handleClick}>
-                Add
+              <button className='button is-success is-intermediate' onClick={this.handleClick}>
+                <span className='icon is-intermediate'>
+                  <i className={`fa fa-plus`} />
+                </span>
+                <span>Add</span>
               </button>
             </span>
               <span className='control'>
-              <button className='button is-danger' onClick={() => switchAddKeyVisibility(false)}>
-                Cancel
+              <button className='button is-danger is-intermediate' onClick={() => switchAddKeyVisibility(false)}>
+                <span className='icon is-intermediate'>
+                  <i className={`fa fa-times`} />
+                </span>
+                <span>Cancel</span>
               </button>
             </span>
             </div>

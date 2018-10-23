@@ -22,8 +22,8 @@ const TabFundsComponent = ({
           Fetching current ETH balance...
         </p>
       )}
-      <div className='box'>
-        <h5 className='title is-5'>Deposit from account {account}</h5>
+      <div className=''>
+        <p className=''>Deposit from account {account}</p>
         <div className='field is-horizontal'>
           <div className='field-body'>
             <div className='field is-expanded'>
@@ -46,7 +46,8 @@ const TabFundsComponent = ({
                     className='button is-success'
                     onClick={() => deposit(stringToWei(refInputAmount.value))}
                   >
-                    Send money to identity
+                    <span className='icon is-intermediate'><i className='fa fa-credit-card'></i></span>
+                    <span> Send money to identity</span>
                   </button>
                 </span>
               )}

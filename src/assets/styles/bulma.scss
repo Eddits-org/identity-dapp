@@ -16,3 +16,8 @@ $navbar-item-hover-background-color: lighten($dark-blue, 10%) !important;
 $footer-background-color: transparent;
 
 @import '~bulma/bulma.sass';
+
+.is-intermediate {
+    border-radius: 2px;
+    font-size: 0.80rem;
+}
