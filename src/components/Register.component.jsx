@@ -142,6 +142,7 @@ RegisterComponent.propTypes = {
   deploying: PropTypes.bool.isRequired,
   txHash: PropTypes.string,
   address: PropTypes.string,
+  addIdentityOperationResult: PropTypes.object,
 
   fetchCost: PropTypes.func.isRequired,
   deploy: PropTypes.func.isRequired,
