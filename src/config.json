@@ -4,12 +4,12 @@
     { "id": 1, "name": "Mainnet", "enabled": false, "etherscan": "https://etherscan.io" },
     { "id": 3, "name": "Ropsten", "enabled": true, "etherscan": "https://ropsten.etherscan.io" },
     { "id": 42, "name": "Kovan", "enabled": true, "etherscan": "https://kovan.etherscan.io" },
-    { "id": 153, "name": "localhost", "enabled": true, "etherscan": "https://kovan.etherscan.io" },
+    { "id": 17, "name": "localhost", "enabled": true, "etherscan": "https://kovan.etherscan.io" },
     { "id": 5777, "name": "ganache", "enabled": true, "etherscan": "https://etherscan.io" }
   ],
   "orelySvcURL": "https://eddits.io/orely",
   "orelyURL": "https://orely.test.luxtrust.com/FederatedServiceFrontEnd/saml/dss/req",
-  "dappURL": "https://eddits.io/identity/manage",
+  "dappURL": "http://localhost:3000/identity/manage",
   "contract": {
     "abi" :  [
       {
@@ -674,6 +674,177 @@
       "address": "0xd66c1d4f14298f7a9042a24d3b33cc42bb445fb7",
       "abi": [
         {"constant":true,"inputs":[],"name":"cost","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"kill","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_value","type":"uint256"}],"name":"setCost","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_commonName","type":"string"}],"name":"removeAuthority","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_commonName","type":"string"},{"name":"_modulus","type":"bytes"},{"name":"_exponent","type":"bytes"}],"name":"addAuthority","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"drain","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_signInfo","type":"string"},{"name":"_signature","type":"bytes"},{"name":"_manifest","type":"string"},{"name":"_certificate","type":"bytes"}],"name":"certify","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[{"name":"_who","type":"address"}],"name":"get","outputs":[{"name":"active","type":"bool"},{"name":"cn","type":"string"},{"name":"country","type":"string"},{"name":"issuer_cn","type":"string"},{"name":"modulus","type":"bytes"},{"name":"exponent","type":"bytes"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_commonName","type":"string"}],"name":"trustedAuthority","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[{"name":"_expmod","type":"address"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"}]
+    },
+    "17": {
+      "address": "0x002155d5323cb425a89ecd3ab87ae5ffdf4db5f7",
+      "abi": [
+        {
+          "constant": true,
+          "inputs": [],
+          "name": "cost",
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256"
+            }
+          ],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "constant": false,
+          "inputs": [],
+          "name": "kill",
+          "outputs": [],
+          "payable": false,
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "constant": false,
+          "inputs": [
+            {
+              "name": "_commonName",
+              "type": "string"
+            }
+          ],
+          "name": "removeAuthority",
+          "outputs": [],
+          "payable": false,
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "constant": false,
+          "inputs": [
+            {
+              "name": "_commonName",
+              "type": "string"
+            },
+            {
+              "name": "_modulus",
+              "type": "bytes"
+            },
+            {
+              "name": "_exponent",
+              "type": "bytes"
+            }
+          ],
+          "name": "addAuthority",
+          "outputs": [],
+          "payable": false,
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "constant": true,
+          "inputs": [
+            {
+              "name": "_commonName",
+              "type": "string"
+            }
+          ],
+          "name": "trustedAuthority",
+          "outputs": [
+            {
+              "name": "",
+              "type": "bool"
+            }
+          ],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "constant": false,
+          "inputs": [
+            {
+              "name": "_signInfo",
+              "type": "string"
+            },
+            {
+              "name": "_signature",
+              "type": "bytes"
+            },
+            {
+              "name": "_manifest",
+              "type": "string"
+            },
+            {
+              "name": "_certificate",
+              "type": "bytes"
+            }
+          ],
+          "name": "certify",
+          "outputs": [],
+          "payable": true,
+          "stateMutability": "payable",
+          "type": "function"
+        },
+        {
+          "constant": false,
+          "inputs": [
+            {
+              "name": "_value",
+              "type": "uint256"
+            }
+          ],
+          "name": "setCost",
+          "outputs": [],
+          "payable": false,
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "constant": false,
+          "inputs": [],
+          "name": "drain",
+          "outputs": [],
+          "payable": false,
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "constant": true,
+          "inputs": [
+            {
+              "name": "_who",
+              "type": "address"
+            }
+          ],
+          "name": "get",
+          "outputs": [
+            {
+              "name": "active",
+              "type": "bool"
+            },
+            {
+              "name": "cn",
+              "type": "string"
+            },
+            {
+              "name": "country",
+              "type": "string"
+            },
+            {
+              "name": "issuer_cn",
+              "type": "string"
+            },
+            {
+              "name": "modulus",
+              "type": "bytes"
+            },
+            {
+              "name": "exponent",
+              "type": "bytes"
+            }
+          ],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+        }
+      ]
     }
   },
   "PSPregistry" : {
