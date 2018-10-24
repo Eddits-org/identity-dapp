@@ -19,7 +19,7 @@ export const CERT_REQUEST_FETCHED = 'CERT_REQUEST_FETCHED';
 export const LTCLAIM_AVAILABLE = 'LTCLAIM_AVAILABLE';
 export const SOCLAIM_AVAILABLE = 'SOCLAIM_AVAILABLE';
 
-export const fetchClaimCost = () => (dispatch, getState) => {
+const fetchClaimCost = () => (dispatch, getState) => {
   LTClaimRegistry.getCost().then((cost) => {
     dispatch({
       type: CLAIM_COST_FETCHED,
@@ -35,6 +35,7 @@ export const ClaimAvailableOnCurrentNetwork = () => (dispatch, getState) => {
       type: LTCLAIM_AVAILABLE,
       available
     });
+    if(available) dispatch(fetchClaimCost());
   });
   SOClaimRegistry.isAvailable(networkId).then((available) => {
     dispatch({

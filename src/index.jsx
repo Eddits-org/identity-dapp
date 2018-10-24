@@ -10,8 +10,6 @@ import App from 'components/App.component';
 import AppReducer from 'reducers';
 import preloadState from 'reducers/Preload';
 
-import { fetchClaimCost } from 'actions/Claims.action';
-
 require('assets/styles/bulma.scss');
 require('assets/styles/custom.scss');
 
