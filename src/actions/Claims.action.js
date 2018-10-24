@@ -35,6 +35,7 @@ export const ClaimAvailableOnCurrentNetwork = () => (dispatch, getState) => {
       type: LTCLAIM_AVAILABLE,
       available
     });
+    if(available) dispatch(fetchClaimCost());
   });
   SOClaimRegistry.isAvailable(networkId).then((available) => {
     dispatch({
@@ -72,7 +73,8 @@ export const confirmAddLuxTrustClaim = () => (dispatch, getState) => {
     orelyResponse.signer_certificate
   );
   const identity = getState().identity.selectedIdentity;
-  const ltClaimRegistry = config.LTClaimRegistry.address;
+  const networkId = getState().network.network.id;
+  const ltClaimRegistry = config.LTClaimRegistry[networkId].address;
   const value = getState().claims.ltClaimCost;
   const from = getState().network.account;
   const id = new Identity(identity);
