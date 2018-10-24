@@ -92,11 +92,10 @@ const TabClaimsComponent = ({
      ) }
     {addClaim === 'EST' && (
       <AddEstonianIDClaim {...{
-        samlRequest,
-        orelyResponse,
+        estCert,
+        estClaimCost,
         closeAddEstonianIDClaim,
-        confirmAddEstonianIDClaim,
-        estClaimCost
+        confirmAddEstonianIDClaim
       }}
       />
     )}

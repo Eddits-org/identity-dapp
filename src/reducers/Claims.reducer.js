@@ -60,7 +60,7 @@ export const ClaimsReducer = (state = initialState, action) => {
     case CERT_REQUEST_FETCHED:
       return {
         ...state,
-        certificate: action.estCert
+        estCert: action.estCert
       };
 
     case ADD_CLAIM_CLOSED:
