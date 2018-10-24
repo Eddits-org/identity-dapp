@@ -18,6 +18,7 @@ export const initialState = {
   samlRequest: null,
   orelyResponse: null,
   ltClaimCost: null,
+  estClaimCost: 0,
   claimDetails: null,
   available: {
     'LT': false,

@@ -19,7 +19,7 @@ export const CERT_REQUEST_FETCHED = 'CERT_REQUEST_FETCHED';
 export const LTCLAIM_AVAILABLE = 'LTCLAIM_AVAILABLE';
 export const SOCLAIM_AVAILABLE = 'SOCLAIM_AVAILABLE';
 
-const fetchClaimCost = () => (dispatch, getState) => {
+export const fetchClaimCost = () => (dispatch, getState) => {
   LTClaimRegistry.getCost().then((cost) => {
     dispatch({
       type: CLAIM_COST_FETCHED,
@@ -73,7 +73,8 @@ export const confirmAddLuxTrustClaim = () => (dispatch, getState) => {
     orelyResponse.signer_certificate
   );
   const identity = getState().identity.selectedIdentity;
-  const ltClaimRegistry = config.LTClaimRegistry.address;
+  const networkId = getState().network.network.id;
+  const ltClaimRegistry = config.LTClaimRegistry[networkId].address;
   const value = getState().claims.ltClaimCost;
   const from = getState().network.account;
   const id = new Identity(identity);
