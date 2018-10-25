@@ -10,7 +10,7 @@ const AddEstonianIDClaimComponent = ({
   closeAddEstonianIDClaim,
   confirmAddEstonianIDClaim
 }) => (
-  <div className='box'>
+  <div className='box-material'>
     <h5 className='title is-5'>Link to an Estonian Digital Identity</h5>
     <div className='content'>
       {!estCert && (
