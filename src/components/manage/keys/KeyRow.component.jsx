@@ -39,7 +39,7 @@ const Key = ({ value, account }) => {
     keyLabel === account &&
     value.purpose.code === 1;
   return (
-    <span className={`tag is-medium ${isSelectedAccount ? 'is-warning' : ''}`}>
+    <span className={`tag is-medium address-text ${isSelectedAccount ? 'is-warning' : ''}`}>
       {isSelectedAccount && (
         <span
           className='icon'
