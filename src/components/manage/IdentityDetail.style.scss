@@ -12,8 +12,8 @@
 
   .identicon {
     border-radius: 50%;
-    width: 6rem;
-    height: 6rem;
+    width: 7rem;
+    height: 7rem;
 
     &.small {
       width: 4rem;
@@ -27,7 +27,7 @@
 
   .flex-column {
     flex-direction: column;
-    background-color: #E7E7E7;
+    background-color: #F8F8F8;
 
     .tabs {
       margin-left: 1rem;
@@ -43,10 +43,10 @@
   }
 
   .identity-content {
-    background-color: #F0F0F0;
+    background-color: white;
 
     .table {
-      background-color: #F0F0F0;
+      background-color: white;
     }
   }
 
