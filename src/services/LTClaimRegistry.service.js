@@ -25,15 +25,23 @@ class LTClaimRegistry {
   }
 
   isAvailable(networkId){
-    if (!!config.LTClaimRegistry[networkId] ){
-      this.contract = this.web3.eth.contract(config.LTClaimRegistry[networkId].abi).at(config.LTClaimRegistry[networkId].address);
-      this.verifyFunc = new SolidityFunction(
-        window.web3,
-        config.LTClaimRegistry[networkId].abi.find(v => v.type === 'function' && v.name === 'get'),
-        config.LTClaimRegistry[networkId].address
-      );
-    }
-    return Promise.resolve(!!config.LTClaimRegistry[networkId]);
+    return new Promise( (resolve, reject) => {
+      if ( !!config.ClaimRegistry[networkId] && !!config.LTClaimRegistry[networkId] ){
+        this.registry = this.web3.eth.contract(config.ClaimRegistry[networkId].abi).at(config.ClaimRegistry[networkId].address);
+        this.registry.getAddress("0x4c54436c61696d5265676973747279", "address", (err, address) => {
+          if(err) reject(err);
+          this.contract = this.web3.eth.contract(config.LTClaimRegistry[networkId].abi).at(address);
+          this.verifyFunc = new SolidityFunction(
+              window.web3,
+              config.LTClaimRegistry[networkId].abi.find(v => v.type === 'function' && v.name === 'get'),
+              address
+          );
+          resolve(true);
+        })
+      } else {
+        resolve(false)
+      }
+	});
   }
 
   getCost() {
