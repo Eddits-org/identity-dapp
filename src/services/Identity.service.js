@@ -64,6 +64,7 @@ export class Identity {
     });
   }
 
+//CLAIM  = 3
   getAllKeys() {
     return Promise.all(Object.keys(KEYS_PURPOSES)
       // For each PURPOSES, get the list of keys
