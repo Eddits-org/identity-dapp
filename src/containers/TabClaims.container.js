@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { openAddLuxTrustClaim, closeAddLuxTrustClaim, confirmAddLuxTrustClaim, openAddEstonianIDClaim, closeAddEstonianIDClaim, confirmAddEstonianIDClaim, verifyContractClaim, closeClaimDetails, requestSOClaim, fetchClaimCost } from 'actions/Claims.action';
+import { openAddLuxTrustClaim, confirmAddLuxTrustClaim, openAddEstonianIDClaim, closeAddClaim, confirmAddEstonianIDClaim, openAddFranceConnectClaim, verifyContractClaim, closeClaimDetails, requestSOClaim, confirmAddFranceConnectClaim } from 'actions/Claims.action';
 import TabClaimsComponent from 'components/manage/TabClaims.component';
 
 const mapStateToProps = store => ({
@@ -11,6 +11,7 @@ const mapStateToProps = store => ({
   samlRequest: store.claims.samlRequest,
   orelyResponse: store.claims.orelyResponse,
   ltClaimCost: store.claims.ltClaimCost,
+  fcClaimCost: store.claims.fcClaimCost,
   estCert: store.claims.estCert,
   estClaimCost: store.claims.estClaimCost,
   claimDetails: store.claims.claimDetails,
@@ -18,15 +19,13 @@ const mapStateToProps = store => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  openAddLuxTrustClaim: () => {
-    dispatch(fetchClaimCost());
-    dispatch(openAddLuxTrustClaim());
-  },
-  closeAddLuxTrustClaim: () => dispatch(closeAddLuxTrustClaim()),
+  closeAddClaim: () => dispatch(closeAddClaim()),
+  openAddLuxTrustClaim: () => dispatch(openAddLuxTrustClaim()),
   confirmAddLuxTrustClaim: () => dispatch(confirmAddLuxTrustClaim()),
   openAddEstonianIDClaim: () => dispatch(openAddEstonianIDClaim()),
-  closeAddEstonianIDClaim: () => dispatch(closeAddEstonianIDClaim()),
   confirmAddEstonianIDClaim: () => dispatch(confirmAddEstonianIDClaim()),
+  openAddFranceConnectClaim: () => dispatch(openAddFranceConnectClaim()),
+  confirmAddFranceConnectClaim: () => dispatch(confirmAddFranceConnectClaim()),
   verifyContractClaim: (issuer, data) => dispatch(verifyContractClaim(issuer, data)),
   closeClaimDetails: () => dispatch(closeClaimDetails()),
   requestSOClaim: () => dispatch(requestSOClaim())

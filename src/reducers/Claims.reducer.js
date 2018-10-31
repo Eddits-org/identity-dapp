@@ -1,13 +1,17 @@
+import BigNumber from 'bignumber.js';
+
 import {
   ADD_CLAIM_OPENED,
   SAML_REQUEST_FETCHED,
   CERT_REQUEST_FETCHED,
   ADD_CLAIM_CLOSED,
-  CLAIM_COST_FETCHED,
+  LTCLAIM_COST_FETCHED,
+  FCCLAIM_COST_FETCHED,
   CLAIM_DETAILS_FETCHED,
   CLAIM_DETAILS_CLOSED,
   LTCLAIM_AVAILABLE,
-  SOCLAIM_AVAILABLE
+  SOCLAIM_AVAILABLE,
+  FCCLAIM_AVAILABLE
 } from 'actions/Claims.action';
 
 import { IDENTITY_CLAIMS_FETCHED } from 'actions/Manage.action';
@@ -18,11 +22,13 @@ export const initialState = {
   samlRequest: null,
   orelyResponse: null,
   ltClaimCost: null,
-  estClaimCost: 0,
+  fcClaimCost: null,
+  estClaimCost: new BigNumber(0),
   claimDetails: null,
   available: {
     'LT': false,
-    'SO' : false
+    'SO': false,
+    'FC': false
   }
 };
 
@@ -52,6 +58,12 @@ export const ClaimsReducer = (state = initialState, action) => {
         available: { ...state.available, ['SO'] : action.available }
       };
 
+    case FCCLAIM_AVAILABLE:
+      return {
+        ...state,
+        available: { ...state.available, ['FC'] : action.available }
+      };
+
     case SAML_REQUEST_FETCHED:
       return {
         ...state,
@@ -72,10 +84,16 @@ export const ClaimsReducer = (state = initialState, action) => {
         orelyResponse: null
       };
 
-    case CLAIM_COST_FETCHED:
+    case LTCLAIM_COST_FETCHED:
       return {
         ...state,
         ltClaimCost: action.cost
+      };
+    
+    case FCCLAIM_COST_FETCHED:
+      return {
+        ...state,
+        fcClaimCost: action.cost
       };
 
     case CLAIM_DETAILS_FETCHED:

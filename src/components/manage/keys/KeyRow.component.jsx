@@ -148,7 +148,7 @@ const KeyRowComponent = ({
         )}
         {data.isRemoving && (
           <span className='icon is-medium' title='Work in progress'>
-            <i className='fa fa-refresh fa-spin' />
+            <i className='fas fa-sync-alt fa-spin' />
           </span>
         )}
       </td>

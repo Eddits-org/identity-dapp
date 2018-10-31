@@ -676,7 +676,7 @@
         {"constant":true,"inputs":[],"name":"cost","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"kill","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_value","type":"uint256"}],"name":"setCost","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_commonName","type":"string"}],"name":"removeAuthority","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_commonName","type":"string"},{"name":"_modulus","type":"bytes"},{"name":"_exponent","type":"bytes"}],"name":"addAuthority","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"drain","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_signInfo","type":"string"},{"name":"_signature","type":"bytes"},{"name":"_manifest","type":"string"},{"name":"_certificate","type":"bytes"}],"name":"certify","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[{"name":"_who","type":"address"}],"name":"get","outputs":[{"name":"active","type":"bool"},{"name":"cn","type":"string"},{"name":"country","type":"string"},{"name":"issuer_cn","type":"string"},{"name":"modulus","type":"bytes"},{"name":"exponent","type":"bytes"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_commonName","type":"string"}],"name":"trustedAuthority","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[{"name":"_expmod","type":"address"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"}]
     },
     "17": {
-      "address": "0x002155d5323cb425a89ecd3ab87ae5ffdf4db5f7",
+      "address": "0x0a64df94bc0e039474db42bb52feca0c1d540402",
       "abi": [
         {
           "constant": true,
@@ -842,6 +842,119 @@
           ],
           "payable": false,
           "stateMutability": "view",
+          "type": "function"
+        }
+      ]
+    }
+  },
+  "FCClaimRegistry": {
+    "17": {
+      "address": "0x53f6337d308ffb2c52eda319be216cc7321d3725",
+      "abi": [
+        {
+          "constant": true,
+          "inputs": [],
+          "name": "cost",
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256"
+            }
+          ],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "constant": false,
+          "inputs": [],
+          "name": "kill",
+          "outputs": [],
+          "payable": false,
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "constant": true,
+          "inputs": [],
+          "name": "jwtSigner",
+          "outputs": [
+            {
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "constant": false,
+          "inputs": [
+            {
+              "name": "_value",
+              "type": "uint256"
+            }
+          ],
+          "name": "setCost",
+          "outputs": [],
+          "payable": false,
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "constant": false,
+          "inputs": [
+            {
+              "name": "_signer",
+              "type": "address"
+            }
+          ],
+          "name": "setJwtSigner",
+          "outputs": [],
+          "payable": false,
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "constant": true,
+          "inputs": [
+            {
+              "name": "_who",
+              "type": "address"
+            }
+          ],
+          "name": "get",
+          "outputs": [
+            {
+              "name": "active",
+              "type": "bool"
+            },
+            {
+              "name": "sub",
+              "type": "string"
+            }
+          ],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "constant": false,
+          "inputs": [
+            {
+              "name": "_jwt",
+              "type": "string"
+            },
+            {
+              "name": "_signature",
+              "type": "bytes"
+            }
+          ],
+          "name": "certify",
+          "outputs": [],
+          "payable": true,
+          "stateMutability": "payable",
           "type": "function"
         }
       ]
