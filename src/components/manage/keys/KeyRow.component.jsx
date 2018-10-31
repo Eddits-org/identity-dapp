@@ -34,7 +34,7 @@ const Purpose = ({ purpose }) => {
 };
 
 const Key = ({ value, account }) => {
-  const keyLabel = (value.type.code === 1 ? keyToAddress(value.key) : value.key);
+  const keyLabel = value.name ? value.name : (value.type.code === 1 ? keyToAddress(value.key) : value.key);
   const isSelectedAccount = value.type.code === 1 &&
     keyLabel === account &&
     value.purpose.code === 1;

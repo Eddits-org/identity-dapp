@@ -1,6 +1,6 @@
 import Web3 from 'web3';
 import { addressToKey } from 'utils/Keys.util';
-
+import registry2 from './Registry2.service';
 /* eslint function-paren-newline: ["error", "consistent"] */
 
 const config = require('config');
@@ -30,7 +30,6 @@ export const CLAIM_TYPES = Object.freeze({
 export const CLAIM_SCHEME = Object.freeze({
   CONTRACT: 3
 });
-
 
 const keyTypeLabel = num => Object.keys(KEY_TYPES).find(type => KEY_TYPES[type] === num);
 
@@ -64,7 +63,7 @@ export class Identity {
     });
   }
 
-//CLAIM  = 3
+  //CLAIM  = 3
   getAllKeys() {
     return Promise.all(Object.keys(KEYS_PURPOSES)
       // For each PURPOSES, get the list of keys
@@ -73,17 +72,30 @@ export class Identity {
       .then(result => Promise.all(
         result.map(([purpose, keys]) => Promise.all(
           // eslint-disable-next-line no-unused-vars
-          keys.map(key => this.getKey(key, KEYS_PURPOSES[purpose]).then(([_1, type, _2]) => ({
-            key,
-            type: {
-              label: keyTypeLabel(type.toNumber()),
-              code: type.toNumber()
-            },
-            purpose: {
-              label: purpose,
-              code: KEYS_PURPOSES[purpose]
+          keys.map(key => this.getKey(key, KEYS_PURPOSES[purpose]).then(([_1, type, _2]) => {
+            let objectReturn = {
+              key,
+              type: {
+                label: keyTypeLabel(type.toNumber()),
+                code: type.toNumber()
+              },
+              purpose: {
+                label: purpose,
+                code: KEYS_PURPOSES[purpose]
+              }
+            };
+
+            if (KEYS_PURPOSES[purpose] === 3) {
+              return registry2.getClaimName(key).then((nameRetrieved) => {
+                objectReturn.name = nameRetrieved;
+                return objectReturn;
+              }).catch((err) => {
+                return objectReturn;
+              })
+            } else {
+              return objectReturn;
             }
-          })))
+          }))
         ))
       ))
       // Build final result
@@ -114,14 +126,14 @@ export class Identity {
       this.web3.eth.getBlockNumber((err, res) => {
         if (err)
           reject(err);
-        let from = res - 60*60*24*30/15; // currentBlock - 60s * 60mn * 24h * 30j / 15s (one month)
+        let from = res - 60 * 60 * 24 * 30 / 15; // currentBlock - 60s * 60mn * 24h * 30j / 15s (one month)
         from = from > 0 ? from : 0;
         this.contract.PaymentMade({}, { fromBlock: from, toBlock: 'latest' }).get((err, res) => {
           if (err)
             reject(err);
           else {
             console.log(res);
-            resolve(res.map( r => ( { ...r.args } ) ) );
+            resolve(res.map(r => ({ ...r.args })));
           }
         });
       });
