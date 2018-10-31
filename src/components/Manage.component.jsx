@@ -6,7 +6,6 @@ import NoProvider from 'components/messages/NoProvider.component';
 import InvalidNetwork from 'components/messages/InvalidNetwork.component';
 
 import PendingTx from 'components/manage/PendingTx.component';
-import KeySelector from 'components/KeySelector.component';
 import IdentityDetail from 'components/manage/IdentityDetail.component';
 import IdentityCardUnfold from "components/IdentityCardUnfold";
 
@@ -37,7 +36,6 @@ const ManageComponent = ({
   return (
     <section className='section'>
       <div className='container'>
-        <KeySelector {...{ account, keyPurposes, selectedIdentity }} />
         <PendingTx transactions={pendingTransactions} {...{ hidePendingTx, network }} />
         <h1 className='title'>Manage your identity</h1>
         {!selectedIdentity && (
@@ -64,7 +62,8 @@ const ManageComponent = ({
               balance,
               account,
               processingDeposit,
-              deposit
+              deposit,
+              keyPurposes
             }}
           />
         )}
