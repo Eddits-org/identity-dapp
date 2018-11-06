@@ -16,6 +16,7 @@ const TabClaimsComponent = ({
   addClaim,
   samlRequest,
   orelyResponse,
+  fcResponse,
   available,
   ltClaimCost,
   fcClaimCost,
@@ -110,7 +111,9 @@ const TabClaimsComponent = ({
     {addClaim === 'FC' && (
       <AddFranceConnectClaim {...{
         fcClaimCost,
-        confirmAddFranceConnectClaim
+        fcResponse,
+        confirmAddFranceConnectClaim,
+        closeAddClaim
       }}
       />
     )}
@@ -127,11 +130,12 @@ TabClaimsComponent.defaultProps = {
   addClaim: null,
   samlRequest: null,
   orelyResponse: null,
+  fcResponse: null,
   estCert: null,
   ltClaimCost: null,
-  fcClaimCost: null,
   estClaimCost: null,
-  claimDetails: null
+  claimDetails: null,
+  fcRedirectUrl: null
 };
 
 TabClaimsComponent.propTypes = {
@@ -141,12 +145,13 @@ TabClaimsComponent.propTypes = {
   addClaim: PropTypes.string,
   samlRequest: PropTypes.string,
   orelyResponse: PropTypes.object,
+  fcResponse: PropTypes.object,
   estCert: PropTypes.object,
   ltClaimCost: PropTypes.object,
-  fcClaimCost: PropTypes.object,
   estClaimCost: PropTypes.object,
   claimDetails: PropTypes.object,
   available: PropTypes.object,
+  fcRedirectUrl: PropTypes.string,
 
   closeAddClaim: PropTypes.func.isRequired,
   

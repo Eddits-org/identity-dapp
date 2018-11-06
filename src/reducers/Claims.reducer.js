@@ -21,6 +21,7 @@ export const initialState = {
   addClaim: null,
   samlRequest: null,
   orelyResponse: null,
+  fcResponse: null,
   ltClaimCost: null,
   fcClaimCost: null,
   estClaimCost: new BigNumber(0),

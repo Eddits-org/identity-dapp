@@ -33,13 +33,11 @@ class FCClaimRegistry {
     });
   }
 
-  // function certify(
-  //   string _jwt, bytes _signature
-  // ) payable public
-  generateCertifyRequest(cost, jwt, signature) {
+  // function certify(string _jwt, uint8 _v, bytes32 _r, bytes32 _s) public payable
+  generateCertifyRequest(cost, jwt, r, s, v) {
     return this.contract.certify.getData(
       jwt,
-      signature,
+      v, r, s,
       { value: cost }
     );
   }
