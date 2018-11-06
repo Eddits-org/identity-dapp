@@ -97,7 +97,7 @@ export const confirmAddLuxTrustClaim = () => (dispatch, getState) => {
   const ltClaimRegistry = config.LTClaimRegistry[networkId].address;
   const from = getState().network.account;
   const id = new Identity(identity);
-  id.execute(ltClaimRegistry, fcClaimCost.toNumber(), calldata, from).then((txHash) => {
+  id.execute(ltClaimRegistry, ltClaimCost.toNumber(), calldata, from).then((txHash) => {
     dispatch(addPendingTx(txHash, 'Add LuxTrust claim'));
     dispatch(closeAddClaim());
     Web3.waitForMining(txHash).then(() => {
