@@ -23,7 +23,6 @@ export const deployIdentity = (account, gas) => (dispatch) => {
   Web3.deployIdentity(account, gas).then((txHash) => {
     dispatch({ type: WAIT_IDENTITY_MINING, txHash });
     Web3.waitForMining(txHash).then(({ block, address }) => {
-      Storage.addIdentity({ address });
       dispatch({
         type: IDENTITY_DEPLOYED,
         block,

@@ -34,7 +34,7 @@ const IdentityDetailComponent = ({
   <div className='card identity-detail'>
 
 
-    <header style={{"border-radius": "10px"}} className='card-header flex-column'>
+    <header style={{borderRadius: "10px"}} className='card-header flex-column'>
       <div>
         <div className='card-header-title'>
 

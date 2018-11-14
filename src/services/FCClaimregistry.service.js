@@ -1,39 +1,25 @@
 import Web3 from 'web3';
 import SolidityFunction from 'web3/lib/web3/function';
-import web3 from "./Web3.service";
 
 const config = require('config');
 
-class LTClaimRegistry {
+class FCClaimRegistry {
   constructor() {
     if (window.web3) {
       this.web3 = new Web3(window.web3.currentProvider);
     }
-  }
-
-  // function certify(
-  //   string _signInfo, bytes _signature, string _manifest, bytes _certificate
-  // ) payable public
-  generateCertifyRequest(cost, signInfo, signature, manifest, certificate) {
-    return this.contract.certify.getData(
-      signInfo,
-      signature,
-      manifest,
-      certificate,
-      { value: cost }
-    );
-  }
+  }  
 
   isAvailable(networkId){
-    if (!!config.LTClaimRegistry[networkId] ){
-      this.contract = this.web3.eth.contract(config.LTClaimRegistry[networkId].abi).at(config.LTClaimRegistry[networkId].address);
+    if (!!config.FCClaimRegistry[networkId] ){
+      this.contract = this.web3.eth.contract(config.FCClaimRegistry[networkId].abi).at(config.FCClaimRegistry[networkId].address);
       this.verifyFunc = new SolidityFunction(
         window.web3,
-        config.LTClaimRegistry[networkId].abi.find(v => v.type === 'function' && v.name === 'get'),
-        config.LTClaimRegistry[networkId].address
+        config.FCClaimRegistry[networkId].abi.find(v => v.type === 'function' && v.name === 'get'),
+        config.FCClaimRegistry[networkId].address
       );
     }
-    return Promise.resolve(!!config.LTClaimRegistry[networkId]);
+    return Promise.resolve(!!config.FCClaimRegistry[networkId]);
   }
 
   getCost() {
@@ -47,6 +33,15 @@ class LTClaimRegistry {
     });
   }
 
+  // function certify(string _jwt, uint8 _v, bytes32 _r, bytes32 _s) public payable
+  generateCertifyRequest(cost, jwt, r, s, v) {
+    return this.contract.certify.getData(
+      jwt,
+      v, r, s,
+      { value: cost }
+    );
+  }
+
   verifyClaim(calldata) {
     return new Promise((resolve, reject) => {
       if (this.web3) {
@@ -55,15 +50,12 @@ class LTClaimRegistry {
           data: calldata
         }, (err, result) => {
           // eslint-disable-next-line no-unused-vars
-          const [active, subjectCN, country, issuerCN, modulus, exponent] =
-            this.verifyFunc.unpackOutput(result);
+          const [active, sub] = this.verifyFunc.unpackOutput(result);
           if (err) return reject(err);
           return resolve({
-            issuer: 'LT',
+            issuer: 'FC',
             active,
-            subjectCN,
-            country,
-            issuerCN
+            sub
           });
         });
       } else reject(new Error('No Web3 provider: install MetaMask!'));
@@ -71,4 +63,4 @@ class LTClaimRegistry {
   }
 }
 
-export default new LTClaimRegistry();
+export default new FCClaimRegistry();

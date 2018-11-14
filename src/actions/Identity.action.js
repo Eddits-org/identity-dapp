@@ -41,14 +41,11 @@ export const setIdentityOperationResult = (state, message) => ({
 
 
 export const addIdentity = address => (dispatch) => {
-
   if(Web3.web3._extend.utils.isAddress(address) === false) {
-
     dispatch(setIdentityOperationResult(false, "This is not a valid address."));
     return;
   }
-
-
+  
   dispatch({
     type: IDENTITY_ADDEDD,
     address

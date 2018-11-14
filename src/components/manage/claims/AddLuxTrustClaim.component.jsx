@@ -23,7 +23,7 @@ const AddLuxTrustClaimComponent = ({
       samlRequest,
       orelyResponse,
       ltClaimCost,
-      closeAddLuxTrustClaim,
+      closeAddClaim,
       confirmAddLuxTrustClaim
     }) => (
   <div className='box'>
@@ -32,7 +32,7 @@ const AddLuxTrustClaimComponent = ({
       {!orelyResponse && (
         <div>
       <span className='icon is-medium'>
-        <i className='fa fa-refresh fa-spin'/>
+        <i className='fas fa-sync-alt fa-spin'/>
       </span>
           Generate a LuxTrust request, please wait.
           You will be redirected to LuxTrust for authentication...
@@ -79,7 +79,7 @@ const AddLuxTrustClaimComponent = ({
               </button>
             </div>
             <div className='control'>
-              <button className='button is-danger' onClick={closeAddLuxTrustClaim}>
+              <button className='button is-danger' onClick={closeAddClaim}>
                 Cancel
               </button>
             </div>
@@ -102,7 +102,7 @@ AddLuxTrustClaimComponent.propTypes = {
   orelyResponse: PropTypes.object,
   ltClaimCost: PropTypes.object,
 
-  closeAddLuxTrustClaim: PropTypes.func.isRequired,
+  closeAddClaim: PropTypes.func.isRequired,
   confirmAddLuxTrustClaim: PropTypes.func.isRequired
 };
 

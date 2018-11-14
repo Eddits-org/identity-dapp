@@ -7,7 +7,7 @@ import { toEthString } from 'utils/Eth.utils';
 const AddEstonianIDClaimComponent = ({
   estCert,
   estClaimCost,
-  closeAddEstonianIDClaim,
+  closeAddClaim,
   confirmAddEstonianIDClaim
 }) => (
   <div className='box-material'>
@@ -16,7 +16,7 @@ const AddEstonianIDClaimComponent = ({
       {!estCert && (
         <div>
           <span className='icon is-medium'>
-            <i className='fa fa-refresh fa-spin' />
+            <i className='fas fa-sync-alt fa-spin' />
           </span>
           Verifying Certificate, please wait.
         </div>
@@ -61,7 +61,7 @@ const AddEstonianIDClaimComponent = ({
               </button>
             </div>
             <div className='control'>
-              <button className='button is-danger' onClick={closeAddEstonianIDClaim}>
+              <button className='button is-danger' onClick={closeAddClaim}>
                 Cancel
               </button>
             </div>
@@ -82,7 +82,7 @@ AddEstonianIDClaimComponent.propTypes = {
   estCert: PropTypes.object,
   estClaimCost: PropTypes.object,
 
-  closeAddEstonianIDClaim: PropTypes.func.isRequired,
+  closeAddClaim: PropTypes.func.isRequired,
   confirmAddEstonianIDClaim: PropTypes.func.isRequired
 };
 

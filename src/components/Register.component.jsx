@@ -33,101 +33,106 @@ const RegisterComponent = ({
   }
   if (!network.enabled) return <InvalidNetwork {...{ network }} />;
   let refAddIdentityAddress = null;
+  let inputState = '';
+  let textInput = '';
+  let textSuccess = '';
+  if(addIdentityOperationResult.state !== null) {
+    if(!addIdentityOperationResult.state) {
+      inputState = 'is-danger';
+      textInput = addIdentityOperationResult.message;
+    } else {
+      textSuccess = addIdentityOperationResult.message;
+    }
+  }
   return (
     <section className='section'>
-      <Notifier state={addIdentityOperationResult.state} message={addIdentityOperationResult.message}></Notifier>
       <div className='container'>
         <h1 className='title'>Register your identity</h1>
-        <div className='card'>
-          <header className='card-header'>
-            <p className='card-header-title'>
-              <span className='icon card-title-icon'>
-                <i className='far fa-id-card' />
-              </span>
-              Identity
+        <div className='columns'>
+          <div className='column is-6' style={{paddingRight: '5%'}}>
+            <div className='card'>
+              <header className='card-header'>
+                <p className='card-header-title'>
+                  <span className='icon card-title-icon'>
+                    <i className='far fa-id-card' />
+                  </span>
+                  Create a new identity
             </p>
-          </header>
-          <div className='card-content'>
-            <div className='content'>
-              {deploying && (
-                <WaitDeploy {... { network, txHash }} />
-              )}
-              {!deploying && !address && (
-                <Form {... {
-                    fetchingCost,
-                    cost,
-                    account,
-                    gas
-                  }}
-                />
-              )}
-              {!deploying && !!address && (
-                <Success {... { address, network }} />
-              )}
+              </header>
+              <div className='card-content' style={{height: '150px'}}>
+                <div className='content'>
+                  {deploying && (
+                    <WaitDeploy {... { network, txHash }} />
+                  )}
+                  {!deploying && !address && (
+                    <Form {... {
+                      fetchingCost,
+                      cost,
+                      account,
+                      gas
+                    }}
+                    />
+                  )}
+                  {!deploying && !!address && (
+                    <Success {... { address, network }} />
+                  )}
+                </div>
+              </div>
+              <footer className='card-footer'>
+                {!!address && (
+                  <a className='card-footer-item' href={`/identity/manage/${address}`}>Manage</a>
+                )}
+                {!deploying && !address && (
+                  <a
+                    className='card-footer-item'
+                    disabled={fetchingCost}
+                    onClick={() => deploy(account, gas)}
+                  >
+                    Create<i className='fas fa-plus' style={{marginLeft: '10px'}}></i>
+              </a>
+                )}
+              </footer>
             </div>
           </div>
-          <footer className='card-footer'>
-            {!!address && (
-              <a className='card-footer-item' href={`/identity/manage/${address}`}>Manage</a>
-            )}
-            {(deploying || !address) && (
-              <a className='card-footer-item' onClick={reset}>Cancel</a>
-            )}
-            {!deploying && !address && (
-              <a
-                className='card-footer-item'
-                disabled={fetchingCost}
-                onClick={() => deploy(account, gas)}
-              >
-                Create
-              </a>
-            )}
-          </footer>
+          <div className='column is-6' style={{paddingLeft: '5%'}}>
+            <div className='card'>
+              <header className='card-header'>
+                <p className='card-header-title'>
+                  Add an existing identity
+						</p>
+              </header>
+              <div className='card-content' style={{height: '150px'}}>
+                <div className='content' >
+                  <div className='field has-addons is-fullwidth' style={{marginBottom: '0px', paddingBottom: '0px'}}>
+                      <input
+                        className={'input ' + inputState}
+                        type='text'
+                        placeholder='Address of an ERC-725 identity contract'
+                        ref={(input) => {
+                          refAddIdentityAddress = input;
+                        }}
+                        
+                      />
+                  </div>
+                  <p style={{fontSize: '12px',color:'red',marginTop: '0px',paddingTop: '0px',paddingLeft: '10px'}}>{textInput}</p>
+                  {textSuccess !== '' ? (<p style={{textAlign: 'center'}}>{textSuccess}<i className='fas fa-check' style={{marginLeft: '10px',color:'#4CD465'}}></i></p>):''}
+                </div>
+              </div>
+              <footer className='card-footer'>
+              <a className='card-footer-item' onClick={() => addIdentity(refAddIdentityAddress.value)}>Add<i className='fas fa-plus' style={{marginLeft: '10px'}}></i></a>
+              </footer>
+            </div>
+          </div>
         </div>
       </div>
-      <br/>
-			<div className='container'>
-				<div className='card'>
-					<header className='card-header'>
-						<p className='card-header-title'>
-							Add an existing identity
-						</p>
-					</header>
-					<div className='card-content'>
-						<div className='content'>
-							<div className='field has-addons is-fullwidth'>
-								<p className='control is-expanded'>
-									<input
-											className='input'
-											type='text'
-											placeholder='Address of an ERC-725 identity contract'
-											ref={(input) => {
-												refAddIdentityAddress = input;
-											}}
-									/>
-								</p>
-								<p className='control'>
-									<a className='button is-success'
-										 onClick={() => addIdentity(refAddIdentityAddress.value)}
-									>
-                  <span className='icon is-small'>
-                    <i className='fas fa-check'/>
-                  </span>
-									</a>
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-	);
+    </section >
+  );
 };
 
 RegisterComponent.defaultProps = {
-	network: null,
-	account: null,
-	txHash: null,
+  network: null,
+  account: null,
+  txHash: null,
   address: null,
   gas: null
 };
