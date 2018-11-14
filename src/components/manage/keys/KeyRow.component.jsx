@@ -39,22 +39,15 @@ const Key = ({ value, account }) => {
     keyLabel === account &&
     value.purpose.code === 1;
   return (
-    <span className={`tag is-medium address-text ${isSelectedAccount ? 'is-warning' : ''}`}>
-      {isSelectedAccount && (
-        <span
-          className='icon'
-          title='This is your current management key'
-        >
-          <i className='fas fa-exclamation-triangle' />
-        </span>
-      )}
+    <span className={`tag is-medium address-text`}>
       &nbsp;{keyLabel}
     </span>
   );
 };
 
 const Type = ({ type }) => (
-  <span className={`tag ${type.code === 1 ? 'is-primary' : 'is-info'}`}>
+  <span>
+    <span className={`bullet-point ${type.code === 1 ? 'key-ecdsa' : 'key-management'}`}></span>
     {type.label}
   </span>
 );
@@ -79,7 +72,7 @@ const KeyRowComponent = ({
           <div className='field has-addons'>
             <p className='control'>
               <a
-                className='button is-small'
+                className='button is-small is-danger'
                 title='Remove key'
                 onClick={() => removeKey(data.key, data.purpose.code)}
               >
@@ -90,7 +83,7 @@ const KeyRowComponent = ({
             </p>
             <p className='control'>
               <a
-                className='button is-small'
+                className='button is-small is-info'
                 title='Duplicate key'
                 onClick={() => switchDuplicateKeyVisibility(true, data.key, data.purpose.code)}
               >
@@ -148,7 +141,7 @@ const KeyRowComponent = ({
         )}
         {data.isRemoving && (
           <span className='icon is-medium' title='Work in progress'>
-            <i className='fa fa-refresh fa-spin' />
+            <i className='fas fa-sync-alt fa-spin' />
           </span>
         )}
       </td>

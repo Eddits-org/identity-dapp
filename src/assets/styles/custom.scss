@@ -32,6 +32,8 @@ body {
   margin-right: 5px;
 }
 
+
+
 .bullet-point {
   display: inline-block;
   width: 12px;
@@ -70,6 +72,10 @@ body {
 
 .key-payment {
   background-color: $orange !important;
+  color: $white !important;
+}
+.key-ecdsa {
+  background-color: $green !important;
   color: $white !important;
 }
 

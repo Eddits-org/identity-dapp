@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './Welcome.style.scss'
 
 const WelcomeComponent = () => (
   <div className='welcome'>
@@ -22,13 +23,14 @@ const WelcomeComponent = () => (
               to='/register'
               href='/register'
               className='button is-info is-inverted is-outlined'
-              style={{ marginRight: '10px' }}
+              style={{ marginRight: '10px', fontSize: '24px' }}
             >
               Create your identity
             </Link>
             <Link
               to='/manage'
               href='/manage'
+              style={{fontSize: '24px'}}
               className='button is-info is-inverted is-outlined'
             >
               Manage your identity

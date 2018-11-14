@@ -55,11 +55,11 @@ class LTClaimRegistry {
     });
   }
 
-  verifyClaim(issuer, calldata) {
+  verifyClaim(calldata) {
     return new Promise((resolve, reject) => {
       if (this.web3) {
         this.web3.eth.call({
-          to: issuer,
+          to: this.contract.address,
           data: calldata
         }, (err, result) => {
           // eslint-disable-next-line no-unused-vars
@@ -67,6 +67,7 @@ class LTClaimRegistry {
             this.verifyFunc.unpackOutput(result);
           if (err) return reject(err);
           return resolve({
+            issuer: 'LT',
             active,
             subjectCN,
             country,

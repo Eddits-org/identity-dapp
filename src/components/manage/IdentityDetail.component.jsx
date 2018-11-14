@@ -9,6 +9,7 @@ import TabPSP from 'containers/TabPSP.container';
 
 import { toEthString } from 'utils/Eth.utils';
 import makeBlockie from 'ethereum-blockies-base64';
+import InformationKey from 'components/InformationKey.component';
 
 const TabHeader = ({
   id,
@@ -27,24 +28,25 @@ const IdentityDetailComponent = ({
   balance,
   processingDeposit,
   setTab,
-  deposit
+  deposit,
+  keyPurposes
 }) => (
   <div className='card identity-detail'>
-    <header className='card-header flex-column'>
-      <div className='card-header-title'>
+    <header style={{borderRadius: "10px"}} className='card-header flex-column'>
+      <div>
         <div className='card-header-title'>
-		  <img
-			  className='identicon'
-			  src={makeBlockie(address)}
-			  alt={ `Identicon of ether address ${address}` }
-		  />
-		  <div className='title-p2'>
+
+          <img
+            className='identicon'
+            src={makeBlockie(address)}
+            alt={ `Identicon of ether address ${address}` }
+          />
+          <div className='title-p2'>
             <h2> Identity </h2>
             <div className='address-text'> {address} </div>
+            <div className='address-text'> Current balance: <strong>{toEthString(balance)} ETH</strong> </div>
+            <InformationKey {...{ account, keyPurposes, selectedIdentity: address }} />
           </div>
-        </div>
-        <div className='balance'>
-			Current balance: <strong>{toEthString(balance)} ETH</strong>
         </div>
       </div>
       <div className='tabs'>
@@ -57,7 +59,7 @@ const IdentityDetailComponent = ({
           </ul>
       </div>
     </header>
-    <div className='card-content identity-content'>
+    <div style={{'borderRadius': '10px'}}className='card-content identity-content'>
       {tab === 'keys' && <TabKeys  />}
       {tab === 'claims' && <TabClaims />}
       {tab === 'funds' && (
@@ -87,7 +89,8 @@ IdentityDetailComponent.propTypes = {
   processingDeposit: PropTypes.bool.isRequired,
 
   setTab: PropTypes.func.isRequired,
-  deposit: PropTypes.func.isRequired
+  deposit: PropTypes.func.isRequired,
+  keyPurposes: PropTypes.array.isRequired
 };
 
 import './IdentityDetail.style.scss'

@@ -11,22 +11,34 @@ const ClaimDetailsModalComponent = ({ details, closeDetail }) => (
           <button className='delete' aria-label='close' onClick={closeDetail} />
         </header>
         <section className='modal-card-body'>
-          <table className='table is-narrow'>
-            <tbody>
-              <tr>
-                <th>Common name</th>
-                <td>{details.subjectCN}</td>
-              </tr>
-              <tr>
-                <th>Country</th>
-                <td>{details.country}</td>
-              </tr>
-              <tr>
-                <th>Certification authority</th>
-                <td>{details.issuerCN}</td>
-              </tr>
-            </tbody>
-          </table>
+          {details.issuer === 'LT' && (
+            <table className='table is-narrow'>
+              <tbody>
+                <tr>
+                  <th>Common name</th>
+                  <td>{details.subjectCN}</td>
+                </tr>
+                <tr>
+                  <th>Country</th>
+                  <td>{details.country}</td>
+                </tr>
+                <tr>
+                  <th>Certification authority</th>
+                  <td>{details.issuerCN}</td>
+                </tr>
+              </tbody>
+            </table>
+          )}
+          {details.issuer === 'FC' && (
+            <table className='table is-narrow'>
+              <tbody>
+                <tr>
+                  <th>FranceConnect identifier</th>
+                  <td>{details.sub}</td>
+                </tr>
+              </tbody>
+            </table>
+          )}
           {details.active && (
             <div className='is-size-5 has-text-success'>
               <span className='icon is-success'>

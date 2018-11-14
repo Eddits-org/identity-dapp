@@ -1,7 +1,7 @@
 import {
   SELECT_IDENTITY,
   KEY_PURPOSES_FETCHED,
-  IDENTITY_ADDEDD,
+  IDENTITY_ADDED,
   IDENTITY_REMOVED,
   ADD_IDENTITY_VISIBILITY_CHANGED,
   SET_IDENTITY_OPERATION_RESULT
@@ -20,7 +20,7 @@ export const initialState = {
 export const IdentityReducer = (state = initialState, action) => {
   switch (action.type) {
     case IDENTITY_DEPLOYED:
-    case IDENTITY_ADDEDD:
+    case IDENTITY_ADDED:
 
       // avoid duplicate addition
       let index = state.identities.findIndex(el => el.address === action.address);
