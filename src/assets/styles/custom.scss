@@ -74,6 +74,10 @@ body {
   background-color: $orange !important;
   color: $white !important;
 }
+.key-ecdsa {
+  background-color: $green !important;
+  color: $white !important;
+}
 
 .pending-tx {
   position: fixed;

@@ -69,7 +69,7 @@ const IdentityDetailComponent = ({
           </ul>
       </div>
     </header>
-    <div className='card-content identity-content'>
+    <div style={{'border-radius': '10px'}}className='card-content identity-content'>
       {tab === 'keys' && <TabKeys  />}
       {tab === 'claims' && <TabClaims />}
       {tab === 'funds' && (
