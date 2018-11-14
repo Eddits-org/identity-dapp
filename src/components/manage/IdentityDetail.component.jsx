@@ -32,8 +32,6 @@ const IdentityDetailComponent = ({
   keyPurposes
 }) => (
   <div className='card identity-detail'>
-
-
     <header style={{borderRadius: "10px"}} className='card-header flex-column'>
       <div>
         <div className='card-header-title'>
@@ -43,21 +41,13 @@ const IdentityDetailComponent = ({
             src={makeBlockie(address)}
             alt={ `Identicon of ether address ${address}` }
           />
-
           <div className='title-p2'>
             <h2> Identity </h2>
             <div className='address-text'> {address} </div>
             <div className='address-text'> Current balance: <strong>{toEthString(balance)} ETH</strong> </div>
             <InformationKey {...{ account, keyPurposes, selectedIdentity: address }} />
           </div>
-
-
-        
-
         </div>
-
-
-        
       </div>
       <div className='tabs'>
           <ul>
@@ -69,7 +59,7 @@ const IdentityDetailComponent = ({
           </ul>
       </div>
     </header>
-    <div style={{'border-radius': '10px'}}className='card-content identity-content'>
+    <div style={{'borderRadius': '10px'}}className='card-content identity-content'>
       {tab === 'keys' && <TabKeys  />}
       {tab === 'claims' && <TabClaims />}
       {tab === 'funds' && (

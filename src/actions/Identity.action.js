@@ -5,7 +5,7 @@ import Web3 from 'services/Web3.service';
 
 export const SELECT_IDENTITY = 'SELECT_IDENTITY';
 export const KEY_PURPOSES_FETCHED = 'KEY_PURPOSES_FETCHED';
-export const IDENTITY_ADDEDD = 'IDENTITY_ADDED';
+export const IDENTITY_ADDED = 'IDENTITY_ADDED';
 export const IDENTITY_REMOVED = 'IDENTITY_REMOVED';
 export const ADD_IDENTITY_VISIBILITY_CHANGED = 'ADD_IDENTITY_VISIBILITY_CHANGED';
 export const SET_IDENTITY_OPERATION_RESULT = 'SET_IDENTITY_OPERATION_RESULT';
@@ -47,7 +47,7 @@ export const addIdentity = address => (dispatch) => {
   }
   
   dispatch({
-    type: IDENTITY_ADDEDD,
+    type: IDENTITY_ADDED,
     address
   });
   dispatch(switchAddIdentityVisibility(false));

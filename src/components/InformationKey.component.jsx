@@ -28,14 +28,11 @@ const InformationKeyComponent = ({account, keyPurposes, selectedIdentity}) => {
 		}
 	}
 	return (
-
 		<div>
-
-			<p className={`is-medium has-text-${tag}`}>
-
+			<div className={`is-medium has-text-${tag}`}>
 				<p key={icon} ><i className={'fa ' + icon}></i> {label}</p>
 				<span className='address-text'>{account}</span>
-			</p>
+			</div>
 
 	
 		</div>
