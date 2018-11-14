@@ -8,6 +8,7 @@ import { initialState as initialLoginState } from 'reducers/Login.reducer';
 import { parseLoginRequest } from 'utils/LoginRequest.utils';
 
 const ORLEY_TAG = '#response=';
+const FC_TAG = '#fcResponse=';
 const AUTH_TAG = '#loginRequest=';
 
 const preloadStateFromURL = () => {
@@ -25,6 +26,19 @@ const preloadStateFromURL = () => {
       claims: {
         addClaim: 'LT',
         orelyResponse: json
+      }
+    };
+  }
+  if (url.indexOf(FC_TAG) > 0) {
+    const fcResponse = url.substring(url.indexOf(FC_TAG) + FC_TAG.length);
+    const json = JSON.parse(atob(fcResponse));
+    return {
+      manage: {
+        identityDetailTab: 'claims'
+      },
+      claims: {
+        addClaim: 'FC',
+        fcResponse: json
       }
     };
   }

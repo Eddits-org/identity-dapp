@@ -1,5 +1,6 @@
 import Web3 from 'services/Web3.service';
 import Orely from 'services/Orely.service';
+import FC from 'services/FC.service';
 import HWCrypto from 'services/HWCrypto.service';
 import LTClaimRegistry from 'services/LTClaimRegistry.service';
 import SOClaimRegistry from 'services/SOClaimRegistry.service';
@@ -96,7 +97,7 @@ export const confirmAddLuxTrustClaim = () => (dispatch, getState) => {
   const ltClaimRegistry = config.LTClaimRegistry[networkId].address;
   const from = getState().network.account;
   const id = new Identity(identity);
-  id.execute(ltClaimRegistry, fcClaimCost.toNumber(), calldata, from).then((txHash) => {
+  id.execute(ltClaimRegistry, ltClaimCost.toNumber(), calldata, from).then((txHash) => {
     dispatch(addPendingTx(txHash, 'Add LuxTrust claim'));
     dispatch(closeAddClaim());
     Web3.waitForMining(txHash).then(() => {
@@ -129,14 +130,20 @@ export const openAddFranceConnectClaim = () => (dispatch, getState) => {
     type: ADD_CLAIM_OPENED,
     claim: 'FC'
   });
+  const identity = getState().identity.selectedIdentity;
+  FC.generateFCRedirectURL(identity).then((resp) => {
+    window.location = resp.url;
+  });
 };
 
 export const confirmAddFranceConnectClaim = () => (dispatch, getState) => {
-  const { fcClaimCost } = getState().claims;
+  const { fcClaimCost, fcResponse } = getState().claims;
   const calldata = FCClaimRegistry.generateCertifyRequest(
     fcClaimCost,
-    "TEST_SUB",
-    "0x0"
+    fcResponse.jwt,
+    fcResponse.signature.r,
+    fcResponse.signature.s,
+    fcResponse.signature.v
   );
   const identity = getState().identity.selectedIdentity;
   const networkId = getState().network.network.id;
