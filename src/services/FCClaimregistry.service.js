@@ -8,19 +8,27 @@ class FCClaimRegistry {
     if (window.web3) {
       this.web3 = new Web3(window.web3.currentProvider);
     }
-  }  
-
-  isAvailable(networkId){
-    if (!!config.FCClaimRegistry[networkId] ){
-      this.contract = this.web3.eth.contract(config.FCClaimRegistry[networkId].abi).at(config.FCClaimRegistry[networkId].address);
-      this.verifyFunc = new SolidityFunction(
-        window.web3,
-        config.FCClaimRegistry[networkId].abi.find(v => v.type === 'function' && v.name === 'get'),
-        config.FCClaimRegistry[networkId].address
-      );
-    }
-    return Promise.resolve(!!config.FCClaimRegistry[networkId]);
   }
+	
+	isAvailable(networkId){
+		return new Promise( (resolve, reject) => {
+			if ( !!config.ClaimRegistry[networkId] ){
+				this.registry = this.web3.eth.contract(config.ClaimRegistry[networkId].abi).at(config.ClaimRegistry[networkId].address);
+				this.registry.getAddress(config.FCClaimRegistry.name, "address", (err, address) => {
+					if(err) reject(err);
+					this.contract = this.web3.eth.contract(config.FCClaimRegistry[networkId].abi).at(address);
+					this.verifyFunc = new SolidityFunction(
+						window.web3,
+						config.FCClaimRegistry[networkId].abi.find(v => v.type === 'function' && v.name === 'get'),
+						address
+					);
+					resolve(true);
+				})
+			} else {
+				resolve(false)
+			}
+		});
+	}
 
   getCost() {
     return new Promise((resolve, reject) => {

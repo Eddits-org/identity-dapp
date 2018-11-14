@@ -1,4 +1,5 @@
 import Web3 from 'web3';
+import SolidityFunction from "web3/lib/web3/function";
 
 const config = require('config');
 
@@ -8,13 +9,21 @@ class SOClaimRegistry {
       this.web3 = new Web3(window.web3.currentProvider);
     }
   }
-
-  isAvailable(networkId){
-    if (!!config.SOClaimRegistry[networkId] ){
-      this.contract = this.web3.eth.contract(config.SOClaimRegistry[networkId].abi).at(config.SOClaimRegistry[networkId].address);
-    }
-    return Promise.resolve(!!config.SOClaimRegistry[networkId]);
-  }
+	
+	isAvailable(networkId){
+		return new Promise( (resolve, reject) => {
+			if ( !!config.ClaimRegistry[networkId] ){
+				this.registry = this.web3.eth.contract(config.ClaimRegistry[networkId].abi).at(config.ClaimRegistry[networkId].address);
+				this.registry.getAddress(config.SOClaimRegistry.name, "address", (err, address) => {
+					if(err) reject(err);
+					this.contract = this.web3.eth.contract(config.SOClaimRegistry[networkId].abi).at(address);
+					resolve(true);
+				})
+			} else {
+				resolve(false)
+			}
+		});
+	}
 
 
   generateRequestClaim() {
