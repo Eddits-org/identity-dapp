@@ -1,6 +1,6 @@
 import Web3 from 'services/Web3.service';
 import { Identity } from 'services/Identity.service';
-import Registry from 'services/Registry.service';
+import Registry from 'services/PSPRegistry.service';
 
 export const IDENTITY_BALANCE_FETCHED = 'IDENTITY_BALANCE_FETCHED';
 export const IDENTITY_KEYS_FETCHED = 'IDENTITY_KEYS_FETCHED';

@@ -11,36 +11,23 @@ const resolvePromise = (resolve, reject, map = x => x) => (err, result) => {
 
 class Registry {
   constructor() {
-    if(window.web3 && window.web3.currentProvider) this.web3 = new Web3(window.web3.currentProvider);
+    if (window.web3 && window.web3.currentProvider) {
+      this.web3 = new Web3(window.web3.currentProvider);
+      if (!!config.ClaimRegistry["42"]) { //todo
+        this.contract = this.web3.eth.contract(config.ClaimRegistry["42"].abi).at(config.ClaimRegistry["42"].address);
+      }
+    }
   }
 
-  getPSPNames() {
+  getClaimName(keyData) {
     return new Promise((resolve, reject) => {
-      this.contract.getPSPNames(resolvePromise(resolve, reject));
-    });
-  }
-
-  getPspAddress( name ) {
-    return new Promise((resolve, reject) => {
-      return this.contract.getPSPAddress(name, (err, res) => {
+      const keyFormatted = "0x" + keyData.slice(26);
+      return this.contract.getData(keyFormatted,"name", (err, res) => {
         if (err) return reject(err);
-        return resolve({ name: this.web3.toAscii(name), address : res })
+        return resolve(this.web3.toAscii(res));
       });
     });
   }
-
-  getPspNamesToAddress(networkId){
-      if( !config.PSPregistry[networkId] ) return Promise.resolve([]);
-      this.contract = this.web3.eth.contract(config.PSPregistry[networkId].abi).at(config.PSPregistry[networkId].address);
-      return new Promise((resolve, reject) => {
-      this.getPSPNames().then( (names) => {
-        return Promise.all( names.map( name => this.getPspAddress(name) ) )
-      }).then( values => {
-        return resolve(values)
-    }).catch( err => reject(err))
-    });
-  }
-
 
 }
 

@@ -1,6 +1,6 @@
 import Web3 from 'web3';
 import { addressToKey } from 'utils/Keys.util';
-import registry2 from './Registry2.service';
+import registry2 from './Registry.service';
 /* eslint function-paren-newline: ["error", "consistent"] */
 
 const config = require('config');
@@ -17,6 +17,15 @@ export const KEYS_PURPOSES = Object.freeze({
   ENCRYPTION: 4,
   PAYMENT: 101
 });
+
+
+// TODO migrate web3 to 1.0 to use in registry service to utf8 instead of Ascii
+// because to Ascii gives 32 bytes long string which makes comparaison hard af
+export const CLAIM_NAMES = {
+	LTClaimRegistry: "Lux Trust",
+	SOClaimRegistry: "Smart Oversight",
+	FCClaimRegistry: "France Connect"
+}
 
 export const KEY_TYPES = Object.freeze({
   ECDSA: 1,
