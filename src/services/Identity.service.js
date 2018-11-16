@@ -96,7 +96,8 @@ export class Identity {
 
             if (KEYS_PURPOSES[purpose] === 3) {
               return registry2.getClaimName(key).then((nameRetrieved) => {
-                objectReturn.name = nameRetrieved;
+              	//ugly check to see if registry returned a value
+              	nameRetrieved.localeCompare("") ? objectReturn.name = nameRetrieved : null;
                 return objectReturn;
               }).catch((err) => {
                 return objectReturn;
