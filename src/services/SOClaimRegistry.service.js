@@ -16,6 +16,7 @@ class SOClaimRegistry {
 				this.registry = this.web3.eth.contract(config.ClaimRegistry[networkId].abi).at(config.ClaimRegistry[networkId].address);
 				this.registry.getAddress(config.SOClaimRegistry.name, "address", (err, address) => {
 					if(err) reject(err);
+					this.SOAddr = address;
 					this.contract = this.web3.eth.contract(config.SOClaimRegistry[networkId].abi).at(address);
 					resolve(true);
 				})
@@ -23,6 +24,10 @@ class SOClaimRegistry {
 				resolve(false)
 			}
 		});
+	}
+	
+	getAddress() {
+		return this.SOAddr;
 	}
 
 

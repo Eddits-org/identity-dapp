@@ -186,10 +186,9 @@ export const closeClaimDetails = () => ({
 });
 
 export const requestSOClaim = () => (dispatch, getState) => {
-  const networkId = getState().network.network.id;
   const calldata = SOClaimRegistry.generateRequestClaim();
   const identity = getState().identity.selectedIdentity;
-  const soClaimRegistry = config.SOClaimRegistry[networkId].address;
+  const soClaimRegistry = SOClaimRegistry.getAddress();
   const from = getState().network.account;
   const id = new Identity(identity);
   id.execute(soClaimRegistry, 0, calldata, from).then((txHash) => {
