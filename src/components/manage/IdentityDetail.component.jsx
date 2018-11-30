@@ -6,6 +6,7 @@ import TabClaims from 'containers/TabClaims.container';
 import TabActions from './TabActions.component';
 import TabFunds from './TabFunds.component';
 import TabPSP from 'containers/TabPSP.container';
+import TabU2F from 'containers/TabU2F.container';
 
 import { toEthString } from 'utils/Eth.utils';
 import makeBlockie from 'ethereum-blockies-base64';
@@ -56,6 +57,7 @@ const IdentityDetailComponent = ({
               <TabHeader label='Funds' id='funds' currentTab={tab} setTab={setTab} />
               <TabHeader label='Actions' id='actions' currentTab={tab} setTab={setTab} />
               <TabHeader label='Payments' id='psp' currentTab={tab} setTab={setTab} />
+              <TabHeader label='U2F' id='u2f' currentTab={tab} setTab={setTab} />
           </ul>
       </div>
     </header>
@@ -73,6 +75,7 @@ const IdentityDetailComponent = ({
       )}
       {tab === 'actions' && <TabActions />}
       {tab === 'psp' && <TabPSP />}
+      {tab === 'u2f' && <TabU2F />}
     </div>
   </div>
 );
