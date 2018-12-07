@@ -12,6 +12,7 @@ export const PENDING_TX_REMOVED = 'PENDING_TX_REMOVED';
 export const DEPOSIT_PROCESSING_SWITCHED = 'DEPOSIT_PROCESSING_SWITCHED';
 export const PSP_NAMES_FETCHED = 'PSP_NAMES_FETCHED';
 export const PAYMENTS_FETCHED = 'PAYMENTS_FETCHED';
+export const IDENTITY_U2FKEYS_FETCHED = 'IDENTITY_U2FKEYS_FETCHED';
 
 export const fetchIdentityDetail = address => (dispatch) => {
   const id = new Identity(address);
@@ -25,6 +26,12 @@ export const fetchIdentityDetail = address => (dispatch) => {
     dispatch({
       type: IDENTITY_CLAIMS_FETCHED,
       claims
+    });
+  });
+  id.getAllU2FKeys().then((keys) => {
+    dispatch({
+      type: IDENTITY_U2FKEYS_FETCHED,
+      keys
     });
   });
   Web3.getBalance(address).then((balance) => {

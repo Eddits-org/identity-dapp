@@ -4,7 +4,8 @@ const logoU2F = require('assets/images/u2f.png');
 
 import { KEYS_PURPOSES } from 'services/Identity.service';
 
-const TabU2FComponent = ({ keyPurposes, generateU2FKey }) => {
+const TabU2FComponent = ({ keyPurposes, u2fkeys, isKeyGenerated, generateU2FKey, addU2FKey, removeU2FKey }) => {
+  let refKeyName = null;
   const isManagementKey = !!keyPurposes.find(p => p === KEYS_PURPOSES.MANAGEMENT);
   return (
     <div className='content'>    
@@ -18,7 +19,7 @@ const TabU2FComponent = ({ keyPurposes, generateU2FKey }) => {
         </div>
       </div>
       <div className='content'>
-        <table className='table is-fullwidth'>
+        <table className='table is-fullwidth is-hoverable'>
           <thead>
           <tr>
             <th>Label</th>
@@ -26,11 +27,32 @@ const TabU2FComponent = ({ keyPurposes, generateU2FKey }) => {
           </tr>
           </thead>
           <tbody>
-            
+            { u2fkeys.map(u2fkey => (
+              <tr key={u2fkey.id}>
+                <td>
+                  { u2fkey.label }
+                </td>
+                <td>
+                  <div className='field has-addons is-pulled-right'>
+                    <p className='control'>
+                      <a
+                        className='button is-small is-danger'
+                        title='Remove key'
+                        onClick={() => removeU2FKey(u2fkey.id)}
+                      >
+                        <span className='icon is-small'>
+                          <i className='fa fa-trash' />
+                        </span>
+                      </a>
+                    </p>
+                  </div>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
-      {isManagementKey && (
+      {isManagementKey && !isKeyGenerated && (
         <button
           className='button is-primary is-small'
           onClick={generateU2FKey}
@@ -41,14 +63,49 @@ const TabU2FComponent = ({ keyPurposes, generateU2FKey }) => {
           Add U2F key
         </button>
       )}
+      {isManagementKey && isKeyGenerated && (
+        <div className='field is-horizontal'>
+          <div className='field-label is-normal'>
+            <label className='label'>Key name</label>
+          </div>
+          <div className='field-body'>
+            <div className='field has-addons'>
+              <div className='control is-expanded'>
+                <input
+                  className='input'
+                  type='text'
+                  placeholder='Key name'
+                  ref={(input) => { refKeyName = input; }}
+                />
+              </div>
+              <div className='control'>
+                <a
+                  className='button is-info'
+                  onClick={() => addU2FKey(refKeyName.value)}
+                >
+                  Add this key
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
+TabU2FComponent.defaultProps = {
+  u2fkeys: []
+};
 
 TabU2FComponent.propTypes = {
   keyPurposes: PropTypes.arrayOf(PropTypes.number).isRequired,
-  generateU2FKey: PropTypes.func.isRequired
+  isKeyGenerated: PropTypes.bool.isRequired,
+  u2fkeys: PropTypes.arrayOf(PropTypes.object),
+  
+  generateU2FKey: PropTypes.func.isRequired,
+  addU2FKey: PropTypes.func.isRequired,
+  removeU2FKey: PropTypes.func.isRequired
 };
 
 export default TabU2FComponent;

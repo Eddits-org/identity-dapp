@@ -5,9 +5,11 @@ import {
   PENDING_TX_ADDED,
   PENDING_TX_REMOVED,
   DEPOSIT_PROCESSING_SWITCHED,
-  PSP_NAMES_FETCHED
+  PSP_NAMES_FETCHED,
+  IDENTITY_U2FKEYS_FETCHED
 } from 'actions/Manage.action';
 import {PAYMENTS_FETCHED} from "../actions/Manage.action";
+import { U2F_KEY_GENERATED, U2F_KEY_ADDED } from "../actions/U2F.action";
 
 export const initialState = {
   identityDetailTab: 'keys',
@@ -16,7 +18,9 @@ export const initialState = {
   balance: null,
   processingDeposit: false,
   pspNames: [],
-  payments: []
+  payments: [],
+  generatedU2Fkey: null,
+  u2fkeys: []
 };
 
 export const ManageReducer = (state = initialState, action) => {
@@ -74,10 +78,28 @@ export const ManageReducer = (state = initialState, action) => {
         pspNames: action.names
       };
 
-      case PAYMENTS_FETCHED:
+    case PAYMENTS_FETCHED:
       return {
         ...state,
         payments: action.payments
+      };
+    
+    case U2F_KEY_GENERATED:
+      return {
+        ...state,
+        generatedU2Fkey: action.registration
+      };
+    
+    case U2F_KEY_ADDED:
+      return {
+        ...state,
+        generatedU2Fkey: null
+      };
+    
+    case IDENTITY_U2FKEYS_FETCHED:
+      return {
+        ...state,
+        u2fkeys: action.keys
       };
 
     default:

@@ -202,4 +202,40 @@ export class Identity {
       // Build final result
       .then(result => result.reduce((a, b) => a.concat(b)));
   }
+
+  addU2FKey(rawId, label, att, from) {
+    return new Promise((resolve, reject) => {
+      this.contract.addU2FKey(rawId, label, att, { from }, resolvePromise(resolve, reject));
+    });
+  }
+
+  removeU2FKey(keyId, from) {
+    return new Promise((resolve, reject) => {
+      this.contract.removeU2FKey(keyId, { from }, resolvePromise(resolve, reject));
+    });
+  }
+
+  getU2FKeyById(id) {
+    return new Promise((resolve, reject) => {
+      this.contract.getU2FKey(id, resolvePromise(resolve, reject));
+    });
+  }
+
+  getU2FKeyIds() {
+    return new Promise((resolve, reject) => {
+      this.contract.getU2FKeyIds(resolvePromise(resolve, reject));
+    });
+  }
+
+  getAllU2FKeys() {
+    return this.getU2FKeyIds().then((keyIds) => {
+      return Promise.all(keyIds.map(key => this.getU2FKeyById(key).then(([label, att]) => {
+        return {
+          id: key,
+          label,
+          att
+        };
+      })));
+    });
+  }
 }

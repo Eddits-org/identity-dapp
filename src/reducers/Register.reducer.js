@@ -13,7 +13,6 @@ export const initialState = {
   gas: null,
   deploying: false,
   txHash: null,
-  // address: '0x07d2469d84725d8ca12dd15a5dada88bc39247a8'
   address: null
 };
 
