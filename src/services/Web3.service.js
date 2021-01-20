@@ -30,10 +30,12 @@ class Web3Service {
 
   getAccount() {
     return this.withWeb3Promise((resolve, reject) => {
-      this.web3.eth.getAccounts((err, accounts) => {
-        if (err) return reject(err);
-        if (!accounts || accounts.length === 0) return resolve(null);
-        return resolve(accounts[0]);
+      window.ethereum.enable().then(() => {
+        this.web3.eth.getAccounts((err, accounts) => {
+          if (err) return reject(err);
+          if (!accounts || accounts.length === 0) return resolve(null);
+          return resolve(accounts[0]);
+        });
       });
     });
   }
