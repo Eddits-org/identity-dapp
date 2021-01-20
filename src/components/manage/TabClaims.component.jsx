@@ -147,6 +147,7 @@ TabClaimsComponent.propTypes = {
   orelyResponse: PropTypes.object,
   fcResponse: PropTypes.object,
   estCert: PropTypes.object,
+  fcClaimCost: PropTypes.object,
   ltClaimCost: PropTypes.object,
   estClaimCost: PropTypes.object,
   claimDetails: PropTypes.object,
@@ -154,7 +155,7 @@ TabClaimsComponent.propTypes = {
   fcRedirectUrl: PropTypes.string,
 
   closeAddClaim: PropTypes.func.isRequired,
-  
+
   openAddLuxTrustClaim: PropTypes.func.isRequired,
   confirmAddLuxTrustClaim: PropTypes.func.isRequired,
 
