@@ -28,20 +28,30 @@ const rules = [
   {
     test: /\.jsx?$/,
     exclude: /node_modules/,
-    loaders: ['babel-loader', 'eslint-loader']
+    use: [
+      { loader: 'babel-loader' },
+      { loader: 'eslint-loader' }
+    ]
   },
   {
     test: /\.css$/,
-    loaders: ['style-loader', 'css-loader']
+    use: [
+      { loader: 'style-loader' },
+      { loader: 'css-loader' }
+    ]
   },
   {
     test: /\.(scss|sass)$/,
-    loaders: ['style-loader', 'css-loader', 'sass-loader'],
+    use: [
+      { loader: 'style-loader' },
+      { loader: 'css-loader' },
+      { loader: 'sass-loader' }
+    ],
     exclude: /.*\.module.scss$/
   },
   {
     test: /\.(png|woff|woff2|eot|ttf|svg)$/,
-    loader: 'url-loader?limit=50000'
+    use: { loader: 'url-loader?limit=50000' }
   }
 ];
 
@@ -69,7 +79,15 @@ module.exports = {
       src,
       nodeModules
     ],
-    alias
+    alias,
+    fallback: {
+      'os': require.resolve('os-browserify/browser'),
+      'https': require.resolve('https-browserify'),
+      'http': require.resolve('stream-http'),
+      'stream': require.resolve('stream-browserify'),
+      'crypto': false,
+      'vm': require.resolve('vm-browserify')
+    }
   },
   output: {
     path: dist,
