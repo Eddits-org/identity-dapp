@@ -30,13 +30,12 @@ class NetworkComponent extends React.Component {
       this.setState({
         networkPolling: true
       });
-      setInterval(() => {
-        Web3.getNetwork().then((network) => {
-          if (!this.props.network || this.props.network.id !== network.id) {
-            this.props.changeNetwork(network);
-          }
-        });
-      }, 1000);
+
+      Web3.getNetwork().then((network) => {
+        if (!this.props.network || this.props.network.id !== network.id) {
+          this.props.changeNetwork(network);
+        }
+      });
     }
   }
 
@@ -45,13 +44,12 @@ class NetworkComponent extends React.Component {
       this.setState({
         accountPolling: true
       });
-      setInterval(() => {
-        Web3.getAccount().then((account) => {
-          if ((!this.props.account && account) || this.props.account !== account) {
-            this.props.changeAccount(account);
-          }
-        });
-      }, 1000);
+
+      Web3.getAccount().then((account) => {
+        if ((!this.props.account && account) || this.props.account !== account) {
+          this.props.changeAccount(account);
+        }
+      });
     }
   }
 
