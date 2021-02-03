@@ -1,7 +1,9 @@
+import Web3 from 'web3';
+
 import { Identity } from 'services/Identity.service';
-import Storage from 'services/Storage.service';
 import { fetchIdentityDetail } from 'actions/Manage.action';
-import Web3 from 'services/Web3.service';
+
+const web3 = new Web3();
 
 export const SELECT_IDENTITY = 'SELECT_IDENTITY';
 export const KEY_PURPOSES_FETCHED = 'KEY_PURPOSES_FETCHED';
@@ -18,8 +20,6 @@ export const checkKeyPurposes = (key, identityAddress) => (dispatch) => {
 };
 
 export const selectIdentity = address => (dispatch, getState) => {
-  
-
   const key = getState().network.account;
   if (!!key && address) dispatch(checkKeyPurposes(key, address));
   if (address) dispatch(fetchIdentityDetail(address));
@@ -41,11 +41,11 @@ export const setIdentityOperationResult = (state, message) => ({
 
 
 export const addIdentity = address => (dispatch) => {
-  if(Web3.web3._extend.utils.isAddress(address) === false) {
+  if(web3._extend.utils.isAddress(address) === false) {
     dispatch(setIdentityOperationResult(false, "This is not a valid address."));
     return;
   }
-  
+
   dispatch({
     type: IDENTITY_ADDED,
     address

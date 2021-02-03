@@ -1,28 +1,25 @@
-import Web3 from 'web3';
-import SolidityFunction from "web3/lib/web3/function";
+import web3Service from 'services/Web3.service';
 
 const config = require('config');
 
 class SOClaimRegistry {
-  constructor() {
-    if (window.ethereum) {
-      this.web3 = new Web3(window.ethereum);
-    }
-  }
+  constructor() {}
 
 	isAvailable(networkId){
 		return new Promise( (resolve, reject) => {
-			if ( !!config.ClaimRegistry[networkId] ){
-				this.registry = this.web3.eth.contract(config.ClaimRegistry[networkId].abi).at(config.ClaimRegistry[networkId].address);
-				this.registry.getAddress(config.SOClaimRegistry.name, "address", (err, address) => {
-					if(err) reject(err);
-					this.SOAddr = address;
-					this.contract = this.web3.eth.contract(config.SOClaimRegistry[networkId].abi).at(address);
-					resolve(true);
-				})
-			} else {
-				resolve(false)
-			}
+			web3Service.getProvider().then(provider => {
+				if ( !!config.ClaimRegistry[networkId] ){
+					this.registry = provider.eth.contract(config.ClaimRegistry[networkId].abi).at(config.ClaimRegistry[networkId].address);
+					this.registry.getAddress(config.SOClaimRegistry.name, "address", (err, address) => {
+						if(err) reject(err);
+						this.SOAddr = address;
+						this.contract = provider.eth.contract(config.SOClaimRegistry[networkId].abi).at(address);
+						resolve(true);
+					})
+				} else {
+					resolve(false)
+				}
+			}).catch(reject);;
 		});
 	}
 

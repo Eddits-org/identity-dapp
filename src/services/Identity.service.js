@@ -1,6 +1,7 @@
 import Web3 from 'web3';
 import { addressToKey } from 'utils/Keys.util';
 import registry2 from './Registry.service';
+import web3Service from "./Web3.service";
 /* eslint function-paren-newline: ["error", "consistent"] */
 
 const config = require('config');
@@ -47,28 +48,41 @@ const claimSchemeLabel = num =>
 
 export class Identity {
   constructor(address) {
-    this.web3 = new Web3(window.ethereum);
-    this.contract = this.web3.eth.contract(config.contract.abi).at(address);
+    this.address = address;
+  }
+
+  getContract() {
+    return new Promise((resolve, reject) => {
+      if (this.contract) {
+        return resolve(this.contract);
+      }
+
+      web3Service.getProvider().then(provider => {
+        this.contract = provider.eth.contract(config.contract.abi).at(this.address);
+
+        resolve(this.contract);
+      }).catch(reject);
+    });
   }
 
   getKeyPurpose(address) {
     return new Promise((resolve, reject) => {
-      this.contract.getKeyPurpose(
-        addressToKey(address),
-        resolvePromise(resolve, reject, purposes => purposes.map(p => p.toNumber()))
-      );
+      this.getContract().then(contract => contract.getKeyPurpose(
+          addressToKey(address),
+          resolvePromise(resolve, reject, purposes => purposes.map(p => p.toNumber()))
+        )).catch(reject);;
     });
   }
 
   getKeysByPurpose(purpose) {
     return new Promise((resolve, reject) => {
-      this.contract.getKeysByPurpose(purpose, resolvePromise(resolve, reject));
+      this.getContract().then(contract => contract.getKeysByPurpose(purpose, resolvePromise(resolve, reject))).catch(reject);;
     });
   }
 
   getKey(key, purpose) {
     return new Promise((resolve, reject) => {
-      this.contract.getKey(key, purpose, resolvePromise(resolve, reject));
+      this.getContract().then(contract => contract.getKey(key, purpose, resolvePromise(resolve, reject))).catch(reject);;
     });
   }
 
@@ -114,61 +128,64 @@ export class Identity {
 
   addKey(key, purpose, type, from) {
     return new Promise((resolve, reject) => {
-      this.contract.addKey(key, purpose, type, { from }, resolvePromise(resolve, reject));
+      this.getContract().then(contract => contract.addKey(key, purpose, type, { from }, resolvePromise(resolve, reject))).catch(reject);;
     });
   }
 
   removeKey(key, purpose, from) {
     return new Promise((resolve, reject) => {
-      this.contract.removeKey(key, purpose, { from }, resolvePromise(resolve, reject));
+      this.getContract().then(contract => contract.removeKey(key, purpose, { from }, resolvePromise(resolve, reject))).catch(reject);;
     });
   }
 
   deposit(amount, from) {
     return new Promise((resolve, reject) => {
-      this.contract.deposit({ from, value: amount }, resolvePromise(resolve, reject));
+      this.getContract().then(contract => contract.deposit({ from, value: amount }, resolvePromise(resolve, reject))).catch(reject);;
     });
   }
 
 
   getPayments() {
     return new Promise((resolve, reject) => {
-      this.web3.eth.getBlockNumber((err, res) => {
-        if (err)
-          reject(err);
-        let from = res - 60 * 60 * 24 * 30 / 15; // currentBlock - 60s * 60mn * 24h * 30j / 15s (one month)
-        from = from > 0 ? from : 0;
-        this.contract.PaymentMade({}, { fromBlock: from, toBlock: 'latest' }).get((err, res) => {
+      web3Service.getProvider().then(provider => {
+        this.getContract().then(contract => provider.eth.getBlockNumber((err, res) => {
           if (err)
             reject(err);
-          else {
-            console.log(res);
-            resolve(res.map(r => ({ ...r.args })));
-          }
-        });
-      });
+          let from = res - 60 * 60 * 24 * 30 / 15; // currentBlock - 60s * 60mn * 24h * 30j / 15s (one month)
+          from = from > 0 ? from : 0;
+          contract.PaymentMade({}, { fromBlock: from, toBlock: 'latest' }).get((err, res) => {
+            if (err)
+              reject(err);
+            else {
+              console.log(res);
+              resolve(res.map(r => ({ ...r.args })));
+            }
+          });
+        })).catch(reject);
+      }).catch(reject);;
     });
   }
 
   execute(dest, amount, calldata, from) {
     return new Promise((resolve, reject) => {
       // TODO: estimate gas cost !
-      this.contract.execute(dest, amount, calldata, {
+
+      this.getContract().then(contract => contract.execute(dest, amount, calldata, {
         from,
         gas: 5000000
-      }, resolvePromise(resolve, reject));
+      }, resolvePromise(resolve, reject))).catch(reject);;
     });
   }
 
   getClaimIdsByTopic(type) {
     return new Promise((resolve, reject) => {
-      this.contract.getClaimIdsByTopic(type, resolvePromise(resolve, reject));
+      this.getContract().then(contract => contract.getClaimIdsByTopic(type, resolvePromise(resolve, reject))).catch(reject);
     });
   }
 
   getClaim(id) {
     return new Promise((resolve, reject) => {
-      this.contract.getClaim(id, resolvePromise(resolve, reject));
+      this.getContract().then(contract => contract.getClaim(id, resolvePromise(resolve, reject))).catch(reject);
     });
   }
 

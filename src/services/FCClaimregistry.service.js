@@ -1,43 +1,42 @@
 import Web3 from 'web3';
+import web3Service from "./Web3.service";
 import SolidityFunction from 'web3/lib/web3/function';
 
 const config = require('config');
 
 class FCClaimRegistry {
-  constructor() {
-    if (window.ethereum) {
-      this.web3 = new Web3(window.ethereum);
-    }
-  }
+  constructor() {}
 
 	isAvailable(networkId){
 		return new Promise( (resolve, reject) => {
-			if ( !!config.ClaimRegistry[networkId] ){
-				this.registry = this.web3.eth.contract(config.ClaimRegistry[networkId].abi).at(config.ClaimRegistry[networkId].address);
-				this.registry.getAddress(config.FCClaimRegistry.name, "address", (err, address) => {
-					if(err) reject(err);
-					this.contract = this.web3.eth.contract(config.FCClaimRegistry[networkId].abi).at(address);
-					this.verifyFunc = new SolidityFunction(
-						this.web3,
-						config.FCClaimRegistry[networkId].abi.find(v => v.type === 'function' && v.name === 'get'),
-						address
-					);
-					resolve(true);
-				})
-			} else {
-				resolve(false)
-			}
+      if (!config.ClaimRegistry[networkId]) {
+        console.error(`No config for FC claim registry on network ${networkId}.`);
+        return reject(false);
+      }
+
+      web3Service.getProvider().then(provider => {
+        this.registry = provider.eth.contract(config.ClaimRegistry[networkId].abi).at(config.ClaimRegistry[networkId].address);
+
+        this.registry.getAddress(config.FCClaimRegistry.name, "address", (err, address) => {
+          if(err) reject(err);
+          this.contract = provider.eth.contract(config.FCClaimRegistry[networkId].abi).at(address);
+          this.verifyFunc = new SolidityFunction(
+            provider,
+            config.FCClaimRegistry[networkId].abi.find(v => v.type === 'function' && v.name === 'get'),
+            address
+          );
+          resolve(true);
+        });
+      }).catch(reject);
 		});
 	}
 
   getCost() {
     return new Promise((resolve, reject) => {
-      if (this.web3) {
-        this.contract.cost((err, result) => {
-          if (err) return reject(err);
-          return resolve(result);
-        });
-      } else reject(new Error('No Web3 provider: install MetaMask!'));
+      this.contract.cost((err, result) => {
+        if (err) return reject(err);
+        return resolve(result);
+      });
     });
   }
 
@@ -52,8 +51,8 @@ class FCClaimRegistry {
 
   verifyClaim(calldata) {
     return new Promise((resolve, reject) => {
-      if (this.web3) {
-        this.web3.eth.call({
+      web3Service.getProvider().then(provider => {
+        provider.eth.call({
           to: this.contract.address,
           data: calldata
         }, (err, result) => {
@@ -66,7 +65,7 @@ class FCClaimRegistry {
             sub
           });
         });
-      } else reject(new Error('No Web3 provider: install MetaMask!'));
+      }).catch(reject);
     });
   }
 }
