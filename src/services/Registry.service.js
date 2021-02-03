@@ -11,8 +11,8 @@ const resolvePromise = (resolve, reject, map = x => x) => (err, result) => {
 
 class Registry {
   constructor() {
-    if (window.web3 && window.web3.currentProvider) {
-      this.web3 = new Web3(window.web3.currentProvider);
+    if (window.ethereum) {
+      this.web3 = new Web3(window.ethereum);
       if (!!config.ClaimRegistry["42"]) { //todo
         this.contract = this.web3.eth.contract(config.ClaimRegistry["42"].abi).at(config.ClaimRegistry["42"].address);
       }

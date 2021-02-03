@@ -23,7 +23,7 @@ const jwsSign = opts => new Promise((resolve, reject) => {
   const securedInput = jwsSecuredInput(header, payload, opts.encoding || 'utf8');
   const encoded = `0x${Buffer.from(securedInput, 'utf8').toString('hex')}`;
   const params = [encoded, '0x46f19554296d59f3400895f7e3e06d3bfb4f574f'];
-  window.web3.currentProvider.sendAsync({
+  window.ethereum.request({
     method: 'personal_sign',
     params,
     from: '0x46f19554296d59f3400895f7e3e06d3bfb4f574f'
@@ -64,7 +64,7 @@ class JWTService {
       };
 
       new SignStream({
-        provider: window.web3.currentProvider,
+        provider: window.ethereum,
         signer: account,
         encoding: 'utf8',
         secret: ' ',

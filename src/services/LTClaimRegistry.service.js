@@ -6,8 +6,8 @@ const config = require('config');
 
 class LTClaimRegistry {
   constructor() {
-    if (window.web3) {
-      this.web3 = new Web3(window.web3.currentProvider);
+    if (window.ethereum) {
+      this.web3 = new Web3(window.ethereum);
     }
   }
 
@@ -32,7 +32,7 @@ class LTClaimRegistry {
           if(err) reject(err);
           this.contract = this.web3.eth.contract(config.LTClaimRegistry[networkId].abi).at(address);
           this.verifyFunc = new SolidityFunction(
-              window.web3,
+              this.web3,
               config.LTClaimRegistry[networkId].abi.find(v => v.type === 'function' && v.name === 'get'),
               address
           );

@@ -15,7 +15,7 @@ class NetworkComponent extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetch(!!window.web3);
+    this.props.fetch(!!window.ethereum);
   }
 
   componentDidUpdate() {

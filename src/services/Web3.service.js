@@ -5,8 +5,8 @@ const config = require('config');
 
 class Web3Service {
   constructor() {
-    if (window.web3) {
-      this.web3 = new Web3(window.web3.currentProvider);
+    if (window.ethereum) {
+      this.web3 = new Web3(window.ethereum);
     }
   }
 

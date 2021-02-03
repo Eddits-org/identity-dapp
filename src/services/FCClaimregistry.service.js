@@ -5,11 +5,11 @@ const config = require('config');
 
 class FCClaimRegistry {
   constructor() {
-    if (window.web3) {
-      this.web3 = new Web3(window.web3.currentProvider);
+    if (window.ethereum) {
+      this.web3 = new Web3(window.ethereum);
     }
   }
-	
+
 	isAvailable(networkId){
 		return new Promise( (resolve, reject) => {
 			if ( !!config.ClaimRegistry[networkId] ){
@@ -18,7 +18,7 @@ class FCClaimRegistry {
 					if(err) reject(err);
 					this.contract = this.web3.eth.contract(config.FCClaimRegistry[networkId].abi).at(address);
 					this.verifyFunc = new SolidityFunction(
-						window.web3,
+						this.web3,
 						config.FCClaimRegistry[networkId].abi.find(v => v.type === 'function' && v.name === 'get'),
 						address
 					);

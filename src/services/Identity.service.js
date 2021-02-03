@@ -47,7 +47,7 @@ const claimSchemeLabel = num =>
 
 export class Identity {
   constructor(address) {
-    this.web3 = new Web3(window.web3.currentProvider);
+    this.web3 = new Web3(window.ethereum);
     this.contract = this.web3.eth.contract(config.contract.abi).at(address);
   }
 
