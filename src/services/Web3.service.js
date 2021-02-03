@@ -1,5 +1,7 @@
-import Web3 from 'web3';
+import WalletConnectProvider from "@walletconnect/web3-provider";
 import BigNumber from 'bignumber.js';
+import Web3 from 'web3';
+import Web3Modal from "web3modal";
 
 const config = require('config');
 
@@ -8,16 +10,38 @@ class Web3Service {
 
   getProvider() {
     return new Promise((resolve, reject) => {
+      if (this.provider) {
+        return resolve(this.provider);
+      }
+
       if (!this.provider) {
         if (!window.ethereum) {
           console.error('No blockchain module installed (window.ethereum).');
           return reject(new Error('No blockchain module installed (window.ethereum).'));
         }
 
-        this.provider = new Web3(window.ethereum);
-      }
+        const web3Modal = new Web3Modal({
+          cacheProvider: false,
+          providerOptions: {
+            walletconnect: {
+              package: WalletConnectProvider,
+              options: {
+                infuraId: "9d7b395f50134276b6620c1309c7f8fe"
+              }
+            }
+          }
+        });
 
-      return resolve(this.provider);
+        console.log('wallet connect')
+        web3Modal.connect().then(provider => {
+          this.provider = new Web3(provider);
+
+          return resolve(this.provider);
+        }).catch(error => {
+          console.error(error);
+          reject(error);
+        });
+      }
     });
   }
 
@@ -29,14 +53,16 @@ class Web3Service {
 
   getNetwork() {
     return new Promise((resolve, reject) => {
+      console.log('get provider first');
       this.getProvider().then(provider => {
+        console.log(provider);
         provider.version.getNetwork((err, netId) => {
           if (err) return reject(err);
           const network = config.networks.find(n => n.id.toString() === netId);
           if (!network) return resolve({id: -1, name: 'Unknown', enabled: false});
           return resolve(network);
         });
-      }).catch(reject);;
+      }).catch(reject);
     });
   }
 

@@ -17,7 +17,6 @@ import Network from 'containers/Network.container';
 
 import { selectIdentity } from 'actions/Identity.action';
 import { validateLoginRequestSigner } from 'actions/Login.action';
-import { fetchPSPNames } from 'actions/Manage.action';
 
 const HeaderWithRouter = withRouter(Header);
 

@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "@walletconnect/web3-provider": "^1.3.4",
     "base64url": "^3.0.0",
     "bignumber.js": "git+https://github.com/debris/bignumber.js.git#94d7146671b9719e00a09c29b01a691bc85048c2",
     "bulma": "^0.7.2",
@@ -32,7 +33,8 @@
     "stream-http": "^3.1.1",
     "util": "^0.11.0",
     "vm-browserify": "^1.1.2",
-    "web3": "0.x.x"
+    "web3": "0.x.x",
+    "web3modal": "^1.9.3"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",

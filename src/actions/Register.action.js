@@ -1,5 +1,4 @@
 import Web3 from 'services/Web3.service';
-import Storage from 'services/Storage.service';
 
 export const FETCH_COST = 'FETCH_COST';
 export const COST_ESTIMATED = 'COST_ESTIMATED';

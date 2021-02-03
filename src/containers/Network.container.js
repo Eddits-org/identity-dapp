@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Web3 from 'services/Web3.service';
+import web3Service from 'services/Web3.service';
 import { web3Fetched, networkChanged, accountChanged } from 'actions/Network.action';
 import {ClaimAvailableOnCurrentNetwork} from "../actions/Claims.action";
 
@@ -15,7 +15,9 @@ class NetworkComponent extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetch(!!window.ethereum);
+    web3Service.getProvider().then(provider => {
+      this.props.fetch(true);
+    });
   }
 
   componentDidUpdate() {
@@ -31,7 +33,7 @@ class NetworkComponent extends React.Component {
         networkPolling: true
       });
 
-      Web3.getNetwork().then((network) => {
+      web3Service.getNetwork().then((network) => {
         if (!this.props.network || this.props.network.id !== network.id) {
           this.props.changeNetwork(network);
         }
@@ -45,7 +47,7 @@ class NetworkComponent extends React.Component {
         accountPolling: true
       });
 
-      Web3.getAccount().then((account) => {
+      web3Service.getAccount().then((account) => {
         if ((!this.props.account && account) || this.props.account !== account) {
           this.props.changeAccount(account);
         }

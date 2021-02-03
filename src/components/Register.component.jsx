@@ -8,7 +8,6 @@ import InvalidNetwork from 'components/messages/InvalidNetwork.component';
 import WaitDeploy from 'components/register/WaitDeploy.component';
 import Form from 'components/register/Form.component';
 import Success from 'components/register/Success.component';
-import Notifier from 'components/messages/Notifier.component';
 
 const RegisterComponent = ({
   providerReady,
@@ -26,12 +25,12 @@ const RegisterComponent = ({
   reset,
   addIdentityOperationResult
 }) => {
-  if (!fetchingCost && !cost) fetchCost();
   if (!providerReady) return <NoProvider />;
   if (!network) {
     return <Loading message='Please wait during the connection to Ethereum network...' />;
   }
   if (!network.enabled) return <InvalidNetwork {...{ network }} />;
+  if (!fetchingCost && !cost) fetchCost();
   let refAddIdentityAddress = null;
   let inputState = '';
   let textInput = '';
@@ -111,7 +110,7 @@ const RegisterComponent = ({
                         ref={(input) => {
                           refAddIdentityAddress = input;
                         }}
-                        
+
                       />
                   </div>
                   <p style={{fontSize: '12px',color:'red',marginTop: '0px',paddingTop: '0px',paddingLeft: '10px'}}>{textInput}</p>
