@@ -1,4 +1,3 @@
-import Web3 from 'web3';
 import { addressToKey } from 'utils/Keys.util';
 import registry2 from './Registry.service';
 import web3Service from "./Web3.service";
